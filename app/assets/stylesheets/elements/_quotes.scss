@@ -1,0 +1,77 @@
+/* @quotes
+-----------------------------------------------------  */
+
+
+
+
+
+/* @blockquote
+-------------------------------------------------------- */
+
+blockquote {
+    margin: 0;
+
+    .persons-words {
+        @extend %serif--medium;
+        font-size: 1.6em;
+        line-height: 1.5;
+        margin: 0 0 1em;
+    }
+    .persons-name {
+        @extend %sans--black;
+        color: $pink;
+        display: block;
+        font-size: 1.3em;
+        letter-spacing: 1px;
+        line-height: 1.38;
+        text-transform: uppercase;
+    }
+    .persons-title {
+        @extend %serif--italic;
+        display: block;
+        font-size: 1em;
+    }
+    .featured & {
+        max-width: 500px;
+        padding: 10em 0;
+
+        .persons-words,
+        .persons-name,
+        .persons-title {
+            color: $white;
+        }
+        .persons-words {
+            @extend %sans--bold;
+        }
+        .persons-name {
+            @extend %sans--bold;
+            font-size: 1.6em;
+        }
+        .persons-title {
+            @extend %serif--medium;
+            font-size: 1.2em;
+        }
+    }
+}
+
+
+
+
+/* @pull-quote
+-------------------------------------------------------- */
+
+.pull-quote {
+    // Any custom styles below...
+    @extend %sans--bold;
+    font-size: 1.6em;
+    line-height: 1.5;
+    margin: 1em 0;
+
+    p {
+        font-size: 1em;
+    }
+}
+
+
+
+

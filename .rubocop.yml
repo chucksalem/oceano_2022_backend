@@ -1,0 +1,17 @@
+AllCops:
+  Excludes:
+    - db/schema.rb
+Documentation:
+  Enabled: false
+LineLength:
+  Max: 120
+Style/RaiseArgs:
+  EnforcedStyle: compact
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 30
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+Metrics/ClassLength:
+  Max: 200

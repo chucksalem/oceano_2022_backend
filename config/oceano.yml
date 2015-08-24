@@ -1,0 +1,11 @@
+areas:
+    - Corona del Sol
+    - Costa Diamente
+    - Las Conchas
+    - Las Palmas
+    - Mirador
+    - Playa Encanto
+    - Sandy Beach
+cache_population_searches:
+    - address:
+        country: 'MX'

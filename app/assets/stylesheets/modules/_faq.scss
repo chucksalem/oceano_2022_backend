@@ -1,0 +1,7 @@
+.faq article {
+	padding-top: 2%;
+
+	&:first-child {
+		padding-top: 0;
+	}
+}

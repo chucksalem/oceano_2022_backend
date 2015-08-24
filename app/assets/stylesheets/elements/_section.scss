@@ -1,0 +1,21 @@
+section.beige-bg {
+    background-color: lighten($beige, 7);
+
+    &.scallop-top {
+        @include scallop-top(lighten($beige, 7));
+    }
+    &.scallop-bottom {
+        @include scallop-bottom(lighten($beige, 7));
+    }
+}
+section {
+    position: relative;
+    background-color: $white;
+
+    &.scallop-top {
+        @include scallop-top(white);
+    }
+    &.scallop-bottom {
+        @include scallop-bottom(white);
+    }
+}

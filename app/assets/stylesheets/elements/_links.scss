@@ -1,0 +1,27 @@
+/* @links
+------------------------------------------------------ */
+
+a {
+    color: $shamrock;
+    text-decoration: none;
+
+    &.dark {
+        color: $slate;
+    }
+    &.blue {
+        color: $cerulean;
+    }
+
+    &:hover,
+    &:focus {
+        opacity: .75;
+    }
+}
+
+
+/* @webkit-tap-highlight
+------------------------------------------------------ */
+
+body {
+    -webkit-tap-highlight-color: rba(0, 0, 0, .35);
+}

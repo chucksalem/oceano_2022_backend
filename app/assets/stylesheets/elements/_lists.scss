@@ -1,0 +1,28 @@
+/* @lists 
+-------------------------------------------------------- */
+
+ul,
+ol {
+    padding-left: 3em;
+
+    li {
+        font-size: 1.4em;
+        line-height: 1.5;
+        margin-bottom: .5em;
+
+        &.sans {
+            @extend %sans--medium;
+        }
+        &.padded-right {
+            padding-right: 1em;
+        }
+    }
+    &.gw {
+        li {
+            font-size: inherit;
+        }
+    }
+    &.no-padding {
+        padding-left: 0;
+    }
+}

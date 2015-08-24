@@ -1,0 +1,48 @@
+---
+
+- name: install package
+  apt: pkg=nginx state=installed update_cache=yes
+  notify:
+    - start nginx
+
+- name: install site configs
+  template: src=sites/{{ item.name }}.conf.j2 dest=/etc/nginx/sites-available/{{ item.name }}.conf
+  with_items: nginx_sites
+  notify:
+    - reload nginx
+
+- name: create site webroots
+  file: path=/usr/share/nginx/{{ item.name }}
+        owner=deploy
+        group=www-data
+        mode=0755
+        recurse=yes
+        state=directory
+  with_items: nginx_sites
+
+- name: delete default site
+  action: file path=/etc/nginx/sites-enabled/default state=absent
+  notify:
+    - reload nginx
+
+- name: enabled sites
+  file: src=/etc/nginx/sites-available/{{ item.name }}.conf
+        dest=/etc/nginx/sites-enabled/{{ item.name }}.conf
+        state=link
+  with_items: nginx_sites
+  when: item.enabled == True
+  notify:
+    - reload nginx
+
+- name: disabled sites
+  file: path=/etc/nginx/sites-enabled/{{ item.name }}.conf
+        state=absent
+  with_items: nginx_sites
+  when: item.enabled == False
+  notify:
+    - reload nginx
+
+- name: open ports
+  ufw: rule=allow port={{ item }}
+  with_items:
+    - http

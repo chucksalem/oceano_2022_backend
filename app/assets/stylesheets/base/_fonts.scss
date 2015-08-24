@@ -1,0 +1,84 @@
+/* @fonts
+-------------------------------------------------------- */
+
+
+
+
+
+// sans
+
+$sans: "brandon-grotesque", sans-serif;
+
+%sans--light {
+  font-family: $sans;
+  font-weight: 300;
+  font-style: normal;
+}
+
+%sans--regular {
+  font-family: $sans;
+  font-weight: 400;
+  font-style: normal;
+}
+
+%sans--medium {
+  font-family: $sans;
+  font-weight: 500;
+  font-style: normal;
+}
+
+%sans--semi-bold {
+  font-family: $sans;
+  font-weight: 600;
+  font-style: normal;
+}
+
+%sans--bold {
+  font-family: $sans;
+  font-weight: 700;
+  font-style: normal;
+}
+
+%sans--black {
+  font-family: $sans;
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+
+
+
+// serif
+
+$serif: "bodoni-urw", georgia, times;
+
+%serif--light {
+  font-family: $serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+%serif--regular {
+  font-family: $serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+%serif--medium {
+  font-family: $serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+%serif--italic {
+  font-family: $serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+%serif--semi-bold {
+  font-family: $serif;
+  font-weight: 600;
+  font-style: italic;
+}

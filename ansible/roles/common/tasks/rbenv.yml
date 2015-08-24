@@ -1,0 +1,96 @@
+---
+
+- name: install ruby dependencies
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - libssl-dev
+    - libyaml-dev
+    - libreadline6-dev
+    - zlib1g-dev
+    - libncurses5-dev
+    - libffi-dev
+    - libgdbm3
+    - libgdbm-dev
+
+- name: checkout rbenv_repository
+  git: >
+    repo={{ rbenv_repository }}
+    dest={{ rbenv_root }}
+    version={{ rbenv_version }}
+    accept_hostkey=true
+    force=yes
+  sudo: true
+  sudo_user: "{{ ansible_ssh_user }}"
+  ignore_errors: true
+  tags:
+    - rbenv
+
+- name: create plugins directory
+  file: state=directory path={{ rbenv_root }}/plugins
+  sudo: true
+  sudo_user: "{{ ansible_ssh_user }}"
+  tags:
+    - rbenv
+
+- name: install plugins
+  git: >
+    repo={{ item.repository }}
+    dest={{ rbenv_root }}/plugins/{{ item.name }}
+    version={{ item.version }}
+    accept_hostkey=true
+    force=yes
+  sudo: true
+  sudo_user: "{{ ansible_ssh_user }}"
+  with_items: rbenv_plugins
+  tags:
+    - rbenv
+
+- name: add initialization to system-wide profile
+  template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0755
+  sudo: true
+  tags:
+    - rbenv
+
+- name: set gemrc
+  copy: src=gemrc dest=/home/{{ ansible_ssh_user }}/.gemrc owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=0755
+  sudo: true
+  sudo_user: "{{ ansible_ssh_user }}"
+  tags:
+    - rbenv
+
+- name: check ruby {{ rbenv_ruby_version }} installed
+  shell: $SHELL -lc "rbenv versions | grep {{ rbenv_ruby_version }}"
+  register: ruby_installed
+  changed_when: false
+  ignore_errors: yes
+  always_run: yes
+  sudo: true
+  sudo_user: "{{ ansible_ssh_user }}"
+  tags:
+    - rbenv
+
+- name: install ruby version {{ rbenv_ruby_version }}
+  shell: bash -lc "rbenv install {{ rbenv_ruby_version }}"
+  sudo: true
+  sudo_user: "{{ ansible_ssh_user }}"
+  when:
+    - ruby_installed.rc != 0
+  tags:
+    - rbenv
+
+- name: set global ruby version {{ rbenv_ruby_version }}
+  shell: bash -lc "rbenv global {{ rbenv_ruby_version }} && rbenv rehash"
+  sudo: true
+  sudo_user: "{{ ansible_ssh_user }}"
+  when:
+    - ruby_installed.rc != 0
+  tags:
+    - rbenv
+
+- name: install bundler
+  shell: bash -lc "gem install bundler && rbenv rehash"
+  sudo_user: "{{ ansible_ssh_user }}"
+  when:
+    - ruby_installed.rc != 0
+  tags:
+    - rbenv

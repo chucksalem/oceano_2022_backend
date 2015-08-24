@@ -1,0 +1,40 @@
+@mixin scallop-top( $value ) {
+    position: relative;
+    &:before {
+        content: "";
+        background: radial-gradient(
+            transparent 0px, 
+            transparent 4px, 
+            $value 4px,
+            $value
+        );
+        background-size: 11px 12px;
+        background-position: -6px -8px;
+        height: 5px;
+        width: 100%;
+        position: absolute;
+        top: -5px;
+        left: 0;
+    }
+}
+
+@mixin scallop-bottom( $value ) {
+    position: relative;
+    &:before {
+        content: "";
+        background: radial-gradient(
+            transparent 0px, 
+            transparent 4px, 
+            $value 4px,
+            $value
+        );
+        background-size: 11px 12px;
+        background-position: -6px -11px;
+        height: 5px;
+        width: 100%;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        z-index: 1;
+    }
+}

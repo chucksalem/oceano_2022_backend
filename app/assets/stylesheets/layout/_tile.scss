@@ -1,0 +1,40 @@
+.row {
+    clear: left;
+    margin-left: -20px;
+    overflow: hidden;
+
+    .tile {
+        float: left;
+        position: relative;
+
+        &:before {
+            content: "";
+            display: block;
+            padding-top: 100%;
+        }
+        &.md-two-thirds:before {
+            @include bp-at-least($breakpoint__md) { padding-top: 50%; }
+        }
+
+        .contain {
+            background-color: #f2f2f2;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            bottom: 20px;
+            left: 20px;
+            position: absolute;
+            right: 0;
+            top: 0;  
+
+            &.black {
+                background-color: $black;
+            }    
+        }
+        .over {
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}

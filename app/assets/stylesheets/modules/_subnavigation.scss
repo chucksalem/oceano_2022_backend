@@ -1,0 +1,35 @@
+.subnav {
+    margin-bottom: 5em;
+    @include bp-at-least($breakpoint__md) { margin-bottom: 0; }
+    
+    ul {
+        list-style: none;
+        padding-left: 0;
+        @include bp-at-least($breakpoint__md) { padding-right: 7em; }
+
+        li {
+            border-top: 1px solid rgba($gray, .5);
+            font-size: 1em;
+            line-height: 2;
+            margin-bottom: 0;
+
+            &:last-child {
+                border-bottom: 1px solid rgba($gray, .5);
+            }
+
+            a {
+                @extend %sans--medium;
+                color: $slate;
+                display: block;
+                font-size: 1.6em;
+                line-height: 1.6;
+                padding: .85em 0;
+
+                &:hover,
+                &.current {
+                    color: $cerulean;
+                }
+            }
+        }
+    }
+}

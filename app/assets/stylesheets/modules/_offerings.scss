@@ -1,0 +1,25 @@
+.offerings {
+    list-style: none;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding-left: 0;
+    @include bp-until($breakpoint__md) { text-align: center; }               
+
+    li {
+        display: inline-block;
+        font-size: 1em;
+        margin: .75em 2em .75em .75em;
+
+        .icon {
+            margin-right: 7px;
+            vertical-align: middle;
+        }
+        .detail {
+            @extend %sans--medium;
+            color: $brown;
+            display: inline-block;
+            font-size: 1.4em;
+            vertical-align: middle;
+        }
+    }
+}

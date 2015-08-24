@@ -1,0 +1,154 @@
+/* @site-footer
+-----------------------------------------------------  */
+.site-footer {
+    @include scallop-top($brown);
+    background-color: $brown;
+    padding-top: 60px;
+    padding-bottom: 30px;
+    @include bp-until($breakpoint__md) { text-align: center; }
+    
+    .links {
+        float: left;
+        @include bp-until($breakpoint__sm) { margin-top: 2em; }
+
+        ul {
+            list-style: none;
+            @include bp-at-least($breakpoint__md) { margin-bottom: 8em; }
+            padding-bottom: 0;
+            @include bp-until($breakpoint__sm) { padding-left: 0; }
+            
+            li {
+                font-size: 1em;
+                line-height: 2;
+                margin-bottom: 0;
+                padding-bottom: 0;
+                
+                a {
+                    @extend %sans--bold;
+                    color: $white;
+                    font-size: 1.5em;
+                    line-height: 1.3;
+                }
+            }
+
+            &.alt {
+                
+                a {
+                    color: rgba($white, .7)
+                }
+            }
+        }
+
+        .logo {
+            clear: left;
+            display: inline-block;
+            fill: $white;
+            @include bp-at-least($breakpoint__md) { float: left; }
+            @include bp-until($breakpoint__md) { margin-top: 2em; }
+            width: 90px;
+        }
+
+        .copyright {
+            @extend %sans--bold;
+            clear: left;
+            color: rgba($white, .5);
+            @include bp-at-least($breakpoint__md) { float: left; }
+            font-size: .8em;
+            text-transform: uppercase;
+        }
+    }
+
+    .weather-widget {
+        @extend %sans--medium;
+        color: $white;
+        display: inline-block;
+        background: $dark-brown;
+        padding: 20px 40px;
+        width: 220px;
+        text-align: left;
+        margin-top: -63px;
+        @include bp-at-least($breakpoint__sm) {
+            position: absolute;
+            right: 30px;
+            top: -63px;
+            bottom: -30px;
+            margin-top: 0;
+        }
+
+        @include bp-at-least($breakpoint__sm) {
+            .weather-widget-contain {
+                display: block;
+                height: 100%;
+                width: 100%;
+
+                .weather-widget-wrap {
+                    position: relative;
+                    top: 50%;
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                }
+            }
+        }
+
+        h2 {
+            @extend %sans--black;
+            font-size: 1.28em;
+            position: relative;
+            text-transform: uppercase;
+            i {
+                float: right;
+                margin-top: -8px;
+            }
+        }
+
+        .current-temp {
+            @extend %sans--medium;
+            float: left;
+            font-size: 5.8em;
+            padding: 0;
+            margin: .16em 0 0 0;
+            line-height: .8;
+        }
+
+        .low-high {
+            @include clearfix;
+            font-size: 1.6em;
+            margin-top: 1.3em;
+            color: $white-70;
+            line-height: .8em;
+
+            .low, .high {
+                float: right;
+                clear: right;
+                display: block;
+                svg {
+                    margin-bottom: 2px;
+                    margin-left: 3px;
+                }
+            }
+
+            .low {
+                margin-top: 8px;
+            }
+        }
+
+        .contact {
+            margin-top: 2em;
+            padding-top: 2em;
+            border-top: 1px solid $white;
+
+            p {
+                @extend %sans--bold;
+                font-size: 10px;
+                a {
+                    color: $white;
+                    letter-spacing: 1px;
+                }
+            }
+        }
+
+        
+
+    }
+}

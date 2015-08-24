@@ -1,0 +1,72 @@
+// Mixins
+
+// Box
+@mixin border-box {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+@mixin padding-box {
+    -webkit-box-sizing: padding-box;
+       -moz-box-sizing: padding-box;
+            box-sizing: padding-box;
+}
+
+// Display
+@mixin box-shadow( $horiz : .5em , $vert : .5em , $blur : 0px , $spread : 0px , $color : #000000 ) {
+
+  -webkit-box-shadow: $horiz $vert $blur $spread $color; /* Saf3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+     -moz-box-shadow: $horiz $vert $blur $spread $color; /* FF3.5 - 3.6 */
+          box-shadow: $horiz $vert $blur $spread $color; /* Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5 */
+}
+
+@mixin opacity( $value: 1) {
+    opacity: $value; 
+    filter: alpha( opacity= $value * 100 );
+}
+
+@mixin transition( $value : all 0.25s ease-in-out ) {
+    -webkit-transition: $value;
+       -moz-transition: $value;
+        -ms-transition: $value;
+         -o-transition: $value;
+            transition: $value;
+}
+@mixin transition-delay($delay...) {
+    -moz-transition-delay:    $delay;
+    -o-transition-delay:      $delay;
+    -webkit-transition-delay: $delay;
+    transition-delay:         $delay;
+}
+
+// Columns
+@mixin column-count ( $value: 1 ) {
+    -webkit-column-count: $value;
+       -moz-column-count: $value;
+            column-count: $value;
+}
+@mixin column-gap ( $value: 10px ) {
+    -webkit-column-gap: $value;
+       -moz-column-gap: $value;
+            column-gap: $value;
+}
+
+// Gradient
+@mixin linear-gradient($fromColor, $toColor) {
+  background-color: $toColor; /* Fallback Color */
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, $fromColor, $toColor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient(top, $fromColor, $toColor); /* FF3.6 */
+  background-image:     -ms-linear-gradient(top, $fromColor, $toColor); /* IE10 */
+  background-image:      -o-linear-gradient(top, $fromColor, $toColor); /* Opera 11.10+ */
+  background-image:         linear-gradient(top, $fromColor, $toColor);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+}
+
+@mixin clearfix {
+  &:after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}

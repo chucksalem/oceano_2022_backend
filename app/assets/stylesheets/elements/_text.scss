@@ -1,0 +1,39 @@
+/* @text
+-----------------------------------------------------  */
+
+p {
+    font-size: 1.4em;
+    line-height: 1.5;
+    margin-bottom: 1em;
+
+    .wf-loading & {
+      visibility: hidden;
+    }
+    .wf-active & {
+      visibility: visibile;
+    }
+
+    &.sans {
+        @extend %sans--medium;
+    }
+    &.no-top-margin {
+      margin-top: 0;
+    }
+}
+
+
+b,
+strong {
+  @extend %serif--semi-bold;
+
+  .sans & {
+    @extend %sans--bold;
+  }
+}
+
+
+i,
+em {
+  // NOTE: use italic font-face if available instead of 'font-style: italic'
+  font-style: italic;
+}

@@ -1,0 +1,58 @@
+/* @general layout
+-----------------------------------------------------  */
+
+.layout-container {
+    @include clearfix();
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1010px;
+    padding: 0 30px;
+    position: relative;
+}
+.layout-container-smaller {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 825px;
+}
+.padded-top {
+    padding-top: 100px;
+}
+.padded-bottom {
+    padding-bottom: 100px;
+}
+.padded-left-right {
+    padding-left: 25px;
+    padding-right: 25px;
+
+    .padded-left-right {
+        padding-left: 0;
+        padding-right: 0;
+
+        @include bp-at-least(768px) {
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+    }
+}
+.layout-centered {
+    text-align: center;
+}
+.layout-grid {
+    list-style-type: none;
+
+    @include bp-at-least(768px) {
+        > li {
+            display: inline-block;
+            width: auto;
+        }
+    }
+}
+.layout-block {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    > li {
+        display: block;
+    }
+}

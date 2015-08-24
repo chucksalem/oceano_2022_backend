@@ -1,0 +1,13 @@
+---
+
+rbenv_repository: "https://github.com/sstephenson/rbenv.git"
+rbenv_version: v0.4.0
+rbenv_root: "~/.rbenv"
+rbenv_plugins:
+    - name: ruby-build
+      repository: "https://github.com/sstephenson/ruby-build.git"
+      version: v20150506
+    - name: rbenv-sudo
+      repository: "https://github.com/dcarley/rbenv-sudo.git"
+      version: v0.1.0
+rbenv_ruby_version: 2.2.2

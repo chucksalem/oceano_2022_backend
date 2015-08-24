@@ -1,0 +1,30 @@
+.featured-map {
+    background-image: url(featured-map-bg.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .content {
+        float: left;
+
+        h1 {
+            font-size: 2.1em;
+            color: $white;
+        }
+        p {
+            color: $white;
+        }
+    }
+    .map {
+        float: left;
+        @include bp-until($breakpoint__md) { margin-top: 5em; }
+        overflow: hidden;
+        text-align: center;
+        @include bp-until($breakpoint__md) { width: 100%; }
+        
+        img {
+            @include bp-at-least($breakpoint__md) { float: right; }
+            max-width: 270px;
+        }
+    }
+}

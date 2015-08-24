@@ -1,0 +1,36 @@
+<!doctype html>
+<!--[if IE 7]> <html class="no-js ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Oc&eacute;ano Rentals</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <%= csrf_meta_tags %>
+
+    <%= render '/layouts/typekit_embed_code' %>
+    <%= render '/layouts/modernizr' %>
+
+    <%= stylesheet_link_tag("application") %>
+    <%= yield :stylesheets %>
+
+<body<% unless home? %> class="subpage"<% end %>>
+    
+    <%= render 'layouts/header' %>
+
+    <%= yield %>
+
+    <%= render 'layouts/footer' %>
+
+    <%= render 'layouts/scripts' %>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+.pagination {
+    @extend %sans--medium;
+    margin: 0 0 2em 0;
+
+    ul {
+        display: inline-block;
+        margin: 0;
+        padding-left: 0;
+
+        li {
+            display: inline;
+
+            a,
+            span {
+                color: $cerulean;
+                border: 1px solid $gray;
+                fill: $cerulean;
+                float: left;
+                line-height: 1;
+                margin-right: .75em;
+                padding: .75em;
+
+                svg {
+                    width: 4px;
+                    height: 8px;
+                }
+            }
+            a:hover,
+            a:focus,
+            &.active a,
+            &.active span {
+                background-color: $cerulean;
+                color: $white;
+                fill: $white;
+            }
+            &.active a,
+            &.active span {
+                cursor: default;
+                opacity: 1;
+            }
+            &.disabled a:hover,
+            &.disabled a:focus,
+            &.disabled a,
+            &.disabled span {
+                background-color: transparent;
+                color: #999999;
+                cursor: default;
+                fill: #999999;
+                opacity: 1;
+            }
+        }
+    }
+}

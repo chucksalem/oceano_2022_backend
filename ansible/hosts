@@ -1,0 +1,8 @@
+[staging]
+159.203.67.43
+
+[oceano:children]
+staging
+
+[vagrant]
+localhost

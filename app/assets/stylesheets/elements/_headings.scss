@@ -1,0 +1,52 @@
+/* @headings
+------------------------------------------------------ */
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: normal;
+
+    .wf-loading & {
+      visibility: hidden;
+    }
+    .wf-active & {
+      visibility: visibile;
+    }
+
+    &.top-spacing {
+        margin-top: 1em;
+    }
+    &.bottom-spacing {
+        margin-bottom: 1em;
+    }
+    &.bottom-spacing-large {
+        margin-bottom: 2em;
+    }
+}
+
+
+.heading-large {
+    @extend %serif--regular;
+    font-size: 4.2em;
+    line-height: 1.23;
+}
+.heading-medium {
+    @extend %sans--medium;
+    font-size: 2.4em;
+    line-height: 1.38;
+    margin-bottom: .5em;
+}
+.heading-small {
+    @extend %sans--bold;
+    font-size: 1.5em;
+    line-height: 1.3;
+}
+.heading-subheader {
+    @extend %serif--medium;
+    font-size: 1.4em;
+    line-height: 1.4;
+}
+.heading-two {
+    @extend %sans--medium;
+    font-size: 1.6em;
+}
+

@@ -1,0 +1,162 @@
+form {
+    section {
+        background: transparent;
+        clear: left;
+        margin-bottom: 3em;
+        overflow: hidden;
+    }
+    fieldset {
+        width: 100%;
+        border: 0;
+        margin: 0 0 2.25em 0;
+        min-width: 0;
+        padding: 0;
+
+        &.half {
+            width: 50%;
+            padding-right: 20px;
+            float: left;
+
+            &.right {
+                padding-right: 0;
+                padding-left: 0;
+            }
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    label {
+        @extend %sans--medium;
+        color: rgba($black, .7);
+        display: block;
+        font-size: 1.6em;
+        margin-bottom: .75em;
+    }
+    input, textarea {
+        @include padding-box();
+        @extend %sans--medium;
+        background-color: $white;
+        border-radius: 3px;
+        -webkit-appearance: none;
+        width: 100%;
+        padding: .75em;
+        border: 1px solid $gray;
+        color: rgba($black, .7);
+        font-size: 1.6em;
+        resize: none;
+
+        .wf-loading & {
+          visibility: hidden;
+        }
+        .wf-active & {
+          visibility: visibile;
+        }
+    }
+    .select-style {
+        @include padding-box();
+        @extend %sans--medium;
+        border: 1px solid $gray;
+        border-radius: 3px;
+        background: $white;
+        color: rgba($black, .7);
+        font-size: 1.6em;
+        margin: 5px 0 0;
+        overflow: hidden;
+        position: relative;
+
+        .wf-loading & {
+          visibility: hidden;
+        }
+        .wf-active & {
+          visibility: visibile;
+        }
+
+        select {
+            -moz-appearance: none; 
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            background-image: none;
+            border: none;
+            box-shadow: none;
+            cursor: pointer;
+            float: left;
+            line-height: 1.4;
+            margin: 0;
+            padding: .75em;
+            text-indent: .01px;
+            text-overflow: "";
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            -webkit-appearance: none;
+               -moz-appearance: none;
+                    appearance: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+        &:before {
+            color: rgba($black, .5);
+            content: "\25BE";
+            font-size: 15px;
+            height: 100%;
+            line-height: 1.9;
+            padding: 10px 0 10px 13px;
+            position: absolute;
+            right: 13px;
+            top: 0;
+            width: 23px;
+            z-index: 1;
+            @include border-box();
+        }
+    }
+    input[type=checkbox] {
+        -webkit-appearance:none;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        border: 1px solid $gray;
+        background: $white;
+        &:checked {
+            background: $cerulean;
+        }
+        &:focus{
+            outline: 0;
+        }
+    }
+
+    .label--checkbox {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      padding-left: 1.75em;
+      input {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+    .submit {
+        width: auto;
+    }
+}
+
+::-webkit-input-placeholder {
+   color: rgba($black, .7);
+   opacity: 1;
+}
+:-moz-placeholder {
+   color: rgba($black, .7);
+   opacity: 1;
+}
+::-moz-placeholder {
+   color: rgba($black, .7);
+   opacity: 1;
+}
+:-ms-input-placeholder {
+   color: rgba($black, .7);
+   opacity: 1;
+}

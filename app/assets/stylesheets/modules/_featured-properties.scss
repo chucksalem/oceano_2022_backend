@@ -1,0 +1,86 @@
+// Featured Properties grid
+
+.featured-properties {
+    margin-top: 4em;
+    margin-bottom: 4em;
+
+    .property-details {
+        
+        .over {
+            .offerings {
+                list-style: none;
+                padding-left: 0;
+                margin-top: 0;
+
+                li {
+                    display: inline-block;
+                    font-size: 1em;
+                    margin: 0 10px;
+
+                    .detail {
+                        @extend %sans--medium;
+                        color: $white;
+                        display: block;
+                        font-size: 1em;
+                    }
+                }
+            }
+            h2 {
+                @extend %sans--black;
+                @include transition(opacity 0.25s ease-in-out);
+                color: $white;
+                font-size: 2.1em;
+                opacity: 1;
+                position: relative;
+                text-transform: uppercase;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            .info {
+                @include transition(opacity 0.25s ease-in-out);
+                background: rgba(48,48,48,.85);
+                opacity: 0;
+                height: 100%;
+                top: 0;
+                position: absolute;
+                width: 100%;
+
+                .info-wrapper {
+                    @include transition(opacity 0.25s ease-in-out);
+                    margin: 0 auto;
+                    max-width: 330px;
+                    padding: 20px;
+                    position: relative;
+                    top: 50%;
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+
+                    .no-touch-title {
+                        display: none;
+
+                        .touch & {
+                            display: block;
+                            opacity: 1;
+                        }
+                    }
+                    p, .btn {
+                        color: $white;
+                    }
+                }
+                
+            }
+            &:hover,
+            .touch & {                
+                h2 {
+                    opacity: 0;
+                }
+                .info {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

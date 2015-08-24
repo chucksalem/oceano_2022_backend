@@ -1,0 +1,24 @@
+.related-places {
+    li.g {
+        padding-bottom: 0;
+    }
+    li {
+        a {
+            color: $black;
+        }
+        img {
+            vertical-align: bottom;
+        }
+        h2 {
+            @extend %sans--bold;
+            color: $cerulean;
+            font-size: 1.3em;
+            margin-bottom: 0;
+            text-transform: uppercase;
+        }
+        p {
+            font-size: 1.1em;
+            margin-top: .5em;
+        }
+    }
+}

@@ -1,0 +1,29 @@
+/* @tables
+--------------------------------------------------------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+th {
+  // Add custom styles below...
+
+}
+th,
+td {
+  // Add custom styles below...
+
+}
+
+
+
+
+/* @table--striped 
+------------------------------------------------------ */
+
+.table--striped {
+  tbody tr:nth-of-type(odd){
+    background-color: #eee;  // Or whatever color you want
+  }
+}

@@ -1,0 +1,116 @@
+<aside class="request-booking md-one-third">
+<%- if @lookup && @available %>
+    <header class="booking-header">
+        <h2>$<%= '%.0f' % @nightly_rate %> <span class="term">Per Night</span></h2>
+    </header>
+    <%= form_tag("/property/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
+    <table>
+        <tr class="date-select">
+        <td class="g sm-three-eighths">
+            <label for="start_date">Arrive</label>
+            <%= text_field_tag "start_date", @start_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
+        </td>
+        <td class="g sm-three-eighths">
+            <label for="end_date">Depart</label>
+            <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
+        </td>
+        <td class="g sm-two-eighths">
+            <label for="guests">Guests</label>
+            <div class="select-style">
+            <%= select_tag "guests", options_for_select(@guest_amount_list, @guests) %>
+            </div>
+        </td>
+        </tr>
+        <tr class="details">
+        <td class="g two-thirds">$<%=  '%.0f' % @nightly_rate %> x <%= @length_of_stay %> nights</td>
+        <td class="g one-third">$<%= @base_amount %></td>
+        </tr>
+        <tr class="details">
+        <td class="g two-thirds">Tax</td>
+        <td class="g one-third">$<%= @tax_amount %></td>
+        </tr>
+        <% @fees.each do |fee| %>
+        <tr class="details">
+            <td class="g two-thirds"><%= fee.name %></td>
+            <td class="g one-third">$<%= '%.2f' % fee.amount %></td>
+        </tr>
+        <% end %>
+        <tr class="details">
+        <td class="g two-thirds">Total</td>
+        <td class="g one-third">$<%= '%.2f' % @total_amount %></td>
+        </tr>
+        <tr class="submit-container">
+        <td>
+            <input class="btn no-min-width" type="submit" value="Check Availability">
+        </td>
+        </tr>
+        <tr class="submit-container">
+        <td>
+            <a href="#" class="btn no-min-width">Request Booking</a>
+        </td>
+        </tr>
+    </table>
+    <% end %>
+<%- elsif @lookup && !@available %>
+    <header class="booking-header">
+        <h2>Availability and Rate</h2>
+    </header>
+    <%= form_tag("/property/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
+    <table>
+        <tr class="date-select">
+        <td class="g sm-three-eighths">
+            <label for="start_date">Arrive</label>
+            <%= text_field_tag "start_date", @start_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
+        </td>
+        <td class="g sm-three-eighths">
+            <label for="end_date">Depart</label>
+            <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
+        </td>
+        <td class="g sm-two-eighths">
+            <label for="guests">Guests</label>
+            <div class="select-style">
+            <%= select_tag "guests", options_for_select(@guest_amount_list, @guests) %>
+            </div>
+        </td>
+        </tr>
+        <tr class="details">
+            <td class="g">This property is unavailable for the chosen dates.</td>
+        </tr>
+        <tr class="submit-container">
+        <td>
+            <input class="btn no-min-width" type="submit" value="Check Availability">
+        </td>
+        </tr>
+    </table>
+    <% end %>
+<%- else %>
+    <header class="booking-header">
+        <h2>Availability and Rate</h2>
+    </header>
+    <%= form_tag("/property/#{@id}", { method: 'get', class: 'gw no-gutter booking-details' }) do %>
+    <table>
+        <tr class="date-select">
+        <td class="g sm-three-eighths">
+            <label for="start_date">Arrive</label>
+            <%= text_field_tag "start_date", @start_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
+        </td>
+        <td class="g sm-three-eighths">
+            <label for="end_date">Depart</label>
+            <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
+        </td>
+        <td class="g sm-two-eighths">
+            <label for="guests">Guests</label>
+            <div class="select-style">
+            <%= select_tag "guests", options_for_select(@guest_amount_list, @guests) %>
+            </div>
+        </td>
+        </tr>
+        <tr class="submit-container">
+        <td>
+            <input class="btn no-min-width" type="submit" value="Check Availability">
+        </td>
+        </tr>
+    </table>
+    <% end %>
+<% end %>
+</aside>

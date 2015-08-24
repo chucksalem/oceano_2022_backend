@@ -1,0 +1,158 @@
+.request-booking {
+    @include bp-at-least($breakpoint__md) { float: right; }
+    @include bp-until($breakpoint__md) { margin-bottom: 5em; }
+    @include bp-at-least($breakpoint__md) { margin-top: -23em; }
+
+    .booking-header {
+        background-color: $cerulean;
+        width: 100%;
+
+        h2 {
+            @extend %sans--black;
+            color: $white;
+            display: table;
+            font-size: 2.8em;
+            padding: 5px 20px;
+            width: 100%;
+
+            .term {
+                @extend %sans--bold;
+                display: table-cell;
+                font-size: 0.607em;
+                text-align: right;
+                vertical-align: middle;
+            }
+        }
+        img {
+            vertical-align: bottom;
+        }
+    }
+    .booking-details {
+        @extend %sans--medium;
+        background: $white;
+        border: 1px solid $gray;
+        font-size: 1.4em;
+
+        .select-style {
+            border-radius: 2px;
+            font-size: 0.857em;
+            margin: 0;
+
+            &:before {
+                line-height: 1.7;
+                padding: 5px 0 6px 13px;
+            }
+            select {
+                line-height: 1.5;
+            }
+        }
+        label {
+            font-size: 1em;
+            margin-bottom: 0;
+        }
+        input {
+            border-radius: 2px;
+            font-size: 0.857em;
+        }
+
+        .date-select {
+            td {
+                padding: 10px 20px;
+                @include bp-at-least($breakpoint__sm) { padding: 20px 7px; }
+
+                &:first-of-type {
+                    padding-top: 20px;
+                    @include bp-at-least($breakpoint__sm) { padding-left: 20px; }
+                }
+                &:last-of-type {
+                    padding-bottom: 20px;
+                    @include bp-at-least($breakpoint__sm) { padding-right: 20px; }
+                }
+            }
+        }
+        .details {
+            td {
+                border-top: 1px solid $gray;
+                float: left;
+                padding: 5px 20px;
+
+                &:first-of-type {
+                    border-right: 1px solid $gray;
+                }
+            }
+        }
+        .submit-container {
+            td {
+                border-top: 1px solid $gray;
+                padding: 20px;
+            }
+        }
+    }
+    &.step-two {
+        margin-top: 0;
+
+        .booking-header {
+            background-color: transparent;
+        }
+        .booking-details {
+            padding: 25px;
+
+            td {
+                display: table-cell;
+                float: none;
+            }
+            .place {
+                td {
+                    @extend %sans--black;
+                    font-size: 1.143em;
+                }
+            }
+            .specifics {
+                td {
+                    padding-bottom: 15px;
+                }
+            }
+            .dates {
+                td {
+                    @extend %sans--bold;
+                    border-top: 1px solid $gray;
+                    border-bottom: 1px solid $gray;
+                    padding: 15px 0;
+                }
+            }
+            .details {
+                td {
+                    border: none;
+                    padding: 5px 0;
+
+                    &:first-of-type {
+                        border: none;
+                    }
+                }
+                &.first {
+                    td {
+                        padding-top: 20px;
+                    }
+                }
+                &.last {
+                    td {
+                        padding-bottom: 20px;
+                    }
+                }
+            }
+            .total {
+                td {
+                    @extend %sans--bold;
+                    border-top: 1px solid $gray;
+                    font-size: 1.286em;
+                    padding-top: 15px;
+
+                    &:last-of-type {
+                        @extend %sans--black;
+                        font-size: 2em;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+.property-search {
+    background-color: $beige;
+    margin: -135px auto 100px auto;
+    max-width: 840px;
+    padding: 1em;
+    position: relative;
+
+    fieldset,
+    .select-style, 
+    input,
+    .btn {
+        height: 46px;
+        margin: 0;
+    }
+    fieldset {
+        @include bp-until($breakpoint__md){
+            margin-bottom: 1em;
+        }
+    }
+    @include bp-between($breakpoint__sm, $breakpoint__md){
+        fieldset {
+            &:nth-child(2) {
+                input {
+                    border-right: 0;
+                    border-radius: 3px 0 0 3px;
+                }
+            }
+            &:nth-child(3) {
+                input {
+                    border-right: 0;
+                    border-radius: 0;
+                }
+            }
+            &:nth-child(4) {
+                input {
+                    border-radius: 0 3px 3px 0;
+                }
+            }
+        }
+    }
+    @include bp-at-least($breakpoint__md){
+        fieldset {
+            &:nth-child(1) {
+                .select-style {
+                    border-right: 0;
+                    border-radius: 3px 0 0 3px;
+                }
+            }
+            &:nth-child(2) {
+                input {
+                    border-right: 0;
+                    border-radius: 0;
+                }
+            }
+            &:nth-child(3) {
+                input {
+                    border-right: 0;
+                    border-radius: 0;
+                }
+            }
+            &:nth-child(4) {
+                .select-style {
+                    border-right: 0;
+                    border-radius: 0;
+                }
+            }
+        }
+        footer {
+            .btn {
+                border-radius: 0 3px 3px 0;
+            }
+        }
+    }
+}

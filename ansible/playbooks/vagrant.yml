@@ -1,0 +1,7 @@
+---
+
+- hosts: vagrant
+  gather_facts: yes
+  sudo: yes
+  roles:
+    - common

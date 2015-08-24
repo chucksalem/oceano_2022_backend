@@ -1,0 +1,100 @@
+/* @grid
+-----------------------------------------------------  */
+
+
+
+
+
+
+// Grid configuration
+// -----------------------------------------------------
+//
+// Define the point at which grids no longer stack, but float
+// You might use a $breakpoint__* variable from _vars.scss or
+// any other value that works for you.
+$grid__float-at: $breakpoint__sm;
+//
+// Define the width of the gutters between grid units
+$grid__gutter-width-small: 1em;
+$grid__gutter-width: 3em;
+$grid__gutter-width-large: 8em;
+//
+// Define the amount of space at the bottom of a grid unit
+// when they are stacking (before they start to float)
+// You might choose $unit again.
+$grid__bottom-spacing-when-stacking-small: 1em;
+$grid__bottom-spacing-when-stacking: 3em;
+//
+// Define the amount of space at the bottom of a grid unit
+// when they are floating. It's often a good idea to make
+// this value equal to the gutter width.
+$grid__bottom-spacing-when-floating: $grid__gutter-width;
+
+
+
+// Grid Wrap
+.grid-wrap,
+.gw {
+  @include clearfix();
+  display: block;
+  // Sometimes, ul are used for grid wraps
+  list-style-type: none;
+  // margin-bottom: -1*$grid__bottom-spacing-when-stacking;
+  @include bp-at-least($grid__float-at) {
+    margin: 0 0 -1*$grid__bottom-spacing-when-floating -1*$grid__gutter-width;
+  }
+
+  &.large-gutter {
+    @include bp-at-least($grid__float-at) {
+      margin: 0 0 -1*$grid__bottom-spacing-when-floating -1*$grid__gutter-width-large;
+    }
+  }
+  &.small-gutter {
+      @include bp-at-least($grid__float-at) {
+        margin: 0 0 -1*$grid__bottom-spacing-when-floating -1*$grid__gutter-width-small;
+      }
+    }
+  &.no-gutter {
+    @include bp-at-least($grid__float-at) {
+      margin: 0 0 0 0;
+    }
+  }
+}
+
+
+// Grid
+.grid,
+.g {
+  @include clearfix();
+  min-height: 1px;
+  position: relative;
+  padding-bottom: $grid__bottom-spacing-when-stacking;
+  display: block;
+  width: 100%;
+  @include bp-at-least($grid__float-at) {
+    padding: 0 0 $grid__bottom-spacing-when-floating $grid__gutter-width;
+    float: left;
+  }
+
+  .large-gutter & {
+    @include bp-at-least($grid__float-at) {
+      padding: 0 0 $grid__bottom-spacing-when-floating $grid__gutter-width-large;
+      float: left;
+    }
+  }
+  .small-gutter & {
+    padding-bottom: $grid__bottom-spacing-when-stacking-small;
+    @include bp-at-least($grid__float-at) {
+      padding: 0 0 $grid__bottom-spacing-when-floating $grid__gutter-width-small;
+      float: left;
+    }
+  }
+  .no-gutter & {
+    padding-bottom: 0;
+    @include bp-at-least($grid__float-at) {
+      padding-left: 0;
+      padding-bottom: 0;
+      float: left;
+    }
+  }
+}

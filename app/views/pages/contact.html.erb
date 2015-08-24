@@ -1,0 +1,100 @@
+<% content_for :hero_title, "Contact Us".html_safe %> <!-- Hero/Page Title -->
+<% content_for :hero_size, 'hero-small' %> <!-- What's the hero size for the header? -->
+<% content_for :bottom_border, 'bottom-border' %> <!-- Does the header have a bottom border in the hero? -->
+
+<section class="padded-top padded-bottom beige-bg">
+    <div class="layout-container">
+        <div class="gw">
+            <nav class="subnav g md-one-third">
+                <ul>
+                    <li><a class="current" href="contact.html">Contact Us</a></li>
+                    <li><a href="maps.html">Maps</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                </ul>
+            </nav>
+            <div class="subpage-content g md-two-thirds">
+                <h1 class="heading-small">Contact Us</h1>
+                <p>For more information, please fill out the following form, or contact us with any of the methods below this form.  Please make sure that your e-mail address is correct so that we may reply.</p>
+                <h2 class="heading-medium top-spacing">Contact Information</h2>
+                <form>
+                    <fieldset class="half">
+                        <label>First Name</label>
+                        <input type="text" name="firstname" placeholder="First Name">
+                    </fieldset>
+                    <fieldset class="half right">
+                        <label>Last Name</label>
+                        <input type="text" name="firstname" placeholder="First Name">
+                    </fieldset>
+                    <fieldset class="half">
+                        <label>First Name</label>
+                        <input type="text" name="firstname" placeholder="First Name">
+                    </fieldset>
+                    <fieldset class="half right">
+                        <label>Last Name</label>
+                        <input type="text" name="firstname" placeholder="First Name">
+                    </fieldset>
+                    <fieldset>
+                        <label>Special requests or questions?</label>
+                        <textarea class="special-requests"></textarea>
+                    </fieldset> 
+                    <footer class="form__actions">
+                        <article class="field two-fiths">
+                            <input class="field__input btn submit" type="submit" id="submit" value="Submit Form">
+                            <span  class="field__feedback"></span>
+                            <span  class="field__hint"></span>
+                        </article>
+                    </footer>
+                </form>
+                <hr class="dark">
+                <h2 class="heading-medium">Contact by phone</h2>
+                <div class="gw">
+                    <div class="g sm-one-half">
+                        <p class="sans">
+                            <span class="label"><b>Reservation line (toll free from U.S.)</b></span><br>
+                            <a class="dark telephone" href="tel:18883288491">(888) 328-8491</a>
+                        </p>
+                    </div>
+                    <div class="g sm-one-half">
+                        <p class="sans">
+                            <span class="label"><b>Fax from U.S.</b></span><br>
+                            <a class="dark telephone" href="tel:16023912799">(602) 391-2799</a>
+                        </p>
+                    </div>
+                    <div class="g sm-one-half">
+                        <p class="sans">
+                            <span class="label"><b>Telephone from Mexico</b></span><br>
+                            <a class="dark telephone" href="tel:016383830800">01 (638) 383-0800</a>
+                        </p>
+                    </div>
+                    <div class="g sm-one-half">
+                        <p class="sans">
+                            <span class="label"><b>Fax from Mexico</b></span><br>
+                            <a class="dark telephone" href="tel:016383830801">01 (638) 383-0801</a>
+                        </p>
+                    </div>
+                </div>
+                <hr class="dark">
+                <h2 class="heading-medium">Address</h2>
+                <div class="gw">
+                    <div class="g sm-one-half">
+                        <p class="sans">
+                            <span class="label"><b>Oc&eacute;ano Rentals</b></span><br>
+                            <span>P.O. Box 2357</span><br>
+                            <span>Litchfield Park, AZ 85340</span>
+                        </p>
+                    </div>
+                    <div class="g sm-one-half">
+                        <p class="sans">
+                            <span class="label"><b>Oc&eacute;ano Rentals</b></span><br>
+                            <span>22 Freemon Boulevard Colonia Benito Juarez</span><br>
+                            <span>Rocky Point, Mexico 83550</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%= image_tag "contact-map.jpg", :class => "contact-map" %>

@@ -1,0 +1,166 @@
+<section class="scallop-top">
+  <div class="layout-container">    
+    <div class="md-two-thirds">
+      <ul class="offerings">
+        <li>
+          <i class="icon icon-bath"></i>
+          <span class="detail"><%= @unit.bathrooms %> bath</span>
+        </li>
+        <li>
+          <i class="icon icon-bed"></i>
+          <span class="detail"><%= @unit.bedrooms %> beds</span>
+        </li>
+        <li>
+          <i class="icon icon-guests"></i>
+          <span class="detail"><%= @unit.occupancy %> guests</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="padded-top padded-bottom beige-bg">
+  <div class="layout-container">
+    <%= render 'rate_panel' %>
+
+    <div class="property-details md-two-thirds">
+      <div class="gw">
+        <div class="g md-one-fourth">
+          <h2 class="heading-two">Description</h2>
+        </div>
+        <div class="g md-three-fourths">
+          <p><%= @unit.descriptions[:text][0][:description] %></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="gw">
+        <div class="g md-one-fourth">
+          <h2 class="heading-two">Amenities</h2>
+        </div>
+        <div class="g md-three-fourths">
+          <ul class="gw no-gutter no-padding">
+            <% @amenities.each do |amenity| %>
+            <li class="g md-one-half padded-right"><%= amenity.to_s.titleize %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="gw">
+        <div class="g md-one-fourth">
+          <h2 class="heading-two">Availability</h2>
+        </div>
+        <div class="g md-three-fourths">
+          <p class="no-top-margin sans"><strong>1 night minimum stay.</strong></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="image-grouping" id="image-lightbox">
+        <div class="row">
+          <article class="one-whole md-two-thirds tile">
+            <a rel="group" href="<%= @large_images[0][:url] %>" class="chocolat-image contain" style="background-image: url('<%= @standard_images[0][:url] %>');"></a>
+          </article>
+          <article class="one-whole md-one-third tile">
+            <a rel="group" href="<%= @large_images[1][:url] %>" class="chocolat-image contain" style="background-image: url('<%= @standard_images[1][:url] %>');"></a>
+          </article>
+        </div>
+        <div class="row">
+          <article class="one-whole md-one-third tile">
+            <a rel="group" href="<%= @large_images[2][:url] %>" class="chocolat-image contain" style="background-image: url('<%= @standard_images[2][:url] %>');"></a>
+          </article>
+          <article class="one-whole md-one-third tile">
+            <a rel="group" href="<%= @large_images[3][:url] %>" class="chocolat-image contain" style="background-image: url('<%= @standard_images[3][:url] %>');"></a>
+          </article>
+
+          <% for i in 4..@standard_images.count do %>
+            <a rel="group" href="<%= @large_images[i-1][:url] %>" class="chocolat-image hidden"></a>
+          <% end %>
+
+          <article class="one-whole md-one-third tile">
+            <a rel="group" href="#" class="contain black placehold-all-images open-lightbox">
+              <div class="over">
+                <h2>See All 12 Photos</h2>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="padded-top padded-bottom">
+  <div class="layout-container">
+    <div class="md-two-thirds">
+      <h2 class="heading-two bottom-spacing-large">Testimonies</h2>
+      <ul class="testimonials testimonials-paginated normal gw large-gutter">
+        <li class="g sm-one-whole">
+          <blockquote>
+            <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/1">
+            <p class="persons-words">“A fantastic condo. The property was spotless  and the tile work spectacular. Just a few steps to the beach for some remarkable snorkeling.</p>
+            <span class="persons-name">Ryan Buttrey</span>
+            <span class="persons-title">Partner, Front-end Developer</span>
+          </blockquote>
+        </li>
+        <li class="g sm-one-whole">
+          <blockquote>
+            <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/7">
+            <p class="persons-words">“A fantastic condo. The property was spotless  and the tile work spectacular. Just a few steps to the beach for some remarkable snorkeling.</p>
+            <span class="persons-name">Ryan Buttrey</span>
+            <span class="persons-title">Partner, Front-end Developer</span>
+          </blockquote>
+        </li>
+      </ul>
+      <div class="pagination pagination-centered">
+        <p>1 - 18 of 95 Testimonies</p>
+        <ul>
+          <li class="disabled"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="16.3,32.6 0,16.3 16.3,0"/></svg></a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">5</a></li>
+          <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="0,0 16.3,16.3 0,32.6"/></svg></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= image_tag("contact-map.jpg", class: "contact-map") %>
+
+<section class="padded-top padded-bottom related-places">
+  <div class="layout-container">
+    <h2 class="heading-two bottom-spacing-large">Other Places</h2>
+    <ul class="gw large-gutter no-padding">
+      <li class="g md-one-third">
+        <a href="#">
+          <img src="https://unsplash.it/800/500?image=727">
+          <h2 class="top-spacing">Property Name</h2>
+          <p>Property short description</p>
+        </a>
+      </li>
+      <li class="g md-one-third">
+        <a href="#">
+          <img src="https://unsplash.it/800/500?image=727">
+          <h2 class="top-spacing">Property Name</h2>
+          <p>Property short description</p>
+        </a>
+      </li>
+      <li class="g md-one-third">
+        <a href="#">
+          <img src="https://unsplash.it/800/500?image=727">
+          <h2 class="top-spacing">Property Name</h2>
+          <p>Property short description</p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

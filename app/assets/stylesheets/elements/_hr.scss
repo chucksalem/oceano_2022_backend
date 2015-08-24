@@ -1,0 +1,18 @@
+/* @hr
+-------------------------------------------------------- */
+
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgba($gray, .5);
+  margin: 4em 0;
+  padding: 0;
+
+  &.dark {
+    border-top: 1px solid rgba($gray, 1);
+  }
+}
+
+

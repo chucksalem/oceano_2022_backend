@@ -1,0 +1,10 @@
+---
+
+- include: apt.yml 
+  tags: common,apt
+- include: users.yml 
+  tags: common,users
+- include: security.yml
+  tags: common,security
+- include: rbenv.yml
+  tags: common,ruby
