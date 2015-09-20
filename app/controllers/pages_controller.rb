@@ -15,6 +15,14 @@ class PagesController < ApplicationController
     render
   end
 
+  def maps
+    render
+  end
+
+  def privacy
+    render
+  end
+
   def owner
     render
   end
