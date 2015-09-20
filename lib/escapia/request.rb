@@ -20,7 +20,6 @@ module Escapia
       end
 
       body = response.body["evrn_#{operation}_rs".to_sym]
-      puts response.inspect
       fail Error.new(body[:errors][:error]) if body.key?(:errors)
       body
     end
