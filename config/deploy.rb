@@ -3,7 +3,7 @@ lock '3.4.0'
 
 set :application, 'oceano'
 set :repo_url, 'git@github.com:wearethescenery/oceano-rails.git'
-set :branch, 'master'
+set :branch, 'upstart'
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
@@ -35,7 +35,7 @@ namespace :foreman do
   task :export do
     on roles(:app) do
       within current_path do
-        execute :rbenv, :sudo, "bundle exec foreman export upstart /etc/init --procfile=./Procfile -a #{fetch(:application)} -u #{fetch(:user)} -l #{current_path}/log -e #{current_path}/.env.#{fetch(:stage)} --template #{current_path}/upstart"
+        execute :rbenv, :sudo, "bundle exec foreman export upstart /etc/init --procfile=./Procfile -a #{fetch(:application)} -u #{fetch(:user)} -l #{current_path}/log --template #{current_path}/upstart"
       end
     end
   end

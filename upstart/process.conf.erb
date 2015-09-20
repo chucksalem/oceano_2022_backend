@@ -10,5 +10,6 @@ env PORT=<%= port %>
 setuid <%= user %>
 
 script
+    eval $(cat /etc/environment | sed 's/^/export /')
     cd <%= engine.root %> && /home/<%= user %>/.rbenv/shims/<%= process.command %>
 end script
