@@ -10,8 +10,8 @@ class PropertyController < ApplicationController
 	def view
 		@id                = params[:id]
 		@unit              = UnitRepository.get(@id)
-		@page_title        = @unit.name
-		@page_subtitle     = @unit.address[:street]
+		@property_title    = @unit.name
+		@property_subtitle = @unit.address[:street]
 		@amenities         = @unit.available_amenities
 		@guests            = params[:guests] || 1
 		@guest_amount_list = (1..@unit.occupancy).map { |v| v }
