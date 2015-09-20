@@ -78,14 +78,14 @@
             <a rel="group" href="<%= @large_images[3][:url] %>" class="chocolat-image contain" style="background-image: url('<%= @standard_images[3][:url] %>');"></a>
           </article>
 
-          <% for i in 4..@standard_images.count do %>
+          <% for i in 5..@standard_images.count do %>
             <a rel="group" href="<%= @large_images[i-1][:url] %>" class="chocolat-image hidden"></a>
           <% end %>
 
           <article class="one-whole md-one-third tile">
             <a rel="group" href="#" class="contain black placehold-all-images open-lightbox">
               <div class="over">
-                <h2>See All 12 Photos</h2>
+                <h2>See All <%= @standard_images.count %> Photos</h2>
               </div>
             </a>
           </article>
