@@ -7,7 +7,7 @@ class PropertyController < ApplicationController
     search_entry
   end
 
-	def view
+	def show
 		@id                = params[:id]
 		@unit              = UnitRepository.get(@id)
 		@property_title    = @unit.name

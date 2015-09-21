@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get  '/accomodations' => 'property#index'
-  get  '/property/:id'  => 'property#view'
+  get  '/property/:id'  => 'property#show'
 
   PagesController.action_methods.each do |action|
     get "/#{action}", to: "pages##{action}", as: "#{action}_page"
