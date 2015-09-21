@@ -97,6 +97,18 @@
         </div>
       </div>
 
+      <div class="gw">
+        <div class="g">
+          <%
+            unless @videos[0][:formats][:url].empty? 
+              url = @videos[0][:formats][:url]
+          %>
+          
+          <p><a class="btn video-tour-btn" href="<%= url %>" target="_blank">View a video tour</a></p>
+          <% end %>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
