@@ -19,7 +19,7 @@ class PagesController < ApplicationController
     render
   end
 
-  def owner
+  def owners
     render
   end
 end

@@ -1,4 +1,4 @@
-<% content_for :hero_title, "Owner".html_safe %> <!-- Hero/Page Title -->
+<% content_for :hero_title, "Owners".html_safe %> <!-- Hero/Page Title -->
 <% content_for :hero_size, 'hero-small' %> <!-- What's the hero size for the header? -->
 <% content_for :bottom_border, 'bottom-border' %> <!-- Does the header have a bottom border in the hero? -->
 
@@ -12,11 +12,24 @@
                 
                 <h2 class="heading-small">Work Order</h2>
                 <p>Please fill out the following form to submit a work order. You will receive a response within 24 hours.</p>
-                <p>[form fields]</p>
-                <p>Owner Name</p>
-                <p>Property Name</p>
-                <p>Email</p>
-                <p>Problem Explanation</p>
+                <form class="dark">
+                    <fieldset class="half">
+                        <label for="ownerName">Owner Name</label>
+                        <input type="text" id="ownerName">
+                    </fieldset>
+                    <fieldset class="half">
+                        <label for="propertyName">Property Name</label>
+                        <input type="text" id="propertyName">
+                    </fieldset>
+                    <fieldset class="half">
+                        <label for="email">Contact Email</label>
+                        <input type="email" id="email">
+                    </fieldset>
+                    <fieldset>
+                        <label for="problem">Problem Description</label>
+                        <textarea id="problem"></textarea>
+                    </fieldset>
+                </form>
                 
                 <p><a href="mailto:info@goOc&eacute;ano.com">Send Us an E-mail</a></p>
                 
