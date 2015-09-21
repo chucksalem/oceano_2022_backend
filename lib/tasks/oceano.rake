@@ -1,7 +1,16 @@
 namespace :oceano do
   namespace :cache do
-    task update: :environment do
-      c = CachePopulator.new(
+    task properties: :environment do
+      c = CacheProperties.new(
+        config: OceanoConfig, 
+        logger: Rails.logger,
+        redis:  RedisClient
+      )
+      c.perform!
+    end
+
+    task weather: :environment do
+      c = CacheForecast.new(
         config: OceanoConfig, 
         logger: Rails.logger,
         redis:  RedisClient

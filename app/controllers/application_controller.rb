@@ -5,11 +5,18 @@ class ApplicationController < ActionController::Base
   helper_method :home?
   helper_method :property_detail?
 
+  before_filter :weather
+
   private
+
+  def weather
+    @weather = Weather.get
+  end
 
   def home?
     controller_name == 'home' && action_name == 'index'
   end
+
   def property_detail?
     controller_name == 'property' && action_name == 'view'
   end

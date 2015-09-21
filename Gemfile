@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'capistrano', '3.4.0'
-gem 'capistrano-rbenv', '2.0.3'
 gem 'capistrano-bundler', '1.1.4'
+gem 'capistrano-rbenv', '2.0.3'
+gem 'forecast_io', '2.0.0'
 gem 'foreman', '0.78.0'
 gem 'multi_json', '1.11.2'
 gem 'nokogiri', '1.6.6.2'
