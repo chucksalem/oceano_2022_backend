@@ -1,3 +1,5 @@
+  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+
 <% content_for :hero_title, @property_title.html_safe %>
 <% content_for :lede, @property_subtitle.html_safe %>
 
@@ -137,7 +139,13 @@
   </div>
 </section>
 
-<%= image_tag("contact-map.jpg", class: "contact-map") %>
+<div id="map-container">
+  <%
+    @map_latitude = @unit.position[:latitude]
+    @map_longitude = @unit.position[:longitude]
+  %>
+  <div id="map-canvas" data-lat="<%= @map_latitude %>" data-lon="<%= @map_longitude %>"></div>
+</div>
 
 <section class="padded-top padded-bottom related-places">
   <div class="layout-container">
