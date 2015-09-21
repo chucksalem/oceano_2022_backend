@@ -166,9 +166,9 @@
     <%- @random_units.each do |unit| %>
       <li class="g md-one-third">
         <a href="#">
-          <img src="https://unsplash.it/800/500?image=727">
+          <img src="<%= unit.standard_images[0][:url] %>">
           <h2 class="top-spacing"><%= unit.name %></h2>
-          <p>Property short description</p>
+          <p><%= ellipsis(unit.long_description, length: 50) %></p>
         </a>
       </li>
     <%- end %>

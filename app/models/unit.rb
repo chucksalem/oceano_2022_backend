@@ -100,6 +100,22 @@ class Unit
   end
 
   def available_amenities
-		amenities.to_h.select { |k,v| v }.keys
+    amenities.to_h.select { |k,v| v }.keys
+  end
+
+  def standard_images
+    descriptions.images.map { |i| i[:formats][2] }
+  end
+
+  def large_images
+    descriptions.images.map { |i| i[:formats][4] }
+  end
+
+  def long_description
+    descriptions.text[0][:description]
+  end
+
+  def videos
+    descriptions.videos
   end
 end

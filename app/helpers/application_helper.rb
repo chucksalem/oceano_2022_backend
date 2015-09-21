@@ -4,4 +4,8 @@ module ApplicationHelper
       { key: a.tr(' ', '').underscore, name: a }
     end
   end
+
+  def ellipsis(str, length:)
+    str[0..length].gsub(/\s\w+\s*$/,'...')
+  end
 end

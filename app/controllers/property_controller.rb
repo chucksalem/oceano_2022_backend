@@ -68,15 +68,8 @@ class PropertyController < ApplicationController
 	end
 
 	def get_images
-		@images = @unit.descriptions[:images]
-		@videos = @unit.descriptions[:videos]
-		
-		@standard_images = []
-		@large_images = []
-
-		@images.each do |image|
-			@standard_images.push(image[:formats][2]) #standard option
-			@large_images.push(image[:formats][4]) #large option
-		end
+		@videos = @unit.videos
+		@standard_images = @unit.standard_images
+		@large_images = @unit.large_images
 	end
 end
