@@ -23,6 +23,17 @@ class UnitRepository
     Unit.from_hash(hash)
   end
 
+  def self.random_units(limit: 3, except: [])
+    except_keys = except.map { |code| "units:#{code}" }
+    all         = redis.keys('units:*') - except_keys
+    codes       = all.sample(limit).map! { |k| k.sub('units:', '') }
+
+    codes.each_with_object([]) do |code, accum|
+      accum << self.get(code)
+      accum
+    end
+  end
+
   def self.hash_to_key(hash)
     flatten_nested_hash(hash).flatten.join(':')
   end

@@ -4,7 +4,6 @@ class PropertyController < ApplicationController
   def index
     @units = []
     search_results && return if is_search_request
-    search_entry
   end
 
 	def show
@@ -17,15 +16,13 @@ class PropertyController < ApplicationController
 		@guest_amount_list = (1..@unit.occupancy).map { |v| v }
 		@start_date        = params[:start_date] || Date.today.strftime(DATE_FORMAT)
 		@end_date          = params[:end_date] || (Date.today + 7).strftime(DATE_FORMAT)
+    @random_units      = UnitRepository.random_units(except: [@id])
 
 		lookup_rates if [:start_date, :end_date, :guests].all? { |k| params.key?(k) }
 		get_images
 	end
 
   private
-
-  def search_entry
-  end
 
   def is_search_request
 		[:area, :start_date, :end_date, :guests].all? { |k| params.key?(k) }

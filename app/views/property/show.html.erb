@@ -163,27 +163,15 @@
   <div class="layout-container">
     <h2 class="heading-two bottom-spacing-large">Other Places</h2>
     <ul class="gw large-gutter no-padding">
+    <%- @random_units.each do |unit| %>
       <li class="g md-one-third">
         <a href="#">
           <img src="https://unsplash.it/800/500?image=727">
-          <h2 class="top-spacing">Property Name</h2>
+          <h2 class="top-spacing"><%= unit.name %></h2>
           <p>Property short description</p>
         </a>
       </li>
-      <li class="g md-one-third">
-        <a href="#">
-          <img src="https://unsplash.it/800/500?image=727">
-          <h2 class="top-spacing">Property Name</h2>
-          <p>Property short description</p>
-        </a>
-      </li>
-      <li class="g md-one-third">
-        <a href="#">
-          <img src="https://unsplash.it/800/500?image=727">
-          <h2 class="top-spacing">Property Name</h2>
-          <p>Property short description</p>
-        </a>
-      </li>
+    <%- end %>
     </ul>
   </div>
 </section>
