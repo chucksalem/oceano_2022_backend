@@ -23,7 +23,7 @@ class UnitRepository
     Unit.from_hash(hash)
   end
 
-  def self.random_units(limit: 3, except: [])
+  def self.random_units(limit: 2, except: [])
     except_keys = except.map { |code| "units:#{code}" }
     all         = redis.keys('units:*') - except_keys
     codes       = all.sample(limit).map! { |k| k.sub('units:', '') }

@@ -71,7 +71,7 @@ class CachePopulator
   end
 
   def all_units_key
-    'units:all'
+    'temp:units:all'
   end
 
   def unit_key(code)
