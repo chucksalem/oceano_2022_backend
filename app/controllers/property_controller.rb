@@ -72,9 +72,9 @@ class PropertyController < ApplicationController
 
 	def get_images
 		@images = @unit.descriptions[:images]
-    @videos = @unit.descriptions[:videos]
+		@videos = @unit.descriptions[:videos]
 		
-    @standard_images = []
+		@standard_images = []
 		@large_images = []
 
 		@images.each do |image|
