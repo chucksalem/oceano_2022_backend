@@ -6,6 +6,7 @@
   vars:
       - escapia_username: "OceanoRentals"
       - escapia_password: "dioenRionz0e!"
+      - forecastio_api_key: b4c6cea6b8a3b25a56591af3eb5e9e40
       - rack_env: "staging"
       - redis_host: "localhost"
       - redis_port: 6379
