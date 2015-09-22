@@ -1,4 +1,4 @@
-class CachePopulator
+class CacheProperties
   TTL_SECONDS = (24 * 60 * 60).freeze
 
   def initialize(config:, logger:, redis:)

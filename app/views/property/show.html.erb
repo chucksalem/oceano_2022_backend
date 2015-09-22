@@ -100,7 +100,7 @@
       <div class="gw">
         <div class="g">
           <%
-            unless @videos[0][:formats][:url].empty? 
+            unless @videos.empty? || @videos[0][:formats][:url].empty? 
               url = @videos[0][:formats][:url]
           %>
           

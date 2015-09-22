@@ -1,3 +1,4 @@
 every :hour do
-  rake 'oceano:cache:update'
+  rake 'oceano:cache:properties'
+  rake 'oceano:cache:weather'
 end
