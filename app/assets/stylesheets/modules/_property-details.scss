@@ -2,6 +2,12 @@
     @include bp-at-least($breakpoint__md) { float: left; }
     @include bp-at-least($breakpoint__md) { padding-right: 4em; }
 }
+
+.property-details p {
+  font-size: 1.5em;
+  margin-top: 2px;
+}
+
 #map-container {
     background: #fff;
     height: 315px;
