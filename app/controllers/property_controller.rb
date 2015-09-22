@@ -4,10 +4,9 @@ class PropertyController < ApplicationController
   def index
     @units = []
     search_results && return if is_search_request
-    search_entry
   end
 
-	def view
+	def show
 		@id                = params[:id]
 		@unit              = UnitRepository.get(@id)
 		@property_title    = @unit.name
@@ -17,15 +16,13 @@ class PropertyController < ApplicationController
 		@guest_amount_list = (1..@unit.occupancy).map { |v| v }
 		@start_date        = params[:start_date] || Date.today.strftime(DATE_FORMAT)
 		@end_date          = params[:end_date] || (Date.today + 7).strftime(DATE_FORMAT)
+    @random_units      = UnitRepository.random_units(limit: 3, except: [@id])
 
 		lookup_rates if [:start_date, :end_date, :guests].all? { |k| params.key?(k) }
 		get_images
 	end
 
   private
-
-  def search_entry
-  end
 
   def is_search_request
 		[:area, :start_date, :end_date, :guests].all? { |k| params.key?(k) }
@@ -71,15 +68,8 @@ class PropertyController < ApplicationController
 	end
 
 	def get_images
-		@images = @unit.descriptions[:images]
-		@videos = @unit.descriptions[:videos]
-		
-		@standard_images = []
-		@large_images = []
-
-		@images.each do |image|
-			@standard_images.push(image[:formats][2]) #standard option
-			@large_images.push(image[:formats][4]) #large option
-		end
+		@videos = @unit.videos
+		@standard_images = @unit.standard_images
+		@large_images = @unit.large_images
 	end
 end

@@ -6,7 +6,7 @@ class UnitRepository
   end
 
   def self.search(criteria)
-    key   = "units:search:#{hash_to_key(criteria)}"
+    key   = "search:#{hash_to_key(criteria)}"
     value = redis.get(key)
     return MultiJson.load(value) unless value.nil?
     Unit.search(criteria).tap { |c| redis.setex(key, TTL_SECONDS, MultiJson.dump(c)) }
@@ -21,6 +21,17 @@ class UnitRepository
     raise Unit::NotFound if raw.nil?
     hash = MultiJson.load(raw, symbolize_keys: true)
     Unit.from_hash(hash)
+  end
+
+  def self.random_units(limit: 2, except: [])
+    except_keys = except.map { |code| "units:#{code}" }
+    all         = redis.keys('units:*') - except_keys
+    codes       = all.sample(limit).map! { |k| k.sub('units:', '') }
+
+    codes.each_with_object([]) do |code, accum|
+      accum << self.get(code)
+      accum
+    end
   end
 
   def self.hash_to_key(hash)

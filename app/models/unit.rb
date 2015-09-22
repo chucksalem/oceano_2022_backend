@@ -14,6 +14,7 @@ class Unit
   attribute :occupancy,    Integer, default: 0
   attribute :position,     UnitPosition
   attribute :type,         Symbol
+  attribute :reviews,      Array
 
   def self.from_hash(hash)
     new.tap do |unit|
@@ -38,6 +39,7 @@ class Unit
       num_floors:    info[:@num_floors],
       occupancy:     info[:@max_occupancy],
       position:      info[:position],
+      reviews:       content[:unit_reviews],
       rooms:         info[:category_codes][:room_info],
       type_code:     info[:category_codes][:unit_category][:@code]
     )
@@ -57,6 +59,7 @@ class Unit
                                num_floors:,
                                occupancy:,
                                position:,
+                               reviews:,
                                rooms:,
                                type_code:)
     unit = new
@@ -70,6 +73,7 @@ class Unit
     unit.bathrooms    = UnitRooms.count_for_code(:bathrooms, rooms)
     unit.bedrooms     = UnitRooms.count_for_code(:bedrooms, rooms)
     unit.descriptions = UnitDescriptions.from_descriptions(descriptions)
+    unit.reviews      = UnitReviews.from_response(reviews)
 
     unit.address = {
       street:      address[:address_line],
@@ -100,6 +104,22 @@ class Unit
   end
 
   def available_amenities
-		amenities.to_h.select { |k,v| v }.keys
+    amenities.to_h.select { |k,v| v }.keys
+  end
+
+  def standard_images
+    descriptions.images.map { |i| i[:formats][2] }
+  end
+
+  def large_images
+    descriptions.images.map { |i| i[:formats][4] }
+  end
+
+  def long_description
+    descriptions.text[0][:description]
+  end
+
+  def videos
+    descriptions.videos
   end
 end

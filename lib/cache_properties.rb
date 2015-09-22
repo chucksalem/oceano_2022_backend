@@ -1,4 +1,4 @@
-class CachePopulator
+class CacheProperties
   TTL_SECONDS = (24 * 60 * 60).freeze
 
   def initialize(config:, logger:, redis:)
@@ -71,7 +71,7 @@ class CachePopulator
   end
 
   def all_units_key
-    'units:all'
+    'temp:units:all'
   end
 
   def unit_key(code)

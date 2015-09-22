@@ -61,3 +61,10 @@
     state: present
     regexp: '^REDIS_PORT'
     line: 'REDIS_PORT={{ redis_port }}'
+
+- name: Set FORECASTIO_API_KEY
+  lineinfile: 
+    dest: /etc/environment 
+    state: present
+    regexp: '^FORECASTIO_API_KEY'
+    line: 'FORECASTIO_API_KEY={{ forecastio_api_key }}'
