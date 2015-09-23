@@ -38,7 +38,10 @@ class PropertiesController < ApplicationController
 
     codes = []
     OceanoConfig[:cache_population_searches].each do |criteria|
-      criteria = criteria.merge(date_range: { start: start_date, end: end_date })
+      criteria = criteria.merge(
+        date_range: { start: start_date, end: end_date },
+        guests:     [{type: 10, count: params[:guests]}]
+      )
       codes += UnitRepository.search(criteria)
     end
 
