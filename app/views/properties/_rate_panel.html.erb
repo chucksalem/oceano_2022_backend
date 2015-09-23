@@ -3,31 +3,36 @@
     <header class="booking-header">
         <h2>$<%= '%.0f' % @nightly_rate %> <span class="term">Per Night</span></h2>
     </header>
-    <%= form_tag("/property/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
+    <%= form_tag("/accomodations/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
     <table>
         <tr class="date-select">
-        <td class="g sm-three-eighths">
-            <label for="start_date">Arrive</label>
-            <%= text_field_tag "start_date", @start_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
-        </td>
-        <td class="g sm-three-eighths">
-            <label for="end_date">Depart</label>
-            <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
-        </td>
-        <td class="g sm-two-eighths">
-            <label for="guests">Guests</label>
-            <div class="select-style">
-            <%= select_tag "guests", options_for_select(@guest_amount_list, @guests) %>
-            </div>
-        </td>
+            <td class="g sm-three-eighths">
+                <label for="start_date">Arrive</label>
+                <%= text_field_tag "start_date", @start_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
+            </td>
+            <td class="g sm-three-eighths">
+                <label for="end_date">Depart</label>
+                <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'mm/dd/yyyy' %>
+            </td>
+            <td class="g sm-two-eighths">
+                <label for="guests">Guests</label>
+                <div class="select-style">
+                <%= select_tag "guests", options_for_select(@guest_amount_list, @guests) %>
+                </div>
+            </td>
+        </tr>
+        <tr class="full-width-container">
+            <td>
+                <input class="btn no-min-width" type="submit" value="Check Availability">
+            </td>
+        </tr>
+        <tr class="details first">
+            <td class="g two-thirds">$<%=  '%.0f' % @nightly_rate %> x <%= @length_of_stay %> nights</td>
+            <td class="g one-third">$<%= @base_amount %></td>
         </tr>
         <tr class="details">
-        <td class="g two-thirds">$<%=  '%.0f' % @nightly_rate %> x <%= @length_of_stay %> nights</td>
-        <td class="g one-third">$<%= @base_amount %></td>
-        </tr>
-        <tr class="details">
-        <td class="g two-thirds">Tax</td>
-        <td class="g one-third">$<%= @tax_amount %></td>
+            <td class="g two-thirds">Tax</td>
+            <td class="g one-third">$<%= @tax_amount %></td>
         </tr>
         <% @fees.each do |fee| %>
         <tr class="details">
@@ -36,18 +41,26 @@
         </tr>
         <% end %>
         <tr class="details">
-        <td class="g two-thirds">Total</td>
-        <td class="g one-third">$<%= '%.2f' % @total_amount %></td>
+            <td class="g two-thirds highlight">Total</td>
+            <td class="g one-third highlight">$<%= '%.2f' % @total_amount %></td>
         </tr>
-        <tr class="submit-container">
-        <td>
-            <input class="btn no-min-width" type="submit" value="Check Availability">
-        </td>
+        <tr class="details">
+            <td class="g two-thirds"><a href="/trip-cancellation-insurance" target="_blank">Optional Trip Cancellation Insurance</a></td>
+            <td class="g one-third">$<%= '%.2f' % ((@base_amount.to_f * 1.12) * 0.065) %></td>
+        </tr>
+        <tr class="details">
+            <td class="g two-thirds highlight">Total w/ Insurance</td>
+            <td class="g one-third highlight">$<%= '%.2f' % (((@base_amount.to_f * 1.12) * 0.065) + @total_amount.to_f) %></td>
         </tr>
         <tr class="full-width-container">
-        <td>
-            <a href="#" class="btn no-min-width">Request Booking</a>
-        </td>
+            <td>
+                <a href="#" class="btn request-booking-link">Request Booking</a>
+            </td>
+        </tr>
+        <tr class="full-width-container">
+            <td>
+                <span class="note">The total above is an estimate and includes rent, taxes, and additional fees.</span>
+            </td>
         </tr>
     </table>
     <% end %>
@@ -55,7 +68,7 @@
     <header class="booking-header">
         <h2>Availability and Rate</h2>
     </header>
-    <%= form_tag("/property/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
+    <%= form_tag("/accomodations/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
     <table>
         <tr class="date-select">
         <td class="g sm-three-eighths">
@@ -87,7 +100,7 @@
     <header class="booking-header">
         <h2>Availability and Rate</h2>
     </header>
-    <%= form_tag("/property/#{@id}", { method: 'get', class: 'gw no-gutter booking-details' }) do %>
+    <%= form_tag("/accomodations/#{@id}", { method: 'get', class: 'gw no-gutter booking-details' }) do %>
     <table>
         <tr class="date-select">
         <td class="g sm-three-eighths">
