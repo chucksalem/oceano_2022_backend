@@ -22,4 +22,9 @@ class PagesController < ApplicationController
   def owners
     render
   end
+
+  def trip_cancellation_insurance
+    render
+  end
+
 end

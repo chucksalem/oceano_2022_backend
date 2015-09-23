@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :accomodations, controller: :properties, only: [:index, :show]
 
   PagesController.action_methods.each do |action|
-    get "/#{action}", to: "pages##{action}", as: "#{action}_page"
+    get "/#{action}".dasherize, to: "pages##{action}", as: "#{action}_page"
   end
 
   namespace :api do
