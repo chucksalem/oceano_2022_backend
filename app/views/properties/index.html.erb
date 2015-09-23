@@ -1,5 +1,6 @@
 <% content_for :hero_title, "Find a Rental".html_safe %> <!-- Hero/Page Title -->
 <% content_for :lede, "The rentals you can find at rocky point".html_safe %>
+                <%= @end_date %>
 
 <section class="padded-top scallop-top beige-bg">
     <div class="layout-container">
@@ -8,29 +9,21 @@
                 <fieldset class="g sm-one-whole md-four-twelfths">
                     <label class="is-visually-hidden">Where are you going?</label>
                     <div class="select-style">
-                        <select name="area">
-                            <option disabled selected>Where are you going?</option>
-                            <% areas.each do |a| %>
-                            <option value="<%= a[:key] %>"><%= a[:name] %></option>
-                            <% end %>
-                        </select>
+                    <%- areas_options = [['Where are you going?', '-', {disabled: 'disabled'}]] + areas.map { |v| [v[:name], v[:key]] } %>
+                    <%= select_tag "area", options_for_select(areas_options, @area) %>
                     </div>
                 </fieldset>
                 <fieldset class="g sm-one-third md-two-twelfths">
-                    <input id="start_date" class="no-borders datepicker" type="text" name="start_date" placeholder="Arrive">
+                    <%= text_field_tag "start_date", @start_date, class: 'no-borders datepicker', placeholder: 'Arrive' %>
                 </fieldset>
                 <fieldset class="g sm-one-third md-two-twelfths">
-                    <input id="end_date" class="no-borders datepicker" type="text" name="end_date" placeholder="Depart">
+                    <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'Depart' %>
                 </fieldset>
                 <fieldset class="g sm-one-third md-two-twelfths">
                     <label class="is-visually-hidden" for="guests">Guests</label>
                     <div class="select-style">
-                        <select name="guests">
-                            <option>Guests</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>200</option>
-                        </select>
+                    <%- guest_options = [['Guests', '-', {disabled: 'disabled'}]] + (1..10).map { |v| [v, v] } %>
+                    <%= select_tag "guests", options_for_select(guest_options, @guests) %>
                     </div>
                 </fieldset>
                 <footer class="g md-two-twelfths">

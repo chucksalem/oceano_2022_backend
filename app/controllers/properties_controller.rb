@@ -2,7 +2,11 @@ class PropertiesController < ApplicationController
   DATE_FORMAT = '%m/%d/%Y'.freeze
 
   def index
-    @units = []
+    @units      = []
+    @area       = params[:area] || '-'
+    @start_date = params[:start_date]
+    @end_date   = params[:end_date]
+    @guests     = params[:guests] || '-'
     search_results && return if is_search_request
   end
 
