@@ -33,6 +33,10 @@
         </div>
 
         <ul class="properties-list gw small-gutter">
+            <%- if @units.empty? %>
+                Nothing to see here.
+            <%- end %>
+
             <%- @units.each do |unit| %>
             <li class="property g sm-one-half md-one-whole">
                 <img class="property-thumb" src="https://unsplash.it/500/350?image=727">
