@@ -1,4 +1,4 @@
-class PropertyController < ApplicationController
+class PropertiesController < ApplicationController
   DATE_FORMAT = '%m/%d/%Y'.freeze
 
   def index
