@@ -9,15 +9,19 @@
       <ul class="offerings">
         <li>
           <i class="icon icon-bath"></i>
-          <span class="detail"><%= @unit.bathrooms %> bath</span>
+          <span class="detail"><%= @unit.bathrooms %> Bath</span>
         </li>
         <li>
           <i class="icon icon-bed"></i>
-          <span class="detail"><%= @unit.bedrooms %> beds</span>
+          <span class="detail"><%= @unit.bedrooms %> Beds</span>
         </li>
         <li>
           <i class="icon icon-guests"></i>
-          <span class="detail"><%= @unit.occupancy %> guests</span>
+          <span class="detail"><%= @unit.occupancy %> Guests</span>
+        </li>
+        <li>
+          <i class="icon icon-apartment"></i>
+          <span class="detail"><%= @unit.type.capitalize %></span>
         </li>
       </ul>
     </div>
@@ -40,6 +44,22 @@
 
       <hr>
 
+      <div class="gw">
+        <div class="g md-one-fourth">
+          <h2 class="heading-two">Property Details</h2>
+        </div>
+        <div class="g md-three-fourths">
+          <ul class="gw no-gutter no-padding">
+            <li class="g md-one-half padded-right"><p><b>Property Type:</b> <%= @unit.type.capitalize %></p></li>
+            <li class="g md-one-half padded-right"><p><b>Bedrooms:</b> <%= @unit.bedrooms %></p></li>
+            <li class="g md-one-half padded-right"><p><b>Bathrooms:</b> <%= @unit.bathrooms %></p></li>
+            <li class="g md-one-half padded-right"><p><b>Floors:</b> <%= @unit.num_floors %></p></li>
+            <li class="g md-one-half padded-right"><p><b>Occupancy:</b> <%= @unit.occupancy %></p></li>
+          </ul>
+        </div>
+      </div>
+
+      <hr>
       <div class="gw">
         <div class="g md-one-fourth">
           <h2 class="heading-two">Amenities</h2>
