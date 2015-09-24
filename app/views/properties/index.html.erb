@@ -31,12 +31,15 @@
                 </footer>
             <%- end %>
         </div>
-
+    </div>    
+    <%- if @units.empty? %>
+    <div class="layout-container-smaller padded-bottom layout-centered">
+        <h1>No available rental properties found</h1>
+        <p>Please adjust your search and try again.</p>
+    </div>
+    <%- else %>
+    <div class="layout-container">
         <ul class="properties-list gw small-gutter">
-            <%- if @units.empty? %>
-                Nothing to see here.
-            <%- end %>
-
             <%- @units.each do |unit| %>
             <li class="property g sm-one-half md-one-whole">
                 <img class="property-thumb" src="https://unsplash.it/500/350?image=727">
@@ -71,6 +74,7 @@
             <%- end %>
 
         </ul>
+        <%- end %>
         <!--div class="pagination pagination-centered">
             <p>1 - 18 of 95 Rentals</p>
             <ul>
