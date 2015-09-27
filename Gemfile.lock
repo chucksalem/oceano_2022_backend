@@ -267,6 +267,7 @@ GEM
       crack (>= 0.3.2)
     whenever (0.9.4)
       chronic (>= 0.6.3)
+    will_paginate (3.0.6)
 
 PLATFORMS
   ruby
@@ -304,6 +305,7 @@ DEPENDENCIES
   virtus (= 1.0.5)
   webmock (= 1.21.0)
   whenever (= 0.9.4)
+  will_paginate (= 3.0.6)
 
 BUNDLED WITH
    1.10.6

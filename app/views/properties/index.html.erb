@@ -1,7 +1,5 @@
 <% content_for :hero_title, "Find a Rental".html_safe %> <!-- Hero/Page Title -->
 <% content_for :lede, "The rentals you can find at rocky point".html_safe %>
-                <%= @end_date %>
-
 <section class="padded-top scallop-top beige-bg">
     <div class="layout-container">
         <div class="property-search">
@@ -22,7 +20,7 @@
                 <fieldset class="g sm-one-third md-two-twelfths">
                     <label class="is-visually-hidden" for="guests">Guests</label>
                     <div class="select-style">
-                    <%- guest_options = [['Guests', '-', {disabled: 'disabled'}]] + (1..10).map { |v| [v, v] } %>
+                    <%- guest_options = [['Guests', '-', {disabled: 'disabled'}], ['Any', 'all']] + (1..10).map { |v| [v, v] } %>
                     <%= select_tag "guests", options_for_select(guest_options, @guests) %>
                     </div>
                 </fieldset>
@@ -42,7 +40,7 @@
         <ul class="properties-list gw small-gutter">
             <%- @units.each do |unit| %>
             <li class="property g sm-one-half md-one-whole">
-                <img class="property-thumb" src="https://unsplash.it/500/350?image=727">
+                <img class="property-thumb" src="<%= unit.standard_images[0][:url] %>">
                 <div class="details">
                     <div class="gw small-gutter">
                         <div class="g md-three-eighths">
@@ -75,17 +73,10 @@
 
         </ul>
         <%- end %>
-        <!--div class="pagination pagination-centered">
-            <p>1 - 18 of 95 Rentals</p>
-            <ul>
-                <li class="disabled"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="16.3,32.6 0,16.3 16.3,0"/></svg></a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="0,0 16.3,16.3 0,32.6"/></svg></a></li>
-            </ul>
-        </div-->
+
+        <div class="pagination pagination-centered">
+        <%= will_paginate @units, previous_label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="16.3,32.6 0,16.3 16.3,0"/></svg>', 
+                                  next_label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="0,0 16.3,16.3 0,32.6"/></svg>' %>
+        </div>
     </div>
 </section>

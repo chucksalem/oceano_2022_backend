@@ -38,8 +38,10 @@ class PropertiesController < ApplicationController
 
     codes = []
     OceanoConfig[:cache_population_searches].each do |criteria|
-      criteria[:date_range] = { start: start_date, end: end_date },
-      criteria[:guests]     = [{type: 10, count: params[:guests]}] unless params[:guests] == 'all'
+      criteria[:date_range] = { start: start_date, end: end_date }
+      unless params[:guests] == 'all'
+        criteria[:guests] = [{type: 10, count: params[:guests]}] 
+      end
       codes += UnitRepository.search(criteria)
     end
 
@@ -50,8 +52,12 @@ class PropertiesController < ApplicationController
       codes = codes & in_area_codes
     end
 
-    @units = codes.map do |c|
+    units = codes.map do |c|
       UnitRepository.get(c)
+    end
+
+    @units = WillPaginate::Collection.create((params[:page] || 1).to_i, 10, units.count) do |pager|
+      pager.replace(units[pager.offset, pager.per_page].to_a)
     end
   end
 
