@@ -5,67 +5,44 @@
 <section class="padded-top padded-bottom scallop-top">
     <div class="layout-container">
         <ul class="testimonials normal gw large-gutter">
+            <%- @reviews[0..1].each do |review| %>
             <li class="g sm-one-half">
                 <blockquote>
                     <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/1">
-                    <p class="persons-words">“A fantastic condo. The property was spotless  and the tile work spectacular. Just a few steps to the beach for some remarkable snorkeling.</p>
-                    <span class="persons-name">Ryan Buttrey</span>
-                    <span class="persons-title">Partner, Front-end Developer</span>
+                    <p class="persons-words">“<%= review[:comment] %></p>
+                    <%- unless review[:city].empty? || review[:state].empty? %>
+                    <span class="persons-name"><%= review[:city] %>, <%= review[:state] %></span>
+                    <% end %>
                 </blockquote>
             </li>
-            <li class="g sm-one-half">
-                <blockquote>
-                    <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/7">
-                    <p class="persons-words">“A fantastic condo. The property was spotless  and the tile work spectacular. Just a few steps to the beach for some remarkable snorkeling.</p>
-                    <span class="persons-name">Ryan Buttrey</span>
-                    <span class="persons-title">Partner, Front-end Developer</span>
-                </blockquote>
-            </li>
+            <%- end %>
         </ul>
     </div>
     <div class="testimonials featured">
         <div class="layout-container">
+            <%- @reviews[2].tap do |review| %>
             <blockquote>
-                <p class="persons-words">“Great house! Plenty of room and easy beach access! Only recommendation would be to better stock the home with basic supplies - e.g. extra paper towels, sponges and basic cleaning stuff to scrub dishes, wipe counters, sinks, etc. Also, our check in was 2+ hours late as cleaning people were still there so really ate into stayed in!”</p>
-                <span class="persons-name">Ryan Buttrey</span>
-                <span class="persons-title">Partner, Front-end Developer</span>
+                <p class="persons-words">“<%= review[:comment].html_safe %></p>
+                <%- unless review[:city].empty? || review[:state].empty? %>
+                <span class="persons-name"><%= review[:city] %>, <%= review[:state] %></span>
+                <% end %>
             </blockquote>
+            <%- end %>
         </div>
     </div>
     <div class="layout-container padded-top">
         <ul class="testimonials normal gw large-gutter">
+            <%- @reviews[2..5].each do |review| %>
             <li class="g sm-one-half">
                 <blockquote>
                     <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/1">
-                    <p class="persons-words">“A fantastic condo. The property was spotless  and the tile work spectacular. Just a few steps to the beach for some remarkable snorkeling.</p>
-                    <span class="persons-name">Ryan Buttrey</span>
-                    <span class="persons-title">Partner, Front-end Developer</span>
+                    <p class="persons-words">“<%= review[:comment] %></p>
+                    <%- unless review[:city].empty? || review[:state].empty? %>
+                    <span class="persons-name"><%= review[:city] %>, <%= review[:state] %></span>
+                    <% end %>
                 </blockquote>
             </li>
-            <li class="g sm-one-half">
-                <blockquote>
-                    <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/7">
-                    <p class="persons-words">“A fantastic condo. The property was spotless  and the tile work spectacular. Just a few steps to the beach for some remarkable snorkeling.</p>
-                    <span class="persons-name">Ryan Buttrey</span>
-                    <span class="persons-title">Partner, Front-end Developer</span>
-                </blockquote>
-            </li>
-            <li class="g sm-one-half">
-                <blockquote>
-                    <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/1">
-                    <p class="persons-words">“A fantastic condo. The property was spotless  and the tile work spectacular. Just a few steps to the beach for some remarkable snorkeling.</p>
-                    <span class="persons-name">Ryan Buttrey</span>
-                    <span class="persons-title">Partner, Front-end Developer</span>
-                </blockquote>
-            </li>
-            <li class="g sm-one-half">
-                <blockquote>
-                    <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/7">
-                    <p class="persons-words">“A fantastic condo. The property was spotless  and the tile work spectacular. Just a few steps to the beach for some remarkable snorkeling.</p>
-                    <span class="persons-name">Ryan Buttrey</span>
-                    <span class="persons-title">Partner, Front-end Developer</span>
-                </blockquote>
-            </li>
+            <%- end %>
         </ul>
     </div>
 </section>

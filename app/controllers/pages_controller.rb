@@ -8,6 +8,7 @@ class PagesController < ApplicationController
   end
 
   def testimonials
+    @reviews = UnitRepository.random_units(limit: 10).map(&:reviews).flatten
     render
   end
 
