@@ -38,17 +38,19 @@ class PropertiesController < ApplicationController
 
     codes = []
     OceanoConfig[:cache_population_searches].each do |criteria|
-      criteria = criteria.merge(
-        date_range: { start: start_date, end: end_date },
-        guests:     [{type: 10, count: params[:guests]}]
-      )
+      criteria[:date_range] = { start: start_date, end: end_date },
+      criteria[:guests]     = [{type: 10, count: params[:guests]}] unless params[:guests] == 'all'
       codes += UnitRepository.search(criteria)
     end
 
-    in_area_codes  = UnitRepository.units_in_area(params[:area])
-    filtered_codes = codes & in_area_codes
+    codes = codes.uniq
 
-    @units = filtered_codes.map do |c|
+    unless params[:area] == 'all'
+      in_area_codes = UnitRepository.units_in_area(params[:area])
+      codes = codes & in_area_codes
+    end
+
+    @units = codes.map do |c|
       UnitRepository.get(c)
     end
   end

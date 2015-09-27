@@ -12,6 +12,7 @@
                     <div class="select-style">
                         <select name="area">
                             <option disabled selected>Where are you going?</option>
+                            <option value="all">Any</option>
                             <% areas.each do |a| %>
                             <option value="<%= a[:key] %>"><%= a[:name] %></option>
                             <% end %>

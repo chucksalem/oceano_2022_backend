@@ -3,7 +3,7 @@ namespace :oceano do
     task properties: :environment do
       c = CacheProperties.new(
         config: OceanoConfig, 
-        logger: Rails.logger,
+        logger: Logger.new(STDOUT),
         redis:  RedisClient
       )
       c.perform!
@@ -12,7 +12,7 @@ namespace :oceano do
     task weather: :environment do
       c = CacheForecast.new(
         config: OceanoConfig, 
-        logger: Rails.logger,
+        logger: Logger.new(STDOUT),
         redis:  RedisClient
       )
       c.perform!

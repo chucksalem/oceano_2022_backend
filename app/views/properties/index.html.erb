@@ -9,7 +9,7 @@
                 <fieldset class="g sm-one-whole md-four-twelfths">
                     <label class="is-visually-hidden">Where are you going?</label>
                     <div class="select-style">
-                    <%- areas_options = [['Where are you going?', '-', {disabled: 'disabled'}]] + areas.map { |v| [v[:name], v[:key]] } %>
+                    <%- areas_options = [['Where are you going?', '-', {disabled: 'disabled'}], ['Any', 'all']] + areas.map { |v| [v[:name], v[:key]] } %>
                     <%= select_tag "area", options_for_select(areas_options, @area) %>
                     </div>
                 </fieldset>
