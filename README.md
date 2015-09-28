@@ -2,6 +2,8 @@
 
 Rails application for Oceano. Interfaces with the Escapia SOAP API for data.
 
+Staging Server: http://159.203.67.43
+
 ### Setup & Usage
 
 ```bash
