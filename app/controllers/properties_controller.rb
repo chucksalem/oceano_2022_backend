@@ -29,7 +29,7 @@ class PropertiesController < ApplicationController
   private
 
   def is_search_request
-		[:area, :start_date, :end_date, :guests].all? { |k| params.key?(k) }
+		[:area, :start_date, :end_date, :guests].all? { |k| params.key?(k) && !params[k].empty? }
   end
 
   def search_results
