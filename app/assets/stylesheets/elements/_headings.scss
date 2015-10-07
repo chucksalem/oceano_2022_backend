@@ -35,6 +35,12 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.38;
     margin-bottom: .5em;
 }
+.heading-medium-small {
+    @extend %sans--bold;
+    font-size: 1.9em;
+    line-height: 1.33;
+    margin-bottom: .5em;
+}
 .heading-small {
     @extend %sans--bold;
     font-size: 1.5em;
@@ -48,5 +54,19 @@ h1, h2, h3, h4, h5, h6 {
 .heading-two {
     @extend %sans--medium;
     font-size: 1.6em;
+}
+
+.heading-large,
+.heading-medium,
+.heading-medium-small,
+.heading-small,
+.heading-subheader,
+.heading-two {
+    &.up {
+        text-transform: uppercase;
+    }
+    &.alt {
+        color: $cerulean;
+    }
 }
 

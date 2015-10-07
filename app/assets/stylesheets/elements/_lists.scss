@@ -6,8 +6,7 @@ ol {
     padding-left: 3em;
 
     li {
-        font-size: 1.4em;
-        line-height: 1.5;
+        font-size: 1.5em;
         margin-bottom: .5em;
 
         &.sans {
@@ -15,6 +14,10 @@ ol {
         }
         &.padded-right {
             padding-right: 1em;
+        }
+
+        ul li {
+          font-size:1em;
         }
     }
     &.gw {
