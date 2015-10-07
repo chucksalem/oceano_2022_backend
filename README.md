@@ -31,3 +31,9 @@ Reset Forecast.io cache with:
 ```bash
 bundle exec rake oceano:cache:weather
 ```
+
+### Deploys
+Deploy to Staging with:
+```bash
+bundle exec cap staging deploy
+```
