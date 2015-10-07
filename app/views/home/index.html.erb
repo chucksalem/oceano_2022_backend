@@ -6,7 +6,7 @@
 <section class="scallop-top padded-top padded-bottom main-content">
     <div class="layout-container layout-centered">
         <div class="property-search">
-            <%= form_tag("/accomodations", {method: 'get', class: 'gw no-gutter'}) do %>
+            <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
                 <fieldset class="g sm-one-whole md-four-twelfths">
                     <label class="is-visually-hidden">Where are you going?</label>
                     <div class="select-style">
@@ -85,7 +85,7 @@
                                     </li>
                                 </ul>
                                 <p><%= ellipsis(unit.long_description, length: 50) %></p>
-                                <a href="<%= accomodation_url(unit.code) %>" class="btn btn--tertiary">More Information</a>
+                                <a href="<%= accommodation_url(unit.code) %>" class="btn btn--tertiary">More Information</a>
                             </div>
                         </div>
                     </div>

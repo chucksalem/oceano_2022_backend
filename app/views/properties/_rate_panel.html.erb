@@ -3,7 +3,7 @@
     <header class="booking-header">
         <h2>$<%= '%.0f' % @nightly_rate %> <span class="term">Per Night</span></h2>
     </header>
-    <%= form_tag("/accomodations/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
+    <%= form_tag("/accommodations/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
     <table>
         <tr class="date-select">
             <td class="g sm-three-eighths">
@@ -68,7 +68,7 @@
     <header class="booking-header">
         <h2>Availability and Rate</h2>
     </header>
-    <%= form_tag("/accomodations/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
+    <%= form_tag("/accommodations/#{@id}", {method: 'get', class: 'gw no-gutter booking-details'}) do %>
     <table>
         <tr class="date-select">
         <td class="g sm-three-eighths">
@@ -100,7 +100,7 @@
     <header class="booking-header">
         <h2>Availability and Rate</h2>
     </header>
-    <%= form_tag("/accomodations/#{@id}", { method: 'get', class: 'gw no-gutter booking-details' }) do %>
+    <%= form_tag("/accommodations/#{@id}", { method: 'get', class: 'gw no-gutter booking-details' }) do %>
     <table>
         <tr class="date-select">
         <td class="g sm-three-eighths">

@@ -3,7 +3,7 @@
 <section class="padded-top scallop-top beige-bg">
     <div class="layout-container">
         <div class="property-search">
-            <%= form_tag("/accomodations", {method: 'get', class: 'gw no-gutter'}) do %>
+            <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
                 <fieldset class="g sm-one-whole md-four-twelfths">
                     <label class="is-visually-hidden">Where are you going?</label>
                     <div class="select-style">
@@ -44,7 +44,7 @@
                 <div class="details">
                     <div class="gw small-gutter">
                         <div class="g md-three-eighths">
-                            <h2><a href="<%= accomodation_url(unit.code) %>"><%= unit.name %></a></h2>
+                            <h2><a href="<%= accommodation_url(unit.code) %>"><%= unit.name %></a></h2>
                             <p class="location"><%= unit.address.street %> <br><%= unit.address.city %>, <%= unit.address.country %></p>
                         </div>
                         <div class="g md-three-eighths">

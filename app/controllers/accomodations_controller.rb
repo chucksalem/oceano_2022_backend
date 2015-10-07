@@ -1,2 +1,0 @@
-class AccomodationsController < ApplicationController
-end

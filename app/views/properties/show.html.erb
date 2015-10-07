@@ -183,7 +183,7 @@
     <ul class="gw large-gutter no-padding">
     <%- @random_units.each do |unit| %>
       <li class="g md-one-third">
-        <a href="<%= accomodation_url(unit.code) %>">
+        <a href="<%= accommodation_url(unit.code) %>">
           <img src="<%= unit.standard_images[0][:url] %>">
           <h2 class="top-spacing"><%= unit.name %></h2>
           <p><%= ellipsis(unit.long_description, length: 50) %></p>
