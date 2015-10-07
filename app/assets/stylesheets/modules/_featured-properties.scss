@@ -17,6 +17,10 @@
                     font-size: 1em;
                     margin: 0 10px;
 
+                    .icon {
+                        margin-right: 0;
+                    }
+
                     .detail {
                         @extend %sans--medium;
                         color: $white;
