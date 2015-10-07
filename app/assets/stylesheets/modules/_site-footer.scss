@@ -141,9 +141,12 @@
             p {
                 @extend %sans--bold;
                 font-size: 10px;
+                text-transform: uppercase;
                 a {
+                    float: right;
                     color: $white;
                     letter-spacing: 1px;
+                    text-transform: lowercase;
                 }
             }
         }
