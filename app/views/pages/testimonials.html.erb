@@ -9,7 +9,7 @@
             <li class="g sm-one-half">
                 <blockquote>
                     <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/1">
-                    <p class="persons-words">“<%= review[:comment] %></p>
+                    <p class="persons-words">“<%= review[:comment].html_safe %></p>
                     <%- unless review[:city].empty? || review[:state].empty? %>
                     <span class="persons-name"><%= review[:city] %>, <%= review[:state] %></span>
                     <% end %>
@@ -36,7 +36,7 @@
             <li class="g sm-one-half">
                 <blockquote>
                     <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/1">
-                    <p class="persons-words">“<%= review[:comment] %></p>
+                    <p class="persons-words">“<%= review[:comment].html_safe %></p>
                     <%- unless review[:city].empty? || review[:state].empty? %>
                     <span class="persons-name"><%= review[:city] %>, <%= review[:state] %></span>
                     <% end %>
