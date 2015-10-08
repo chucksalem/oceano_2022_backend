@@ -40,7 +40,7 @@
         <ul class="properties-list gw small-gutter">
             <%- @units.each do |unit| %>
             <li class="property g sm-one-half md-one-whole">
-                <img class="property-thumb" src="<%= unit.standard_images[0][:url] %>">
+                <a href="<%= accommodation_url(unit.code) %>"><img class="property-thumb" src="<%= unit.standard_images[0][:url] %>"></a>
                 <div class="details">
                     <div class="gw small-gutter">
                         <div class="g md-three-eighths">
@@ -64,6 +64,7 @@
                             </ul>
                         </div>
                         <div class="g md-two-eighths">
+                            <span class="price"></span>
                             <span class="type"><%= unit.type %></span>
                         </div>
                     </div>
