@@ -4,20 +4,20 @@
     <div class="layout-container">
         <div class="property-search">
             <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
-                <fieldset class="g sm-one-whole md-four-twelfths">
+                <fieldset class="g sm-one-whole md-five-twelfths">
                     <label class="is-visually-hidden">Where are you going?</label>
                     <div class="select-style">
                     <%- areas_options = [['Where are you going?', '-', {disabled: 'disabled'}], ['Any', 'all']] + areas.map { |v| [v[:name], v[:key]] } %>
                     <%= select_tag "area", options_for_select(areas_options, @area) %>
                     </div>
                 </fieldset>
-                <fieldset class="g sm-one-third md-two-twelfths">
+                <fieldset class="g sm-one-third md-one-seventh">
                     <%= text_field_tag "start_date", @start_date, class: 'no-borders datepicker', placeholder: 'Arrive' %>
                 </fieldset>
-                <fieldset class="g sm-one-third md-two-twelfths">
+                <fieldset class="g sm-one-third md-one-seventh">
                     <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'Depart' %>
                 </fieldset>
-                <fieldset class="g sm-one-third md-two-twelfths">
+                <fieldset class="g sm-one-third md-one-eighth">
                     <label class="is-visually-hidden" for="guests">Guests</label>
                     <div class="select-style">
                     <%- guest_options = [['Guests', '-', {disabled: 'disabled'}], ['Any', 'all']] + (1..10).map { |v| [v, v] } %>
