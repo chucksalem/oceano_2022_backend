@@ -18,7 +18,7 @@
             </ul>
         </div>
     </nav>
-    <div class="hero">
+    <div class="hero <%= content_for :hero_class %>">
         <div class="layout-container layout-centered padded-top padded-bottom">
             <h1 class="<%= content_for :bottom_border %> heading-large"><%= yield(:hero_title) %></h1>
             <% if content_for?(:lede) %><p class="lede"><%= yield :lede %></p><% end %>

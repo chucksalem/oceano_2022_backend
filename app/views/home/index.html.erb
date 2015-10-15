@@ -1,4 +1,5 @@
 <% content_for :header_class, 'full-background' %>
+<% content_for :hero_class, 'no-bg' %>
 <% content_for :hero_size, 'hero-medium' %>
 <% content_for :hero_title, "Welcome to Oc&eacute;ano Rentals".html_safe %>
 <% content_for :lede, "We have the largest selection of beach house rentals and condos in rocky point".html_safe %>
@@ -7,7 +8,7 @@
     <div class="layout-container layout-centered">
         <div class="property-search">
             <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
-                <fieldset class="g sm-one-whole md-four-twelfths">
+                <fieldset class="g sm-one-whole md-five-twelfths">
                     <label class="is-visually-hidden">Where are you going?</label>
                     <div class="select-style">
                         <select name="area">
@@ -19,13 +20,13 @@
                         </select>
                     </div>
                 </fieldset>
-                <fieldset class="g sm-one-third md-two-twelfths">
+                <fieldset class="g sm-one-third md-one-seventh">
                     <input id="start_date" class="no-borders datepicker" type="text" name="start_date" placeholder="Arrive">
                 </fieldset>
-                <fieldset class="g sm-one-third md-two-twelfths">
+                <fieldset class="g sm-one-third md-one-seventh">
                     <input id="end_date" class="no-borders datepicker" type="text" name="end_date" placeholder="Depart">
                 </fieldset>
-                <fieldset class="g sm-one-third md-two-twelfths">
+                <fieldset class="g sm-one-third md-one-eighth">
                     <label class="is-visually-hidden" for="guests">Guests</label>
                     <div class="select-style">
                         <select name="guests">
@@ -64,7 +65,8 @@
             <% else %>
             <article class="one-whole md-one-third tile property-details">
             <% end %>
-                <div class="contain" style="background-image: url('<%= unit.large_images[0][:url] %>');">
+                <div class="contain">
+                    <div class="featured-property-image-container" style="background-image: url('<%= unit.large_images[0][:url] %>');"></div>
                     <div class="over">
                         <h2><%= unit.name %></h2>
                         <div class="info">

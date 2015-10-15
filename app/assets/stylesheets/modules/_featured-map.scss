@@ -1,8 +1,18 @@
 .featured-map {
-    background-image: asset-url("featured-map-bg.jpg");
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #000;
+    position: relative;
+    
+    &:before {
+        background: image-url('featured-map-bg.jpg') bottom center no-repeat;
+        background-size: cover;
+        content: "";
+        height: 100%;
+        left: 0;
+        opacity: .5;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
 
     .content {
         float: left;

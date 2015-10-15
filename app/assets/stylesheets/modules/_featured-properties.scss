@@ -6,7 +6,17 @@
 
     .property-details {
         padding-right: 0;
-        
+
+        .contain {
+            background: #000;
+        }
+        .featured-property-image-container {
+            height: 100%;
+            opacity: .75;
+            position: absolute;
+            width: 100%;
+            z-index: 1;
+        }
         .over {
             .offerings {
                 list-style: none;
@@ -36,9 +46,11 @@
                 color: $white;
                 font-size: 2.1em;
                 opacity: 1;
+                padding: 0 20px;
                 position: relative;
                 text-transform: uppercase;
                 top: 50%;
+                z-index: 2;
                 -webkit-transform: translateY(-50%);
                 -ms-transform: translateY(-50%);
                 transform: translateY(-50%);
@@ -51,6 +63,7 @@
                 top: 0;
                 position: absolute;
                 width: 100%;
+                z-index: 3;
 
                 .info-wrapper {
                     @include transition(opacity 0.25s ease-in-out);

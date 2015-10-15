@@ -4,9 +4,20 @@
     @include bp-until($breakpoint__md) { text-align: center; }
 
     &.full-background {
-        background: image-url('hero.jpg') top center no-repeat;
-        background-size: cover;
-
+        background-color: #000;
+        position: relative;
+        
+        &:before {
+            background: image-url('hero.jpg') bottom center no-repeat;
+            background-size: cover;
+            content: "";
+            height: 100%;
+            left: 0;
+            opacity: .75;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
         .hero {
             background: none;
         }
@@ -72,8 +83,27 @@
         }
     }
     .hero {
-        background: image-url('hero.jpg') top center no-repeat;
-        background-size: cover;
+        background-color: #000;
+        position: relative;
+        
+        &:before {
+            background: image-url('hero.jpg') center center no-repeat;
+            background-size: cover;
+            content: "";
+            height: 100%;
+            left: 0;
+            opacity: .75;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        &.no-bg {
+            background: none;
+
+            &:before {
+                display: none;
+            }
+        }
 
         &.hero-small {
             .layout-container {
