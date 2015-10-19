@@ -29,7 +29,7 @@
                 </footer>
             <%- end %>
         </div>
-    </div>    
+    </div>
     <%- if @units.empty? %>
     <div class="layout-container-smaller padded-bottom layout-centered">
         <h1>No available rental properties found</h1>
@@ -40,11 +40,16 @@
         <ul class="properties-list gw small-gutter">
             <%- @units.each do |unit| %>
             <li class="property g sm-one-half md-one-whole">
-                <a href="<%= accommodation_url(unit.code) %>"><img class="property-thumb" src="<%= unit.standard_images[0][:url] %>"></a>
+
+                <%
+                full_link = accommodation_url(unit.code) + "?start_date=#{@start_date}&end_date=#{@end_date}&guests=#{@guests}"
+                %>
+
+                <a href="<%= full_link %>"><img class="property-thumb" src="<%= unit.standard_images[0][:url] %>"></a>
                 <div class="details">
                     <div class="gw small-gutter">
                         <div class="g md-three-eighths">
-                            <h2><a href="<%= accommodation_url(unit.code) %>"><%= unit.name %></a></h2>
+                            <h2><a href="<%= full_link %>"><%= unit.name %></a></h2>
                             <p class="location"><%= unit.address.street %> <br><%= unit.address.city %>, <%= unit.address.country %></p>
                         </div>
                         <div class="g md-three-eighths">
@@ -75,7 +80,7 @@
         </ul>
 
         <div class="pagination pagination-centered">
-        <%= will_paginate @units, previous_label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="16.3,32.6 0,16.3 16.3,0"/></svg>', 
+        <%= will_paginate @units, previous_label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="16.3,32.6 0,16.3 16.3,0"/></svg>',
                                   next_label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="0,0 16.3,16.3 0,32.6"/></svg>' %>
         <%- end %>
         </div>
