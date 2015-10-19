@@ -54,7 +54,7 @@
         </tr>
         <tr class="full-width-container">
             <td>
-                <a href="#" class="btn request-booking-link">Request Booking</a>
+                <a href="http://bookings.oceano-rentals.com/Booking/RateDetails/<%= @booking_id %>?arrive=<%= @start_date %>&depart=<%= @end_date %>&adults=<%= @guests %>" class="btn request-booking-link">Request Booking</a>
             </td>
         </tr>
         <tr class="full-width-container">
@@ -117,6 +117,9 @@
             <%= select_tag "guests", options_for_select(@guest_amount_list, @guests) %>
             </div>
         </td>
+        </tr>
+        <tr class="full-width-container">
+            <td class="g">Check availablilty to view rates and fees.</td>
         </tr>
         <tr class="full-width-container">
         <td>

@@ -1,10 +1,10 @@
-  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <% content_for :hero_title, @property_title.html_safe %>
 <% content_for :lede, @property_subtitle.html_safe %>
 
 <section class="scallop-top">
-  <div class="layout-container">    
+  <div class="layout-container">
     <div class="md-two-thirds">
       <ul class="offerings">
         <li>
@@ -120,10 +120,10 @@
       <div class="gw">
         <div class="g">
           <%
-            unless @videos.empty? || @videos[0][:formats][:url].empty? 
+            unless @videos.empty? || @videos[0][:formats][:url].empty?
               url = @videos[0][:formats][:url]
           %>
-          
+
           <p><a class="btn video-tour-btn" href="<%= url %>" target="_blank">View a video tour</a></p>
           <% end %>
         </div>

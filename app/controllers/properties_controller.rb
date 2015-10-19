@@ -12,6 +12,7 @@ class PropertiesController < ApplicationController
 
 	def show
 		@id                = params[:id]
+    @booking_id        = params[:id].to_str.split('-', 2).last
 		@unit              = UnitRepository.get(@id)
 		@property_title    = @unit.name
 		@property_subtitle = @unit.address[:street]
@@ -40,7 +41,7 @@ class PropertiesController < ApplicationController
     OceanoConfig[:cache_population_searches].each do |criteria|
       criteria[:date_range] = { start: start_date, end: end_date }
       unless params[:guests] == 'all'
-        criteria[:guests] = [{type: 10, count: params[:guests]}] 
+        criteria[:guests] = [{type: 10, count: params[:guests]}]
       end
       codes += UnitRepository.search(criteria)
     end
@@ -68,9 +69,9 @@ class PropertiesController < ApplicationController
     end_date        = Date.strptime(@end_date, DATE_FORMAT)
 		@length_of_stay = end_date.mjd - start_date.mjd
 
-		@rates = Stay.lookup(@id, 
-                        start_date: start_date, 
-                        end_date: end_date, 
+		@rates = Stay.lookup(@id,
+                        start_date: start_date,
+                        end_date: end_date,
                         guests: @guests)
 
 		@nightly_rate      = '%.2f' % (@rates.base_amount / @length_of_stay)
