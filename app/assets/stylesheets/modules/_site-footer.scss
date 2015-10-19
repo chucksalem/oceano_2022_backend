@@ -6,7 +6,7 @@
     padding-top: 60px;
     padding-bottom: 30px;
     @include bp-until($breakpoint__md) { text-align: center; }
-    
+
     .links {
         float: left;
         @include bp-until($breakpoint__sm) { margin-top: 2em; }
@@ -16,13 +16,13 @@
             @include bp-at-least($breakpoint__md) { margin-bottom: 8em; }
             padding-bottom: 0;
             @include bp-until($breakpoint__sm) { padding-left: 0; }
-            
+
             li {
                 font-size: 1em;
                 line-height: 2;
                 margin-bottom: 0;
                 padding-bottom: 0;
-                
+
                 a {
                     @extend %sans--bold;
                     color: $white;
@@ -32,7 +32,7 @@
             }
 
             &.alt {
-                
+
                 a {
                     color: rgba($white, .7)
                 }
@@ -133,6 +133,12 @@
             }
         }
 
+        .current-conditions {
+          font-size: 1.5em;
+          font-style: italic;
+          line-height: 1.1;
+        }
+
         .contact {
             margin-top: 2em;
             padding-top: 2em;
@@ -151,7 +157,7 @@
             }
         }
 
-        
+
 
     }
 }
