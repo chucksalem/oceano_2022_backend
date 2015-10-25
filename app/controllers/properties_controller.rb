@@ -6,7 +6,7 @@ class PropertiesController < ApplicationController
     @area       = params[:area] || '-'
     @start_date = params[:start_date]
     @end_date   = params[:end_date]
-    @guests     = params[:guests] || '-'
+    @guests     = params[:guests] || 'all'
     search_results && return if is_search_request
   end
 
