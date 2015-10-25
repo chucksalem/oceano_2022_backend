@@ -48,7 +48,12 @@ class Unit
   def self.search(*criteria)
     search   = Escapia::UnitSearch.new
     response = search.execute(*criteria)
-    response[:units][:unit].map { |unit| unit[:@unit_code] }
+
+    if response[:units]
+      return response[:units][:unit].map { |unit| unit[:@unit_code] }
+    end
+
+    []
   end
 
   def self.create_from_results(address:,

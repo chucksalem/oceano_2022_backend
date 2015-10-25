@@ -33,7 +33,7 @@ module Escapia
     end
 
     def search_criteria(xml, criteria)
-      xml.Criteria('AvailabilityOnlyIndicator' => false) do
+      xml.Criteria('AvailableOnlyIndicator' => true) do
         xml.Criterion do
           address(xml, criteria)
           guests(xml, criteria)
@@ -77,8 +77,8 @@ module Escapia
       start_date = criteria[:date_range][:start]
       end_date   = criteria[:date_range][:end]
 
-      xml.StayDateRange('Start' => start_date.strftime('%m/%d/%Y'),
-                        'End'   => end_date.strftime('%m/%d/%Y')) do
+      xml.StayDateRange('Start' => start_date.strftime('%-m/%-d/%Y'),
+                        'End'   => end_date.strftime('%-m/%-d/%Y')) do
       end
     end
 
