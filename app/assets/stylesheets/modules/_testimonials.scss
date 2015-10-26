@@ -39,7 +39,7 @@
 
     &:before {
         content: "";
-        background: url(image-path('testimonials-bg.jpg')) bottom center no-repeat;
+        background: image-url('testimonials-bg.jpg') bottom center no-repeat;
         background-size: cover;
         position: absolute;
         top: 0;
