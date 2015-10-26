@@ -6,8 +6,8 @@
             width: 60px;
         }
     }
-    @include bp-at-least($breakpoint__sm){ 
-        text-align: left; 
+    @include bp-at-least($breakpoint__sm){
+        text-align: left;
 
         .persons-image {
             float: left;
@@ -16,7 +16,7 @@
         }
         .persons-words,
         .persons-name,
-        .persons-title { 
+        .persons-title {
             float: right;
             width: 80%;
         }
@@ -34,18 +34,19 @@
     }
 }
 .testimonials.featured {
+    background: #000;
     position: relative;
 
     &:before {
         content: "";
-        background: url('https://unsplash.it/1600/800?image=536') top left no-repeat;
+        background: url('testimonials-bg.jpg') bottom center no-repeat;
         background-size: cover;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        opacity: .85;
+        opacity: .35;
     }
     blockquote {
         position: relative;
