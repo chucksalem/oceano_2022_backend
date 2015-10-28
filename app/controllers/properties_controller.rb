@@ -68,6 +68,7 @@ class PropertiesController < ApplicationController
     start_date      = Date.strptime(@start_date, DATE_FORMAT)
     end_date        = Date.strptime(@end_date, DATE_FORMAT)
 		@length_of_stay = end_date.mjd - start_date.mjd
+    @guests         = @guests == "all" ? 1 : @guests
 
 		@rates = Stay.lookup(@id,
                         start_date: start_date,
