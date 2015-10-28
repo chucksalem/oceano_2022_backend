@@ -2,12 +2,19 @@ class PropertiesController < ApplicationController
   DATE_FORMAT = '%m/%d/%Y'.freeze
 
   def index
-    @units      = []
     @area       = params[:area] || '-'
     @start_date = params[:start_date]
     @end_date   = params[:end_date]
     @guests     = params[:guests] || 'all'
-    search_results && return if is_search_request
+
+    if is_search_request
+      search_results
+    else
+      units = UnitRepository.random_units(limit: 10)
+      @units = WillPaginate::Collection.create((params[:page] || 1).to_i, 10, units.count) do |pager|
+        pager.replace(units[pager.offset, pager.per_page].to_a)
+      end
+    end
   end
 
 	def show
