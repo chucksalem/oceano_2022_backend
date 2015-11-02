@@ -36,7 +36,7 @@
     margin-left:-16px;
     margin-top:-16px;
     z-index:11;
-    background:url(chocolat/loader.gif);
+    background: image-url("chocolat/loader.gif");
     display:none;
 }
 .chocolat-content{
@@ -62,7 +62,7 @@
     top: 50%;
     margin-top: -50px;
     cursor:pointer;
-    background:url(chocolat/left.png) 50% 50% no-repeat;
+    background: image-url("chocolat/left.png") 50% 50% no-repeat;
     z-index: 17;
     display: none;
 
@@ -75,7 +75,7 @@
     top: 50%;
     margin-top: -50px;
     cursor:pointer;
-    background:url(chocolat/right.png)  50% 50% no-repeat;
+    background: image-url("chocolat/right.png")  50% 50% no-repeat;
     z-index: 17;
     display: none;
 }
@@ -103,7 +103,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    background:url(chocolat/close.png) 50% 50% no-repeat;
+    background: image-url("chocolat/close.png") 50% 50% no-repeat;
 }
 .chocolat-wrapper .chocolat-bottom{
     position:absolute;
@@ -137,7 +137,7 @@
 .chocolat-wrapper .chocolat-fullscreen{
     width: 16px;
     height: 40px;
-    background: url(chocolat/fullscreen.png) 50% 50% no-repeat;
+    background: image-url("chocolat/fullscreen.png") 50% 50% no-repeat;
     display: block;
     margin:auto;
     cursor: pointer;
@@ -158,11 +158,11 @@
 }
 .chocolat-cover .chocolat-content .chocolat-right{
     right:0px;
-    background:url(chocolat/right-compact.png) 100% 50% no-repeat;
+    background: image-url("chocolat/right-compact.png") 100% 50% no-repeat;
 }
 .chocolat-cover .chocolat-content .chocolat-left{
     left:0;
-    background:url(chocolat/left-compact.png) 0% 50% no-repeat;
+    background: image-url("chocolat/left-compact.png") 0% 50% no-repeat;
 }
 .chocolat-cover .chocolat-content .chocolat-top{
     top: 0;
@@ -171,7 +171,7 @@
     z-index: 1;
 }
 .chocolat-cover .chocolat-content .chocolat-close{
-    background:url(chocolat/close-compact.png) 0% center no-repeat;
+    background: image-url("chocolat/close-compact.png") 0% center no-repeat;
 }
 .chocolat-cover .chocolat-content .chocolat-bottom{
     bottom: 0;
