@@ -33,58 +33,6 @@
     <%= render 'rate_panel' %>
 
     <div class="property-details md-two-thirds">
-      <div class="gw">
-        <div class="g md-one-fourth">
-          <h2 class="heading-two">Description</h2>
-        </div>
-        <div class="g md-three-fourths">
-          <p><%= @unit.descriptions[:text][0][:description] %></p>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="gw">
-        <div class="g md-one-fourth">
-          <h2 class="heading-two">Property Details</h2>
-        </div>
-        <div class="g md-three-fourths">
-          <ul class="gw no-gutter no-padding">
-            <li class="g md-one-half padded-right"><p><b>Property Type:</b> <%= @unit.type.capitalize %></p></li>
-            <li class="g md-one-half padded-right"><p><b>Bedrooms:</b> <%= @unit.bedrooms %></p></li>
-            <li class="g md-one-half padded-right"><p><b>Bathrooms:</b> <%= @unit.bathrooms %></p></li>
-            <li class="g md-one-half padded-right"><p><b>Floors:</b> <%= @unit.num_floors %></p></li>
-            <li class="g md-one-half padded-right"><p><b>Occupancy:</b> <%= @unit.occupancy %></p></li>
-          </ul>
-        </div>
-      </div>
-
-      <hr>
-      <div class="gw">
-        <div class="g md-one-fourth">
-          <h2 class="heading-two">Amenities</h2>
-        </div>
-        <div class="g md-three-fourths">
-          <ul class="gw no-gutter no-padding">
-            <% @amenities.each do |amenity| %>
-            <li class="g md-one-half padded-right"><p><%= amenity.to_s.titleize %></p></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-
-      <hr>
-
-      <!--<div class="gw">
-        <div class="g md-one-fourth">
-          <h2 class="heading-two">Availability</h2>
-        </div>
-        <div class="g md-three-fourths">
-          <p class="no-top-margin sans"><strong>1 night minimum stay.</strong></p>
-        </div>
-      </div>
-
-      <hr>-->
 
       <div class="image-grouping" id="image-lightbox">
         <div class="row">
@@ -129,6 +77,46 @@
         </div>
       </div>
 
+
+      <div class="gw">
+        <div class="g md-one-fourth">
+          <h2 class="heading-two">Description</h2>
+        </div>
+        <div class="g md-three-fourths">
+          <p><%= @unit.descriptions[:text][0][:description] %></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="gw">
+        <div class="g md-one-fourth">
+          <h2 class="heading-two">Property Details</h2>
+        </div>
+        <div class="g md-three-fourths">
+          <ul class="gw no-gutter no-padding">
+            <li class="g md-one-half padded-right"><p><b>Property Type:</b> <%= @unit.type.capitalize %></p></li>
+            <li class="g md-one-half padded-right"><p><b>Bedrooms:</b> <%= @unit.bedrooms %></p></li>
+            <li class="g md-one-half padded-right"><p><b>Bathrooms:</b> <%= @unit.bathrooms %></p></li>
+            <li class="g md-one-half padded-right"><p><b>Floors:</b> <%= @unit.num_floors %></p></li>
+            <li class="g md-one-half padded-right"><p><b>Occupancy:</b> <%= @unit.occupancy %></p></li>
+          </ul>
+        </div>
+      </div>
+
+      <hr>
+      <div class="gw">
+        <div class="g md-one-fourth">
+          <h2 class="heading-two">Amenities</h2>
+        </div>
+        <div class="g md-three-fourths">
+          <ul class="gw no-gutter no-padding">
+            <% @amenities.each do |amenity| %>
+            <li class="g md-one-half padded-right"><p><%= amenity.to_s.titleize %></p></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
