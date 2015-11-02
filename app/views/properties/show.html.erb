@@ -37,26 +37,26 @@
       <div class="image-grouping" id="image-lightbox">
         <div class="row">
           <article class="one-whole md-two-thirds tile">
-            <a rel="group" href="<%= @large_images[0][:url] %>" class="chocolat-image contain" style="background-image: url('<%= @standard_images[0][:url] %>');"></a>
+            <a rel="image-gallery" href="<%= @large_images[0][:url] %>" title="<%= @large_images[0][:title] %>" class="fancybox contain" style="background-image: url('<%= @standard_images[0][:url] %>');"></a>
           </article>
           <article class="one-whole md-one-third tile">
-            <a rel="group" href="<%= @large_images[1][:url] %>" class="chocolat-image contain" style="background-image: url('<%= @standard_images[1][:url] %>');"></a>
+            <a rel="image-gallery" href="<%= @large_images[1][:url] %>" title="<%= @large_images[1][:title] %>" class="fancybox contain" style="background-image: url('<%= @standard_images[1][:url] %>');"></a>
           </article>
         </div>
         <div class="row">
           <article class="one-whole md-one-third tile">
-            <a rel="group" href="<%= @large_images[2][:url] %>" class="chocolat-image contain" style="background-image: url('<%= @standard_images[2][:url] %>');"></a>
+            <a rel="image-gallery" href="<%= @large_images[2][:url] %>" title="<%= @large_images[2][:title] %>" class="fancybox contain" style="background-image: url('<%= @standard_images[2][:url] %>');"></a>
           </article>
           <article class="one-whole md-one-third tile">
-            <a rel="group" href="<%= @large_images[3][:url] %>" class="chocolat-image contain" style="background-image: url('<%= @standard_images[3][:url] %>');"></a>
+            <a rel="image-gallery" href="<%= @large_images[3][:url] %>" title="<%= @large_images[3][:title] %>" class="fancybox contain" style="background-image: url('<%= @standard_images[3][:url] %>');"></a>
           </article>
 
           <% for i in 5..@standard_images.count do %>
-            <a rel="group" href="<%= @large_images[i-1][:url] %>" class="chocolat-image hidden"></a>
+            <a rel="image-gallery" href="<%= @large_images[i-1][:url] %>" title="<%= @large_images[i-1][:title] %>" class="fancybox hidden"></a>
           <% end %>
 
           <article class="one-whole md-one-third tile">
-            <a rel="group" href="#" class="contain black placehold-all-images open-lightbox">
+            <a href="#" class="contain black placehold-all-images open-lightbox">
               <div class="over">
                 <h2>See All <%= @standard_images.count %> Photos</h2>
               </div>
@@ -72,7 +72,7 @@
               url = @videos[0][:formats][:url]
           %>
 
-          <p><a class="btn video-tour-btn" href="<%= url %>" target="_blank">View a video tour</a></p>
+          <p><a class="fancybox-media btn video-tour-btn" title="Video Tour" href="<%= url %>" target="_blank">View a video tour</a></p>
           <% end %>
         </div>
       </div>
