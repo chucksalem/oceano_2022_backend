@@ -130,28 +130,14 @@
         <%- @unit.reviews.sample(3).each do |review| %>
         <li class="g sm-one-whole">
           <blockquote>
-            <img class="img-circle persons-image" src="http://lorempixel.com/400/400/people/1">
             <p class="persons-words">“<%= review[:comment].html_safe %></p>
             <%- unless review[:city].empty? || review[:state].empty? %>
             <span class="persons-name"><%= review[:city] %>, <%= review[:state] %></span>
             <% end %>
-            <!--span class="persons-title">Partner, Front-end Developer</span-->
           </blockquote>
         </li>
         <%- end %>
       </ul>
-      <!--div class="pagination pagination-centered">
-        <p>1 - 18 of 95 Testimonies</p>
-        <ul>
-          <li class="disabled"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="16.3,32.6 0,16.3 16.3,0"/></svg></a></li>
-          <li class="active"><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="0,0 16.3,16.3 0,32.6"/></svg></a></li>
-        </ul>
-      </div-->
     </div>
   </div>
 </section>

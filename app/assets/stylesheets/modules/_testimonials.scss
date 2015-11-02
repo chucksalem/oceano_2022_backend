@@ -1,23 +1,12 @@
 .testimonials.normal {
     padding-left: 0;
     text-align: center;
-    @include bp-until($breakpoint__sm){
-        .persons-image {
-            width: 60px;
-        }
-    }
     @include bp-at-least($breakpoint__sm){
         text-align: left;
 
-        .persons-image {
-            float: left;
-            margin-right: 5%;
-            width: 15%;
-        }
         .persons-words,
         .persons-name,
         .persons-title {
-            float: right;
             width: 80%;
         }
     }
