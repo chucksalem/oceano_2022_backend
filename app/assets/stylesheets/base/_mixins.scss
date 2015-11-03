@@ -21,7 +21,7 @@
 }
 
 @mixin opacity( $value: 1) {
-    opacity: $value; 
+    opacity: $value;
     filter: alpha( opacity= $value * 100 );
 }
 
@@ -37,6 +37,14 @@
     -o-transition-delay:      $delay;
     -webkit-transition-delay: $delay;
     transition-delay:         $delay;
+}
+
+@mixin vertical-align($position: relative) {
+    position: $position;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 // Columns

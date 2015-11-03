@@ -7,6 +7,36 @@
     padding-bottom: 30px;
     @include bp-until($breakpoint__md) { text-align: center; }
 
+    // Social Links
+    .social-link-item {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .social-link {
+        display: inline-block;
+        height: 46px;
+        margin-right: 9px;
+        text-align: center;
+        width: 46px;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+
+        &:hover {
+          border-color: #FFFFFF;
+        }
+    }
+
+    .svg-social-icon {
+        @include vertical-align();
+        fill: $white;
+        height: 23px;
+        opacity: .8;
+        width: 23px;
+    }
+
     .links {
         float: left;
         @include bp-until($breakpoint__sm) { margin-top: 2em; }
