@@ -15,3 +15,7 @@ Rails.application.config.assets.precompile += %w( pikaday.jquery.js )
 Rails.application.config.assets.precompile += %w( pikaday.js )
 Rails.application.config.assets.precompile += %w( jquery.fancybox.pack.js )
 Rails.application.config.assets.precompile += %w( jquery.fancybox-media.js )
+
+%w( home pages properties accomodations ).each do |controller|
+  Rails.application.config.assets.precompile += ["#{controller}.js"]
+end
