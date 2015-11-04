@@ -7,6 +7,19 @@ class PagesController < ApplicationController
     render
   end
 
+  def thank_you
+    ContactMailer.contact(
+      email:      params[:email],
+      first_name: params[:firstname],
+      last_name:  params[:lastname],
+      phone:      params[:phone],
+      message:    params[:message]
+    ).deliver_now
+
+    # Redirect for now. This should just be a page that says thank you.
+    redirect_to :contact_page
+  end
+
   def testimonials
     render
   end
