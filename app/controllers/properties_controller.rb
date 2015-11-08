@@ -5,7 +5,7 @@ class PropertiesController < ApplicationController
     @area       = params[:area] || '-'
     @start_date = params[:start_date]
     @end_date   = params[:end_date]
-    @guests     = params[:guests] || 'all'
+    @guests     = params[:guests]
     @sort       = params[:sort] || 'P'
 
     if is_search_request
@@ -48,7 +48,7 @@ class PropertiesController < ApplicationController
     codes = []
     OceanoConfig[:cache_population_searches].each do |criteria|
       criteria[:date_range] = { start: start_date, end: end_date }
-      unless params[:guests] == 'all'
+      unless [nil, '', 'all'].include?(params[:guests])
         criteria[:guests] = [{type: 10, count: params[:guests]}]
       end
       codes += UnitRepository.search(criteria)
