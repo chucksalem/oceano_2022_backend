@@ -7,7 +7,7 @@ module Escapia
     def payload(criteria)
       builder do |xml|
         envelope(xml) do
-          unit_search(xml) do
+          unit_search(xml, criteria) do
             auth(xml)
             search_criteria(xml, criteria)
           end
@@ -17,13 +17,13 @@ module Escapia
 
     private
 
-    def unit_search(xml, &blk)
+    def unit_search(xml, criteria, &blk)
       attrs = {
         'TransactionIdentifier' => identifier,
         'EchoToken'             => 'request',
         'Version'               => '1.0',
         'MaxResponses'          => '2147483647',
-        'SortOrder'             => 'P',
+        'SortOrder'             => criteria[:sort],
         'xmlns'                 => 'http://www.escapia.com/EVRN/2007/02',
         'xmlns:xsi'             => 'http://www.w3.org/2001/XMLSchema-instance',
         'xmlns:xsd'             => 'http://www.w3.org/2001/XMLSchema'

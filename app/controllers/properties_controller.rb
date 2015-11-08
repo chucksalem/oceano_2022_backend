@@ -6,6 +6,7 @@ class PropertiesController < ApplicationController
     @start_date = params[:start_date]
     @end_date   = params[:end_date]
     @guests     = params[:guests] || 'all'
+    @sort       = params[:sort] || 'P'
 
     if is_search_request
       search_results
