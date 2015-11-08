@@ -4,7 +4,7 @@
     <div class="layout-container">
         <div class="property-search">
             <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
-                <fieldset class="g sm-one-whole md-five-twelfths">
+                <fieldset class="g sm-one-half md-one-fourth">
                     <label class="is-visually-hidden">Where are you going?</label>
                     <div class="select-style">
                     <%- areas_options = [['Where are you going?', '-', {disabled: 'disabled'}], ['Any', 'all']] + areas.map { |v| [v[:name], v[:key]] } %>
@@ -22,6 +22,18 @@
                     <div class="select-style">
                     <%- guest_options = [['Guests', '-', {disabled: 'disabled'}], ['Any', 'all']] + (1..10).map { |v| [v, v] } %>
                     <%= select_tag "guests", options_for_select(guest_options, @guests) %>
+                    </div>
+                </fieldset>
+                <fieldset class="g sm-one-third md-one-sixth">
+                    <label class="is-visually-hidden" for="sort">Sort by</label>
+                    <div class="select-style">
+                        <select>
+                            <option disabled selected>Sort by</option>
+                            <option>Guest Rating</option>
+                            <option>Price</option>
+                            <option>Location</option>
+                            <option>Name</option>
+                        </select>
                     </div>
                 </fieldset>
                 <footer class="g md-two-twelfths">
@@ -43,10 +55,10 @@
                     <label for="sort">Sort By...</label>
                     <div class="select-style">
                         <select name="sort">
-                            <option value="G">Guest Rating</option>
-                            <option value="P">Price</option>
-                            <option value="L">Location</option>
-                            <option value="N">Name</option>
+                            <option>Guest Rating</option>
+                            <option>Price</option>
+                            <option>Location</option>
+                            <option>Name</option>
                         </select>
                     </div>
                 </fieldset>
