@@ -27,13 +27,8 @@
                 <fieldset class="g sm-one-half md-one-sixth">
                     <label class="is-visually-hidden" for="sort">Sort by</label>
                     <div class="select-style">
-                        <select>
-                            <option disabled selected>Sort by</option>
-                            <option>Guest Rating</option>
-                            <option>Price</option>
-                            <option>Location</option>
-                            <option>Name</option>
-                        </select>
+                        <%- sort_options = [['Sort by', '-', {disabled: 'disabled'}]] + sort_by %>
+                        <%= select_tag "sort", options_for_select(sort_options, @sort) %>
                     </div>
                 </fieldset>
                 <footer class="g md-two-twelfths">
