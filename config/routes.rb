@@ -7,8 +7,6 @@ Rails.application.routes.draw do
     get "/#{action}".dasherize, to: "pages##{action}", as: "#{action}_page"
   end
 
-  #post "/contact/thank-you", to: "pages#thank_you", as: "thank_you_page"
-
   namespace :api do
     resources :units, only: [:index, :show] do
       resources :stays, only: [:get]
