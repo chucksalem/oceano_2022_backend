@@ -12,7 +12,7 @@ Bundler.require(*Rails.groups)
 module OceanoRails
   class Application < Rails::Application
     config.autoload_paths << "#{Rails.root}/lib"
-    config.assets.version = '1.0'
+    config.assets.version = '1.0.1'
     config.middleware.use Rack::Attack
   end
 end
