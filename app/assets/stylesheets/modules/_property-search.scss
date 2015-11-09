@@ -64,6 +64,12 @@
                     border-radius: 0;
                 }
             }
+            &:nth-of-type(5) {
+                .select-style {
+                    border-right: 0;
+                    border-radius: 0;
+                }
+            }
         }
         footer {
             .btn {
