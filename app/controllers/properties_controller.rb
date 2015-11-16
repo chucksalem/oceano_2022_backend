@@ -27,11 +27,11 @@ class PropertiesController < ApplicationController
 		@amenities         = @unit.available_amenities
 		@guests            = params[:guests] || 1
 		@guest_amount_list = (1..@unit.occupancy).map { |v| v }
-		@start_date        = params[:start_date] || Date.today.strftime(DATE_FORMAT)
-		@end_date          = params[:end_date] || (Date.today + 7).strftime(DATE_FORMAT)
+		@start_date        = params[:start_date].blank? ? params[:start_date] : Date.today.strftime(DATE_FORMAT)
+		@end_date          = params[:end_date].blank? ? params[:end_date] : (Date.today + 7).strftime(DATE_FORMAT)
     @random_units      = UnitRepository.random_units(limit: 3, except: [@id])
 
-		lookup_rates if [:start_date, :end_date, :guests].all? { |k| params.key?(k) }
+		lookup_rates if [:start_date, :end_date, :guests].all? { |k| params.key?(k) && !params[k].blank? }
 		get_images
 	end
 
