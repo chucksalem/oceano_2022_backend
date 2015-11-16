@@ -16,7 +16,7 @@
         .property-thumb {
             vertical-align: bottom;
             width: 100%;
-            @include bp-at-least($breakpoint__md) { 
+            @include bp-at-least($breakpoint__md) {
                 position: absolute;
                 bottom: 0;
                 left: 0;
@@ -37,14 +37,14 @@
             h2 {
                 @extend %sans--bold;
                 color: $cerulean;
-                font-size: 1.214em;
+                font-size: 1.6em;
 
                 a {
                     color: $cerulean;
                 }
             }
             p {
-                font-size: 0.857em;
+                font-size: 1.4em;
                 margin-bottom: 0;
             }
             .offerings {
