@@ -1,5 +1,6 @@
 class ContactMailer < ActionMailer::Base
   default from: 'info@gooceano.com'
+  default to: 'brett@buddin.us'
 
   def contact(email:, first_name:, last_name:, phone:, message:)
     @email      = email
@@ -8,6 +9,6 @@ class ContactMailer < ActionMailer::Base
     @message    = message
     @phone      = phone
 
-    mail(to: email, subject: 'Contact Form')
+    mail(subject: 'Contact Form')
   end
 end
