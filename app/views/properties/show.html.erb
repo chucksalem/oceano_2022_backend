@@ -36,20 +36,28 @@
 
       <div class="image-grouping" id="image-lightbox">
         <div class="row">
+        <%- if @large_images.count > 0 %>
           <article class="one-whole md-two-thirds tile">
             <a rel="image-gallery" href="<%= @large_images[0][:url] %>" title="<%= @large_images[0][:title] %>" class="fancybox contain" style="background-image: url('<%= @standard_images[0][:url] %>');"></a>
           </article>
+        <%- end %>
+        <%- if @large_images.count > 1 %>
           <article class="one-whole md-one-third tile">
             <a rel="image-gallery" href="<%= @large_images[1][:url] %>" title="<%= @large_images[1][:title] %>" class="fancybox contain" style="background-image: url('<%= @standard_images[1][:url] %>');"></a>
           </article>
+        <%- end %>
         </div>
         <div class="row">
+        <%- if @large_images.count > 2 %>
           <article class="one-whole md-one-third tile">
             <a rel="image-gallery" href="<%= @large_images[2][:url] %>" title="<%= @large_images[2][:title] %>" class="fancybox contain" style="background-image: url('<%= @standard_images[2][:url] %>');"></a>
           </article>
+        <%- end %>
+        <%- if @large_images.count > 3 %>
           <article class="one-whole md-one-third tile">
             <a rel="image-gallery" href="<%= @large_images[3][:url] %>" title="<%= @large_images[3][:title] %>" class="fancybox contain" style="background-image: url('<%= @standard_images[3][:url] %>');"></a>
           </article>
+        <%- end %>
 
           <% for i in 5..@standard_images.count do %>
             <a rel="image-gallery" href="<%= @large_images[i-1][:url] %>" title="<%= @large_images[i-1][:title] %>" class="fancybox hidden"></a>
