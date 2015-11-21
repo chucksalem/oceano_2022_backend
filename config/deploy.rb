@@ -4,10 +4,11 @@ lock '3.4.0'
 set :application, 'oceano'
 set :repo_url, 'git@github.com:wearethescenery/oceano-rails.git'
 set :branch, 'master'
+set :pty, true
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
-set :user, 'deploy'
+set :user, 'oceanorentals'
 set :port, 22
 set :rbenv_type, :user
 set :rbenv_ruby, File.read('.ruby-version').strip

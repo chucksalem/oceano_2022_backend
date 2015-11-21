@@ -7,9 +7,8 @@ env PORT=<%= port %>
     env <%= name.upcase %>='<%= value.gsub(/'/, "'\"'\"'") %>'
 <% end -%>
 
-setuid <%= user %>
-
 script
     eval $(cat /etc/environment | sed 's/^/export /')
-    cd <%= engine.root %> && /home/<%= user %>/.rbenv/shims/<%= process.command %>
+    cd <%= engine.root %>
+    su <%= user %> -C /home/<%= user %>/.rbenv/shims/<%= process.command %>
 end script
