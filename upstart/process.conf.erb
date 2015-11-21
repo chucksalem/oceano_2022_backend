@@ -2,13 +2,4 @@ start on starting <%= app %>-<%= name %>
 stop on stopping <%= app %>-<%= name %>
 respawn
 
-env PORT=<%= port %>
-<% engine.env.each do |name,value| -%>
-    env <%= name.upcase %>='<%= value.gsub(/'/, "'\"'\"'") %>'
-<% end -%>
-
-script
-    eval $(cat /etc/environment | sed 's/^/export /')
-    cd <%= engine.root %>
-    su <%= user %> -C /home/<%= user %>/.rbenv/shims/<%= process.command %>
-end script
+exec su - <%= user %> --session-command 'cd <%= engine.root %>; export PORT=<%= port %>;<% engine.env.each_pair do |var,env| %> export <%= var.upcase %>=<%= shell_quote(env) %>; <% end %> /home/<%= user %>/.rbenv/shims/<%= process.command %> >> <%= log %>/<%=name%>-<%=num%>.log 2>&1'
