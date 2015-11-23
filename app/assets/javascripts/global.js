@@ -21,7 +21,7 @@ $(function(){
     var startDate = moment(dateString, 'M/D/YYYY');
 
     // adds one day to selected start date
-    var nextDate = startDate.add(1, 'd');
+    var nextDate = startDate.add(2, 'd');
 
     // update the second field
     endPicker.setMoment(moment(nextDate, 'M/D/YYYY'));

@@ -37,3 +37,8 @@ em {
   // NOTE: use italic font-face if available instead of 'font-style: italic'
   font-style: italic;
 }
+
+p.important,
+span.important {
+    color: $red;
+}

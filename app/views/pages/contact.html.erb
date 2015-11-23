@@ -17,28 +17,31 @@
                 <p>For more information, please fill out the following form, or contact us with any of the methods below this form.  Please make sure that your e-mail address is correct so that we may reply.</p>
                 <h2 class="heading-medium top-spacing">Contact Information</h2>
                 <form method="post" action="/contact/thank-you">
-                    <%= tag(:input, type: "hidden", name: request_forgery_protection_token.to_s, value: form_authenticity_token) %> 
+                    <%= tag(:input, type: "hidden", name: request_forgery_protection_token.to_s, value: form_authenticity_token) %>
                     <fieldset class="half">
-                        <label>First Name</label>
-                        <input type="text" name="firstname">
+                        <label>First Name<span class="important">*</span></label>
+                        <input type="text" name="firstname" required>
                     </fieldset>
                     <fieldset class="half right">
-                        <label>Last Name</label>
-                        <input type="text" name="lastname">
+                        <label>Last Name<span class="important">*</span></label>
+                        <input type="text" name="lastname" required>
                     </fieldset>
                     <fieldset class="half">
-                        <label>Email Address</label>
-                        <input type="email" name="email">
+                        <label>Email Address<span class="important">*</span></label>
+                        <input type="email" name="email" required>
                     </fieldset>
                     <fieldset class="half right">
                         <label>Phone Number</label>
                         <input type="tel" name="phone">
                     </fieldset>
                     <fieldset>
-                        <label>Special requests or questions?</label>
-                        <textarea class="special-requests"></textarea>
+                        <label>Special requests or questions?<span class="important">*</span></label>
+                        <textarea class="special-requests" required></textarea>
                     </fieldset>
                     <footer class="form__actions">
+                        <article class="two-fifths">
+                            <p class="important">* denotes a required field</p>
+                        </article>
                         <article class="field two-fiths">
                             <input class="field__input btn submit" type="submit" id="submit" value="Submit Form">
                             <span  class="field__feedback"></span>

@@ -14,21 +14,22 @@
                 <p>Please fill out the following form to submit a work order. You will receive a response within 24 hours.</p>
                 <form class="dark">
                     <fieldset class="half">
-                        <label for="ownerName">Owner Name</label>
-                        <input type="text" id="ownerName">
+                        <label for="ownerName">Owner Name<span class="important">*</span></label>
+                        <input type="text" id="ownerName" required>
                     </fieldset>
                     <fieldset class="half">
-                        <label for="propertyName">Property Name</label>
-                        <input type="text" id="propertyName">
+                        <label for="propertyName">Property Name<span class="important">*</span></label>
+                        <input type="text" id="propertyName" required>
                     </fieldset>
                     <fieldset class="half">
-                        <label for="email">Contact Email</label>
-                        <input type="email" id="email">
+                        <label for="email">Contact Email<span class="important">*</span></label>
+                        <input type="email" id="email" required>
                     </fieldset>
                     <fieldset>
-                        <label for="problem">Problem Description</label>
-                        <textarea id="problem"></textarea>
+                        <label for="problem">Problem Description<span class="important">*</span></label>
+                        <textarea id="problem" required></textarea>
                     </fieldset>
+                    <p class="important">* denotes a required field</p>
                     <input class="btn submit" type="submit" value="Submit Form">
                 </form>
 
