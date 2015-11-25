@@ -12,7 +12,8 @@
 
                 <h2 class="heading-small">Work Order</h2>
                 <p>Please fill out the following form to submit a work order. You will receive a response within 24 hours.</p>
-                <form class="dark">
+                <form class="dark" method="post" action="/owners/thank-you">
+                    <%= tag(:input, type: "hidden", name: request_forgery_protection_token.to_s, value: form_authenticity_token) %>
                     <fieldset class="half">
                         <label for="ownerName">Owner Name<span class="important">*</span></label>
                         <input type="text" id="ownerName" required>

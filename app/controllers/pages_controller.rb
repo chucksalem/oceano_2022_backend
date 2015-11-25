@@ -7,8 +7,18 @@ class PagesController < ApplicationController
     render
   end
 
-  def thank_you
+  def contact_thank_you
     ContactMailer.contact(
+      email:      params[:email],
+      first_name: params[:firstname],
+      last_name:  params[:lastname],
+      phone:      params[:phone],
+      message:    params[:message]
+    ).deliver_now
+  end
+
+  def owners_thank_you
+    ContactMailer.work_order(
       email:      params[:email],
       first_name: params[:firstname],
       last_name:  params[:lastname],
