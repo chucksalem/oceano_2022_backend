@@ -39,3 +39,5 @@ dump.rdb
 tmp/pids/puma.pid
 tmp/pids/server.pid
 tmp/restart.txt
+
+public/assets
