@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.network "private_network", ip: "10.10.10.20"
-  config.vm.network "forwarded_port", guest: 5000,  host: 5000
+  config.vm.network "forwarded_port", guest: 3000,  host: 3000
 
   config.vm.provision "shell", inline: $packages
   config.vm.provision "shell", inline: $bootstrap, privileged: false
