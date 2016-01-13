@@ -1,6 +1,7 @@
 $packages  = <<SCRIPT
   apt-get update
   apt-get install -y redis-server \
+                     nodejs \
                      git-core \
                      curl \
                      zlib1g-dev \
@@ -30,7 +31,6 @@ $bootstrap = <<SCRIPT
   rbenv install -v 2.2.2
   rbenv global 2.2.2
   echo 'gem: --no-document' > $HOME/.gemrc
-
   gem install bundler
   rbenv rehash
 SCRIPT
@@ -42,10 +42,11 @@ Vagrant.configure(2) do |config|
   config.ssh.forward_agent = true
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 1028
+    v.memory = 2048
   end
 
   config.vm.network "private_network", ip: "10.10.10.20"
+  config.vm.network "forwarded_port", guest: 5000,  host: 5000
 
   config.vm.provision "shell", inline: $packages
   config.vm.provision "shell", inline: $bootstrap, privileged: false
