@@ -20,7 +20,7 @@
                         </select>
                     </div>
                 </fieldset>
-                <fieldset class="g sm-one-third md-one-seventh">
+                <fieldset class="g sm-one-third md-one-seventh test">
                     <input id="start_date" class="no-borders datepicker" type="text" name="start_date" placeholder="Arrive">
                 </fieldset>
                 <fieldset class="g sm-one-third md-one-seventh">
@@ -53,14 +53,14 @@
         <h1 class="heading-medium-small up alt">Featured Properties</h1>
         <h2 class="heading-subheader">Discover new, inspiring places close to home.</h2>
         <div class="featured-properties">
-            
+
             <% @random_units.each_with_index do |unit, index| %>
-            
+
             <% if index == 0 || index == 2 %>
             <div class="row">
             <% end %>
 
-            <% if index == 0 %>    
+            <% if index == 0 %>
             <article class="one-whole md-two-thirds tile property-details">
             <% else %>
             <article class="one-whole md-one-third tile property-details">
