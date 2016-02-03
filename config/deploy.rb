@@ -22,7 +22,7 @@ namespace :deploy do
 
   after :publishing, :precompile do
     on roles(:app) do
-      within fetch(:latest_release_directory) do
+      within release_path do
         execute :rbenv, :exec, "bundle exec rake assets:precompile RAILS_ENV=#{fetch(:stage)}"
       end
     end
