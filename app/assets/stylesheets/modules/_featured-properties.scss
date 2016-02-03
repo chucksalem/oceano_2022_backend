@@ -6,11 +6,22 @@
 
     .property-details {
         padding-right: 0;
+        @media screen and (max-width: 768px) {
+            width: 100%;
+        }
+
+        &.md-one-third:before {
+            @media screen and (max-width: 768px) {
+                padding-top: 60%;
+            }
+        }
 
         .contain {
             background: #000;
         }
         .featured-property-image-container {
+            background-repeat: no-repeat;
+            background-size: cover;
             height: 100%;
             opacity: .75;
             position: absolute;
@@ -68,7 +79,7 @@
                 .info-wrapper {
                     @include transition(opacity 0.25s ease-in-out);
                     margin: 0 auto;
-                    max-width: 330px;
+                    //max-width: 330px;
                     padding: 20px;
                     position: relative;
                     top: 50%;
@@ -88,10 +99,10 @@
                         color: $white;
                     }
                 }
-                
+
             }
             &:hover,
-            .touch & {                
+            .touch & {
                 h2 {
                     opacity: 0;
                 }

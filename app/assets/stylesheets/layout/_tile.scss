@@ -12,8 +12,10 @@
             display: block;
             padding-top: 100%;
         }
+
         &.md-two-thirds:before {
-            @include bp-at-least($breakpoint__md) { padding-top: 50%; }
+            @media screen and (max-width: 768px) { padding-top: 60%; }
+            @media screen and (min-width: 769px) { padding-top: 50%; }
         }
 
         .contain {
@@ -25,11 +27,11 @@
             left: 20px;
             position: absolute;
             right: 0;
-            top: 0;  
+            top: 0;
 
             &.black {
                 background-color: $black;
-            }    
+            }
         }
         .over {
             display: block;
