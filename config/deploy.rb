@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'oceano'
-set :repo_url, 'git@github.com:wearethescenery/oceano-rails.git'
+set :repo_url, 'git@github.com:chucksalem/oceano-rentals.git'
 set :branch, 'master'
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')

@@ -4,12 +4,12 @@ weather:
 areas:
     - Corona del Sol
     - Costa Diamente
+    - Laguna Shores
     - Las Conchas
     - Las Palmas
     - Mirador
     - Playa Encanto
     - Sandy Beach
-    - Laguna Shores
 cache_population_searches:
     - address:
         country: 'MX'
