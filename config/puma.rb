@@ -2,9 +2,9 @@ threads 0,8
 workers 2
 preload_app!
 
+bind "unix://tmp/puma.sock"
+
 daemonize true
-pidfile ENV['PID_PATH'] || 'tmp/pids/puma.pid'
 
-port Integer(ENV['PORT'] || 5000)
+pidfile 'tmp/pids/puma.pid'
 
-preload_app!

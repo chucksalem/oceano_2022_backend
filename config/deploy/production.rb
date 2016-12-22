@@ -1,6 +1,9 @@
-role :app, %w(oceanorentals@184.168.146.56)
+server "192.155.86.203", user: "deploy", roles: %w{web app}
 
 set :pty, true
 
-set :user, 'oceanorentals'
-set :deploy_to, -> { "/home/oceanorentals/app" }
+set :user, 'deploy'
+set :deploy_to, -> { "/home/apps/oceano_rentals" }
+
+set :stage, 'production'
+
