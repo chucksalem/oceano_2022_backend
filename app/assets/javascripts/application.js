@@ -11,3 +11,4 @@
 // about supported directives.
 //
 //= require global
+//= require DataTables

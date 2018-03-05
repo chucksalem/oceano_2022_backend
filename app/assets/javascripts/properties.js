@@ -1,5 +1,7 @@
 $(function(){
 
+  $('#properties-table').DataTable();
+
   $(".fancybox").fancybox();
 
   $(".fancybox-media").fancybox({
