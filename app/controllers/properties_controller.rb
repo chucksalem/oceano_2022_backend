@@ -38,18 +38,28 @@ class PropertiesController < ApplicationController
   private
 
   def is_search_request
-    [:area, :start_date, :end_date, :guests].all? { |k| params.key?(k) && !params[k].empty? }
+    [:area, :start_date, :end_date, :guests].any? { |k| params.key?(k) && !params[k].empty? }
   end
 
   def search_results
-    start_date = Date.strptime(params[:start_date], DATE_FORMAT)
-    end_date   = Date.strptime(params[:end_date], DATE_FORMAT)
+    start_date, end_date = params[:start_date], params[:end_date]
+    date_range =
+      if [start_date, end_date].all?(&:present?)
+        {
+          start:  Date.strptime(start_date, DATE_FORMAT),
+          end:    Date.strptime(end_date, DATE_FORMAT)
+        }
+      end
 
     codes = []
     OceanoConfig[:cache_population_searches].each do |criteria|
       criteria[:sort]       = params[:sort] || 'G'
       criteria[:sort]       = 'G' if criteria[:sort] == '-'
-      criteria[:date_range] = { start: start_date, end: end_date }
+      if date_range
+        criteria[:date_range] = date_range
+      else
+        criteria.delete(:date_range)
+      end
       unless [nil, '', 'all'].include?(params[:guests])
         criteria[:guests] = [{type: 10, count: params[:guests]}]
       end
