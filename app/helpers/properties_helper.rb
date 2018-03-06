@@ -3,4 +3,8 @@ module PropertiesHelper
     image = unit.descriptions.images.select { |img| img[:default] == true }.first
     image[:formats].select { |img| img[:category ] == 'Standard' }.first[:url]
   end
+
+  def fetch_name unit
+    unit.name.split('-').first
+  end
 end

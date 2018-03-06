@@ -30,7 +30,6 @@ class Unit
     response = search.execute(unit_id: id)
     content  = response[:unit_descriptive_contents][:unit_descriptive_content]
     info     = content[:unit_info]
-
     create_from_results(
       address:       info[:address],
       amenities:     info[:unit_amenity],
