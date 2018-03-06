@@ -70,7 +70,7 @@
             <% full_link = accommodation_url(unit.code) + "?start_date=#{@start_date}&end_date=#{@end_date}&guests=#{@guests}" %>
             <tr class="property">
               <td><a href="<%= full_link %>"><img src="<%= fetch_image unit %>" class="property__thumb"/></a></td>
-              <td><a href="<%= full_link %>" class="property__name"><%= unit.name %></a></td>
+              <td><a href="<%= full_link %>" class="property__name"><%= fetch_name unit %></a></td>
               <td>$<%= unit.night_rate %></td>
               <td><%= "#{unit.address.street} #{unit.address.city} #{unit.address.country}" %></td>
               <td><%= unit.bedrooms %></td>
