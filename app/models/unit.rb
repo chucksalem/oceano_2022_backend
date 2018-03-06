@@ -15,6 +15,7 @@ class Unit
   attribute :position,     UnitPosition
   attribute :type,         Symbol
   attribute :reviews,      Array
+  attribute :night_rate,   Integer
 
   def self.from_hash(hash)
     new.tap do |unit|
@@ -41,7 +42,8 @@ class Unit
       position:      info[:position],
       reviews:       content[:unit_reviews],
       rooms:         info[:category_codes][:room_info],
-      type_code:     info[:category_codes][:unit_category][:@code]
+      type_code:     info[:category_codes][:unit_category][:@code],
+      night_rate:    info[:rate_ranges][:rate_range].select { |rate_range| rate_range[:@rate_type] == "Nightly" }[0][:@min_rate]
     )
   end
 
@@ -66,7 +68,8 @@ class Unit
                                position:,
                                reviews:,
                                rooms:,
-                               type_code:)
+                               type_code:,
+                               night_rate:)
     unit = new
 
     unit.type         = UnitType.from_code(type_code)
@@ -79,6 +82,7 @@ class Unit
     unit.bedrooms     = UnitRooms.count_for_code(:bedrooms, rooms)
     unit.descriptions = UnitDescriptions.from_descriptions(descriptions)
     unit.reviews      = UnitReviews.from_response(reviews)
+    unit.night_rate   = night_rate.to_i
 
     unit.address = {
       street:      address[:address_line],

@@ -1,6 +1,11 @@
 $(function(){
 
-  $('#properties-table').DataTable();
+  $('#properties-table').DataTable({
+    "bPaginate": false,
+    "columnDefs": [
+      { "orderable": false, "targets": 0 }
+    ]
+  });
 
   $(".fancybox").fancybox();
 

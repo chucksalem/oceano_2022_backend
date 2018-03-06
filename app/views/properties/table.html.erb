@@ -43,13 +43,22 @@
       <p>Please adjust your search and try again.</p>
     </div>
   <%- else %>
-    <div class="layout-container">
+    <div class="layout-container" id="properties-container">
 
       <table id="properties-table">
+        <colgroup>
+          <col style="width: 19%"/>
+          <col style="width: 15%"/>
+          <col style="width: 10%"/>
+          <col style="width: 20%"/>
+          <col style="width: 8%"/>
+          <col style="width: 8%"/>
+          <col style="width: 10%"/>
+          <col style="width: 10%"/>
+        </colgroup>
         <thead>
-          <th>Preview</th>
-          <th>Property</th>
-          <th>Night Rate</th>
+          <th colspan="2">Property</th>
+          <th>Nightly Rate</th>
           <th>Location</th>
           <th>Beds</th>
           <th>Baths</th>
@@ -58,14 +67,15 @@
         </thead>
         <tbody>
           <% @units.each do |unit| %>
-            <tr>
-              <td><img src="<%= fetch_image unit %>"/></td>
-              <td><%= unit.name %></td>
-              <td>rate</td>
-              <td><%= "#{unit.address.street} #{unit.address.city} #{unit.address.country}" %> </td>
-              <td><%= unit.bedrooms %> beds</td>
-              <td><%= unit.bathrooms %> baths</td>
-              <td><%= unit.occupancy %> guests</td>
+            <% full_link = accommodation_url(unit.code) + "?start_date=#{@start_date}&end_date=#{@end_date}&guests=#{@guests}" %>
+            <tr class="property">
+              <td><a href="<%= full_link %>"><img src="<%= fetch_image unit %>" class="property__thumb"/></a></td>
+              <td><a href="<%= full_link %>" class="property__name"><%= unit.name %></a></td>
+              <td><%= unit.night_rate %>$<br>night</td>
+              <td><%= "#{unit.address.street} #{unit.address.city} #{unit.address.country}" %></td>
+              <td><%= unit.bedrooms %></td>
+              <td><%= unit.bathrooms %></td>
+              <td class="property__occupancy"><%= unit.occupancy %></td>
               <td><%= unit.type %></td>
             </tr>
           <% end %>
