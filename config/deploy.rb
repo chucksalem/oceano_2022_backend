@@ -1,6 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
+set :branch, ENV['BRANCH'] || 'master'
+
 set :application, 'oceano_rentals/'
 set :repo_url, 'git@github.com:chucksalem/oceano-rentals.git'
 set :branch, 'master'
