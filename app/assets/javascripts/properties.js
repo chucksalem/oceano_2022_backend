@@ -2,6 +2,7 @@ $(function(){
 
   $('#properties-table').DataTable({
     "bPaginate": false,
+    "searching": false,
     "columnDefs": [
       { "orderable": false, "targets": 0 }
     ]
