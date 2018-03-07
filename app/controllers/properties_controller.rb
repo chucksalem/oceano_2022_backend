@@ -28,10 +28,7 @@ class PropertiesController < ApplicationController
     if is_search_request
       search_results
     else
-      units = UnitRepository.random_units(limit: 10)
-      @units = WillPaginate::Collection.create((params[:page] || 1).to_i, 10, units.count) do |pager|
-        pager.replace(units[pager.offset, pager.per_page].to_a)
-      end
+      @units = UnitRepository.random_units(limit: 100)
     end
   end
 

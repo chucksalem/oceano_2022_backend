@@ -72,7 +72,7 @@
               <td><a href="<%= full_link %>"><img src="<%= fetch_image unit %>" class="property__thumb"/></a></td>
               <td><a href="<%= full_link %>" class="property__name"><%= fetch_name unit %></a></td>
               <td>$<%= unit.night_rate %></td>
-              <td><%= "#{unit.address.street} #{unit.address.city} #{unit.address.country}" %></td>
+              <td><%= unit.address.street %></td>
               <td><%= unit.bedrooms %></td>
               <td><%= unit.bathrooms %></td>
               <td class="property__occupancy"><%= unit.occupancy %></td>
@@ -81,11 +81,6 @@
           <% end %>
         </tbody>
       </table>
-
-      <div class="pagination pagination-centered">
-        <%= will_paginate @units, previous_label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="16.3,32.6 0,16.3 16.3,0"/></svg>',
-        next_label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.3 32.6"><polygon points="0,0 16.3,16.3 0,32.6"/></svg>' %>
-  <%- end %>
-      </div>
-    </div>
+    <%- end %>
+  </div>
 </section>
