@@ -47,18 +47,16 @@
 
       <table id="properties-table">
         <colgroup>
+          <col style="width: 20%"/>
           <col style="width: 19%"/>
           <col style="width: 15%"/>
           <col style="width: 10%"/>
-          <col style="width: 20%"/>
-          <col style="width: 8%"/>
-          <col style="width: 8%"/>
           <col style="width: 10%"/>
-          <col style="width: 10%"/>
+          <col style="width: 13%"/>
+          <col style="width: 13%"/>
         </colgroup>
         <thead>
           <th colspan="2">Property</th>
-          <th>Nightly Rate</th>
           <th>Location</th>
           <th>Beds</th>
           <th>Baths</th>
@@ -71,7 +69,6 @@
             <tr class="property">
               <td><a href="<%= full_link %>"><img src="<%= fetch_image unit %>" class="property__thumb"/></a></td>
               <td><a href="<%= full_link %>" class="property__name"><%= fetch_name unit %></a></td>
-              <td>$<%= unit.night_rate %></td>
               <td><%= unit.address.street %></td>
               <td><%= unit.bedrooms %></td>
               <td><%= unit.bathrooms %></td>
