@@ -14,5 +14,11 @@ module OceanoRails
     config.autoload_paths << "#{Rails.root}/lib"
     config.assets.version = '1.0.1'
     config.middleware.use Rack::Attack
+
+    config.action_mailer.delivery_method = :mailgun
+    config.action_mailer.mailgun_settings = {
+      api_key: ENV['MAILGUN_API_KEY'],
+      domain: 'mg.oceano-rentals.com'
+    }
   end
 end
