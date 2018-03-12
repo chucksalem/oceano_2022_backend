@@ -17,6 +17,17 @@
                 <p>For more information, please fill out the following form, or contact us with any of the methods below this form.  Please make sure that your e-mail address is correct so that we may reply.</p>
                 <h2 class="heading-medium top-spacing">Contact Information</h2>
                 <form method="post" action="/contact/thank-you">
+
+                  <% if @errors %>
+                    <div class="error_explanation">
+                      <ul>
+                        <% @errors.each do |msg| %>
+                          <li><span class="important"><%= msg %></span></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
                     <%= tag(:input, type: "hidden", name: request_forgery_protection_token.to_s, value: form_authenticity_token) %>
                     <fieldset class="half">
                         <label>First Name<span class="important">*</span></label>
