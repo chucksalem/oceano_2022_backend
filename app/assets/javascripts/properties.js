@@ -3,9 +3,11 @@ $(function(){
   $('#properties-table').DataTable({
     "bPaginate": false,
     "searching": false,
+    "bInfo": false,
     "columnDefs": [
       { "orderable": false, "targets": 0 }
-    ]
+    ],
+    "order": []
   });
 
   $(".fancybox").fancybox();
