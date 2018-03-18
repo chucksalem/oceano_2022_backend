@@ -4,17 +4,17 @@
   <div class="layout-container">
     <div class="property-search">
       <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
-        <fieldset class="g sm-one-whole md-one-fourth">
+        <fieldset class="g two-ninths">
           <label class="is-visually-hidden">Where are you going?</label>
           <div class="select-style">
             <%- areas_options = [['Where are you going?', '-', {disabled: 'disabled'}], ['Any', 'all']] + areas.map { |v| [v[:name], v[:key]] } %>
             <%= select_tag "area", options_for_select(areas_options, @area) %>
           </div>
         </fieldset>
-        <fieldset class="g sm-one-third md-one-seventh">
+        <fieldset class="g sm-one-third md-one-eighth">
           <%= text_field_tag "start_date", @start_date, class: 'no-borders datepicker', placeholder: 'Arrive' %>
         </fieldset>
-        <fieldset class="g sm-one-third md-one-seventh">
+        <fieldset class="g sm-one-third md-one-eighth">
           <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'Depart' %>
         </fieldset>
         <fieldset class="g sm-one-third md-one-eighth">
@@ -24,14 +24,20 @@
             <%= select_tag "guests", options_for_select(guest_options, @guests) %>
           </div>
         </fieldset>
-        <fieldset class="g sm-one-whole md-one-sixth">
+        <fieldset class="g sm-one-third md-one-eighth">
+          <div class="select-style">
+            <%- beach_options = [['Beach', nil], ['Yes', true], ['No', false]] %>
+            <%= select_tag 'beach', options_for_select(beach_options, @beach) %>
+          </div>
+        </fieldset>
+        <fieldset class="g sm-one-whole md-one-eighth">
           <label class="is-visually-hidden" for="sort">Sort by</label>
           <div class="select-style">
             <%- sort_options = [['Sort by', '-', {disabled: 'disabled'}]] + sort_by %>
             <%= select_tag "sort", options_for_select(sort_options, @sort) %>
           </div>
         </fieldset>
-        <footer class="g md-two-twelfths">
+        <footer class="g" style="width: 15.2%;">
           <input class="btn btn--green no-min-width max-width" type="submit" value="Search">
         </footer>
       <%- end %>
@@ -50,10 +56,11 @@
           <col style="width: 20%"/>
           <col style="width: 19%"/>
           <col style="width: 15%"/>
-          <col style="width: 10%"/>
-          <col style="width: 10%"/>
-          <col style="width: 13%"/>
-          <col style="width: 13%"/>
+          <col style="width: 8%"/>
+          <col style="width: 8%"/>
+          <col style="width: 11%"/>
+          <col style="width: 8%"/>
+          <col style="width: 11%"/>
         </colgroup>
         <thead>
           <th>Preview</th>
@@ -62,6 +69,7 @@
           <th>Beds</th>
           <th>Baths</th>
           <th>Occupancy</th>
+          <th>Beach</th>
           <th>Type</th>
         </thead>
         <tbody>
@@ -74,6 +82,7 @@
               <td><%= unit.bedrooms %></td>
               <td><%= unit.bathrooms %></td>
               <td class="property__occupancy"><%= unit.occupancy %></td>
+              <td><%= t unit.amenities.beach.to_s %></td>
               <td><%= unit.type %></td>
             </tr>
           <% end %>

@@ -23,6 +23,7 @@ class PropertiesController < ApplicationController
     @start_date = params[:start_date]
     @end_date   = params[:end_date]
     @guests     = params[:guests]
+    @beach      = params[:beach]
     @sort       = params[:sort] || 'P'
 
     if is_search_request
@@ -52,7 +53,7 @@ class PropertiesController < ApplicationController
   private
 
   def is_search_request
-    [:area, :start_date, :end_date, :guests].any? { |k| params.key?(k) && !params[k].empty? }
+    %i(area start_date end_date guests beach).any? { |k| params.key?(k) && !params[k].empty? }
   end
 
   def search_results
@@ -73,6 +74,11 @@ class PropertiesController < ApplicationController
         criteria[:date_range] = date_range
       else
         criteria.delete(:date_range)
+      end
+      if params[:beach].present?
+        criteria[:beach] = params[:beach]
+      else
+        criteria.delete(:beach)
       end
       unless [nil, '', 'all'].include?(params[:guests])
         criteria[:guests] = [{type: 10, count: params[:guests]}]

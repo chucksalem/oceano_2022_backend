@@ -47,9 +47,11 @@ class Unit
   def self.search(*criteria)
     search   = Escapia::UnitSearch.new
     response = search.execute(*criteria)
+    units = response[:units][:unit]
 
-    if response[:units]
-      return response[:units][:unit].map { |unit| unit[:@unit_code] }
+    if units.any?
+      units = apply_beach_filter(units, criteria[0]["beach"]) if criteria[0].key?("beach")
+      return units.map { |unit| unit[:@unit_code] }
     end
 
     []
@@ -125,5 +127,17 @@ class Unit
 
   def videos
     descriptions.videos
+  end
+
+  private
+
+  def self.apply_beach_filter(units, beach)
+    method = beach == "true" ? :select : :reject
+
+    units.public_send(method) do |unit|
+      unit[:unit_amenity].any? do |amenity|
+        amenity.is_a?(Array) ? amenity.include?("8") : amenity.has_value?("8")
+      end
+    end
   end
 end
