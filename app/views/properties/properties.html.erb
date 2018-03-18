@@ -1,6 +1,6 @@
 <% content_for :hero_title, "Find a Rental".html_safe %> <!-- Hero/Page Title -->
 <% content_for :lede, "Search for a rental at Rocky Point".html_safe %>
-<section class="padded-top scallop-top beige-bg">
+<section id="property-list" class="padded-top scallop-top beige-bg">
   <div class="layout-container">
     <div class="property-search">
       <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
@@ -43,7 +43,7 @@
       <p>Please adjust your search and try again.</p>
     </div>
   <%- else %>
-    <div class="layout-container" id="properties-container">
+    <div class="layout-container">
 
       <table id="properties-table">
         <colgroup>
@@ -56,7 +56,8 @@
           <col style="width: 13%"/>
         </colgroup>
         <thead>
-          <th colspan="2">Property</th>
+          <th>Preview</th>
+          <th>Property</th>
           <th>Location</th>
           <th>Beds</th>
           <th>Baths</th>
@@ -67,7 +68,7 @@
           <% @units.each do |unit| %>
             <% full_link = accommodation_url(unit.code) + "?start_date=#{@start_date}&end_date=#{@end_date}&guests=#{@guests}" %>
             <tr class="property">
-              <td><a href="<%= full_link %>"><img src="<%= fetch_image unit %>" class="property__thumb"/></a></td>
+              <td><a href="<%= full_link %>"><img src="<%= fetch_image unit %>"/></a></td>
               <td><a href="<%= full_link %>" class="property__name"><%= fetch_name unit %></a></td>
               <td><%= unit.address.street %></td>
               <td><%= unit.bedrooms %></td>

@@ -44,21 +44,6 @@
     </div>
     <%- else %>
     <div class="layout-container">
-        <div class="floating-form">
-            <form class="gw no-gutter">
-                <fieldset class="g sm-one-third md-one-seventh">
-                    <label for="sort">Sort By...</label>
-                    <div class="select-style">
-                        <select name="sort">
-                            <option>Guest Rating</option>
-                            <option>Price</option>
-                            <option>Location</option>
-                            <option>Name</option>
-                        </select>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
         <ul class="properties-list gw small-gutter">
             <%- @units.each do |unit| %>
             <li class="property g sm-one-half md-one-whole">

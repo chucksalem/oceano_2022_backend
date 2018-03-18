@@ -1,37 +1,41 @@
-#properties-container { margin: -5em auto 0; }
+#property-list {
+  .layout-container {
+    &:first-child {
+      @include bp-until(768px) {
+        display: none;
+      }
+    }
+
+    &:last-child {
+      margin-top: -8em;
+      padding: 0;
+      overflow: auto;
+    }
+  }
+}
 
 #properties-table {
   border: 0;
   border-collapse: separate;
   border-spacing: 0 .5em;
-  margin: 0 0 5em;
+  margin-bottom: 5em;
 
-  .sorting_asc:first-child {
-    background: none;
-    cursor: initial;
-  }
-
-  th {
-    @extend %sans--bold;
-    font-size: 1.6em;
-    border: 0;
-  }
-
-  .property {
+  th, td {
     font-size: 1.5em;
     text-align: center;
-
-    td:first-child { padding: 0 1em 0 0; }
-
-    .property__thumb { display: block; }
-
-    .property__name {
-      @extend %sans--bold;
-      color: $cerulean;
-    }
-
-    .property__occupancy:after { content: ' people' }
+    border: 0
   }
- }
 
- #properties-table_info { display: none; }
+  th { @extend %sans--bold; }
+
+  td:first-child { padding: 0; }
+
+  img { display: block; }
+
+  .property__name {
+    @extend %sans--bold;
+    color: $cerulean;
+  }
+
+  .property__occupancy:after { content: ' people' }
+ }
