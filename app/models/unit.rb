@@ -51,14 +51,7 @@ class Unit
   def self.search(*criteria)
     search   = Escapia::UnitSearch.new
     response = search.execute(*criteria)
-    units = response[:units][:unit]
-
-    if units.any?
-      units = apply_beach_filter(units, criteria[0]["beach"]) if criteria[0].key?("beach")
-      return units.map { |unit| unit[:@unit_code] }
-    end
-
-    []
+    response[:units] ? response[:units][:unit].map { |unit| unit[:@unit_code] } : []
   end
 
   def self.create_from_results(address:,
@@ -136,16 +129,6 @@ class Unit
   end
 
   private
-
-  def self.apply_beach_filter(units, beach)
-    method = beach == "true" ? :select : :reject
-
-    units.public_send(method) do |unit|
-      unit[:unit_amenity].any? do |amenity|
-        amenity.is_a?(Array) ? amenity.include?("8") : amenity.has_value?("8")
-      end
-    end
-  end
 
   def self.has_beachfront?(info)
     info[:category_codes][:custom_category_group].any? do |custom_category|

@@ -17,17 +17,17 @@
         <fieldset class="g sm-one-third md-one-eighth">
           <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'Depart' %>
         </fieldset>
-        <fieldset class="g sm-one-third md-one-eighth">
+        <fieldset class="g sm-one-third md-one-tenth">
           <label class="is-visually-hidden" for="guests">Guests</label>
           <div class="select-style">
             <%- guest_options = [['Guests', '-', {disabled: 'disabled'}], ['Any', 'all']] + (1..10).map { |v| [v, v] } %>
             <%= select_tag "guests", options_for_select(guest_options, @guests) %>
           </div>
         </fieldset>
-        <fieldset class="g sm-one-third md-one-eighth">
+        <fieldset class="g sm-one-third md-one-seventh">
           <div class="select-style">
-            <%- beach_options = [['Beach', nil], ['Yes', true], ['No', false]] %>
-            <%= select_tag 'beach', options_for_select(beach_options, @beach) %>
+            <%- beachfront_options = [['Beachfront', nil], ['Yes', true], ['No', false]] %>
+            <%= select_tag 'beachfront', options_for_select(beachfront_options, @beach) %>
           </div>
         </fieldset>
         <fieldset class="g sm-one-whole md-one-eighth">

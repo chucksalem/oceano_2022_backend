@@ -53,7 +53,7 @@ class PropertiesController < ApplicationController
   private
 
   def is_search_request
-    %i(area start_date end_date guests beach).any? { |k| params.key?(k) && !params[k].empty? }
+    %i(area start_date end_date guests beachfront).any? { |k| params.key?(k) && !params[k].empty? }
   end
 
   def search_results
@@ -75,11 +75,6 @@ class PropertiesController < ApplicationController
       else
         criteria.delete(:date_range)
       end
-      if params[:beach].present?
-        criteria[:beach] = params[:beach]
-      else
-        criteria.delete(:beach)
-      end
       unless [nil, '', 'all'].include?(params[:guests])
         criteria[:guests] = [{type: 10, count: params[:guests]}]
       end
@@ -96,6 +91,8 @@ class PropertiesController < ApplicationController
     units = codes.map do |c|
       UnitRepository.get(c)
     end
+
+    units = apply_beachfront_filter(units, params[:beachfront]) if params[:beachfront].present?
 
     @units = WillPaginate::Collection.create((params[:page] || 1).to_i, 10, units.count) do |pager|
       pager.replace(units[pager.offset, pager.per_page].to_a)
@@ -128,5 +125,13 @@ class PropertiesController < ApplicationController
     @videos = @unit.videos
     @standard_images = @unit.standard_images
     @large_images = @unit.large_images
+  end
+
+  private
+
+  def apply_beachfront_filter(units, beachfront)
+    method = beachfront == "true" ? :select : :reject
+
+    units.public_send(method, &:beachfront)
   end
 end
