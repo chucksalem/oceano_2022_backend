@@ -1,5 +1,6 @@
 class Unit
   include Virtus.model
+  include Hashable
 
   class NotFound < StandardError; end
 
@@ -15,6 +16,7 @@ class Unit
   attribute :position,     UnitPosition
   attribute :type,         Symbol
   attribute :reviews,      Array
+  attribute :beachfront,   Boolean, default: false
 
   def self.from_hash(hash)
     new.tap do |unit|
@@ -29,6 +31,7 @@ class Unit
     response = search.execute(unit_id: id)
     content  = response[:unit_descriptive_contents][:unit_descriptive_content]
     info     = content[:unit_info]
+
     create_from_results(
       address:       info[:address],
       amenities:     info[:unit_amenity],
@@ -40,7 +43,8 @@ class Unit
       position:      info[:position],
       reviews:       content[:unit_reviews],
       rooms:         info[:category_codes][:room_info],
-      type_code:     info[:category_codes][:unit_category][:@code]
+      type_code:     info[:category_codes][:unit_category][:@code],
+      beachfront:    has_beachfront?(info)
     )
   end
 
@@ -67,7 +71,8 @@ class Unit
                                position:,
                                reviews:,
                                rooms:,
-                               type_code:)
+                               type_code:,
+                               beachfront:)
     unit = new
 
     unit.type         = UnitType.from_code(type_code)
@@ -80,6 +85,7 @@ class Unit
     unit.bedrooms     = UnitRooms.count_for_code(:bedrooms, rooms)
     unit.descriptions = UnitDescriptions.from_descriptions(descriptions)
     unit.reviews      = UnitReviews.from_response(reviews)
+    unit.beachfront   = beachfront
 
     unit.address = {
       street:      address[:address_line],
@@ -138,6 +144,12 @@ class Unit
       unit[:unit_amenity].any? do |amenity|
         amenity.is_a?(Array) ? amenity.include?("8") : amenity.has_value?("8")
       end
+    end
+  end
+
+  def self.has_beachfront?(info)
+    info[:category_codes][:custom_category_group].any? do |custom_category|
+      flatten_nested_hash(custom_category).has_value?("Beachfront")
     end
   end
 end
