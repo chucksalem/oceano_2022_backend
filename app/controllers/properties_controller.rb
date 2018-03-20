@@ -2,10 +2,11 @@ class PropertiesController < ApplicationController
   DATE_FORMAT = '%m/%d/%Y'.freeze
 
   def index
-    @area       = params[:area] || '-'
+    @area       = params[:area] || 'all'
     @start_date = params[:start_date]
     @end_date   = params[:end_date]
     @guests     = params[:guests]
+    @beachfront = params[:beachfront] || 'all'
     @sort       = params[:sort] || 'P'
 
     if is_search_request
@@ -19,11 +20,6 @@ class PropertiesController < ApplicationController
   end
 
   def properties
-    @area       = params[:area] || '-'
-    @start_date = params[:start_date]
-    @end_date   = params[:end_date]
-    @guests     = params[:guests]
-    @beach      = params[:beach]
     @sort       = params[:sort] || 'P'
 
     if is_search_request
@@ -53,7 +49,7 @@ class PropertiesController < ApplicationController
   private
 
   def is_search_request
-    %i(area start_date end_date guests beachfront).any? { |k| params.key?(k) && !params[k].empty? }
+    [:area, :start_date, :end_date, :guests, :beachfront].any? { |k| params.key?(k) && !params[k].empty? }
   end
 
   def search_results
@@ -92,7 +88,7 @@ class PropertiesController < ApplicationController
       UnitRepository.get(c)
     end
 
-    units = apply_beachfront_filter(units, params[:beachfront]) if params[:beachfront].present?
+    units = apply_beachfront_filter(units, params[:beachfront])
 
     @units = WillPaginate::Collection.create((params[:page] || 1).to_i, 10, units.count) do |pager|
       pager.replace(units[pager.offset, pager.per_page].to_a)
@@ -130,8 +126,9 @@ class PropertiesController < ApplicationController
   private
 
   def apply_beachfront_filter(units, beachfront)
-    method = beachfront == "true" ? :select : :reject
+    return units if %w(true false).exclude?(beachfront)
 
+    method = beachfront == "true" ? :select : :reject
     units.public_send(method, &:beachfront)
   end
 end

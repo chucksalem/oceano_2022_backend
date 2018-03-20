@@ -8,7 +8,7 @@
     <div class="layout-container layout-centered">
         <div class="property-search">
             <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
-                <fieldset class="g sm-one-whole md-five-twelfths">
+                <fieldset class="g sm-one-whole md-one-fourth">
                     <label class="is-visually-hidden">Where are you going?</label>
                     <div class="select-style">
                         <select name="area">
@@ -26,7 +26,7 @@
                 <fieldset class="g sm-one-third md-one-seventh">
                     <input id="end_date" class="no-borders datepicker" type="text" name="end_date" placeholder="Depart">
                 </fieldset>
-                <fieldset class="g sm-one-third md-one-eighth">
+                <fieldset class="g sm-one-third md-one-seventh">
                     <label class="is-visually-hidden" for="guests">Guests</label>
                     <div class="select-style">
                         <select name="guests">
@@ -45,7 +45,13 @@
                         </select>
                     </div>
                 </fieldset>
-                <footer class="g md-two-twelfths">
+                <fieldset class="g sm-one-third md-one-seventh">
+                  <div class="select-style">
+                    <%- beachfront_options = [['Beachfront', nil, { disabled: 'disabled', selected: 'selected' }], ['Any', nil], ['Yes', true], ['No', false]] %>
+                    <%= select_tag 'beachfront', options_for_select(beachfront_options, @beachfront) %>
+                  </div>
+                </fieldset>
+                <footer class="g md-two-twelfths" id="home-search-btn">
                     <input class="btn btn--green no-min-width max-width" type="submit" value="Search">
                 </footer>
             <%- end %>

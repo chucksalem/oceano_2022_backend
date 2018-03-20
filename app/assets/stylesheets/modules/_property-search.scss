@@ -78,3 +78,9 @@
         }
     }
 }
+
+#home-search-btn {
+  @include bp-at-least(768px) {
+    width: 17.86%;
+  }
+}

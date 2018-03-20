@@ -16,7 +16,7 @@ class Unit
   attribute :position,     UnitPosition
   attribute :type,         Symbol
   attribute :reviews,      Array
-  attribute :beachfront,   Boolean, default: false
+  attribute :beachfront,   Boolean
 
   def self.from_hash(hash)
     new.tap do |unit|
@@ -31,7 +31,6 @@ class Unit
     response = search.execute(unit_id: id)
     content  = response[:unit_descriptive_contents][:unit_descriptive_content]
     info     = content[:unit_info]
-
     create_from_results(
       address:       info[:address],
       amenities:     info[:unit_amenity],
@@ -51,7 +50,12 @@ class Unit
   def self.search(*criteria)
     search   = Escapia::UnitSearch.new
     response = search.execute(*criteria)
-    response[:units] ? response[:units][:unit].map { |unit| unit[:@unit_code] } : []
+
+    if response[:units]
+      return response[:units][:unit].map { |unit| unit[:@unit_code] }
+    end
+
+    []
   end
 
   def self.create_from_results(address:,
