@@ -79,7 +79,7 @@ class PropertiesController < ApplicationController
 
     codes = codes.uniq
 
-    unless params[:area] == 'all'
+    unless params[:area] == 'all' || params[:area].blank?
       in_area_codes = UnitRepository.units_in_area(params[:area])
       codes = codes & in_area_codes
     end

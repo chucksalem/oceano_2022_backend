@@ -16,7 +16,7 @@ class Unit
   attribute :position,     UnitPosition
   attribute :type,         Symbol
   attribute :reviews,      Array
-  attribute :beachfront,   Boolean
+  attribute :beachfront,   Boolean, default: false
 
   def self.from_hash(hash)
     new.tap do |unit|
