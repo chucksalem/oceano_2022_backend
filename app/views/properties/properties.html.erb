@@ -1,42 +1,7 @@
 <% content_for :hero_title, "Find a Rental".html_safe %> <!-- Hero/Page Title -->
 <% content_for :lede, "Search for a rental at Rocky Point".html_safe %>
 <section id="property-list" class="padded-top scallop-top beige-bg">
-  <div class="layout-container">
-    <div class="property-search">
-      <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
-        <fieldset class="g sm-one-whole md-one-fourth">
-          <label class="is-visually-hidden">Where are you going?</label>
-          <div class="select-style">
-            <%- areas_options = [['Where are you going?', '-', {disabled: 'disabled'}], ['Any', 'all']] + areas.map { |v| [v[:name], v[:key]] } %>
-            <%= select_tag "area", options_for_select(areas_options, @area) %>
-          </div>
-        </fieldset>
-        <fieldset class="g sm-one-third md-one-seventh">
-          <%= text_field_tag "start_date", @start_date, class: 'no-borders datepicker', placeholder: 'Arrive' %>
-        </fieldset>
-        <fieldset class="g sm-one-third md-one-seventh">
-          <%= text_field_tag "end_date", @end_date, class: 'no-borders datepicker', placeholder: 'Depart' %>
-        </fieldset>
-        <fieldset class="g sm-one-third md-one-eighth">
-          <label class="is-visually-hidden" for="guests">Guests</label>
-          <div class="select-style">
-            <%- guest_options = [['Guests', '-', {disabled: 'disabled'}], ['Any', 'all']] + (1..10).map { |v| [v, v] } %>
-            <%= select_tag "guests", options_for_select(guest_options, @guests) %>
-          </div>
-        </fieldset>
-        <fieldset class="g sm-one-whole md-one-sixth">
-          <label class="is-visually-hidden" for="sort">Sort by</label>
-          <div class="select-style">
-            <%- sort_options = [['Sort by', '-', {disabled: 'disabled'}]] + sort_by %>
-            <%= select_tag "sort", options_for_select(sort_options, @sort) %>
-          </div>
-        </fieldset>
-        <footer class="g md-two-twelfths">
-          <input class="btn btn--green no-min-width max-width" type="submit" value="Search">
-        </footer>
-      <%- end %>
-    </div>
-  </div>
+  <%= render 'shared/search_form' %>
   <%- if @units.empty? %>
     <div class="layout-container-smaller padded-bottom layout-centered">
       <h1>No available rental properties found</h1>
@@ -50,10 +15,11 @@
           <col style="width: 20%"/>
           <col style="width: 19%"/>
           <col style="width: 15%"/>
-          <col style="width: 10%"/>
-          <col style="width: 10%"/>
-          <col style="width: 13%"/>
-          <col style="width: 13%"/>
+          <col style="width: 8%"/>
+          <col style="width: 8%"/>
+          <col style="width: 11%"/>
+          <col style="width: 8%"/>
+          <col style="width: 11%"/>
         </colgroup>
         <thead>
           <th>Preview</th>
@@ -62,6 +28,7 @@
           <th>Beds</th>
           <th>Baths</th>
           <th>Occupancy</th>
+          <th>Beach</th>
           <th>Type</th>
         </thead>
         <tbody>
@@ -74,6 +41,7 @@
               <td><%= unit.bedrooms %></td>
               <td><%= unit.bathrooms %></td>
               <td class="property__occupancy"><%= unit.occupancy %></td>
+              <td><%= t unit.beachfront.to_s %></td>
               <td><%= unit.type %></td>
             </tr>
           <% end %>

@@ -30,6 +30,7 @@
         }
         .over {
             .offerings {
+                @include bp-until(768px) { margin: 0.8em 0; }
                 list-style: none;
                 padding-left: 0;
                 margin-top: 0;
@@ -52,6 +53,7 @@
                 }
             }
             h2 {
+                @include bp-until(768px) { font-size: 1em; }
                 @extend %sans--black;
                 @include transition(opacity 0.25s ease-in-out);
                 color: $white;
@@ -77,6 +79,7 @@
                 z-index: 3;
 
                 .info-wrapper {
+                    @include bp-until(768px) { height: 100%; }
                     @include transition(opacity 0.25s ease-in-out);
                     margin: 0 auto;
                     //max-width: 330px;
@@ -86,6 +89,10 @@
                     -webkit-transform: translateY(-50%);
                     -ms-transform: translateY(-50%);
                     transform: translateY(-50%);
+
+                    @include bp-until(768px) {
+                      .no-touch-title { display: none !important; }
+                    }
 
                     .no-touch-title {
                         display: none;
@@ -97,6 +104,10 @@
                     }
                     p, .btn {
                         color: $white;
+                    }
+                    @include bp-until(768px) {
+                      p { margin-bottom: 0.2em; }
+                      a { padding: 0.5em 1.25em; }
                     }
                 }
 
