@@ -1,14 +1,16 @@
 source 'https://rubygems.org'
 
+ruby '2.4.9'
+
 gem 'forecast_io', '2.0.0'
 gem 'foreman', '0.78.0'
 gem 'multi_json', '1.11.2'
 gem 'mailgun-ruby', '~>1.1.6'
 gem 'nokogiri', '1.6.6.2'
-gem 'oj', '2.12.13'
-gem 'puma', '2.12.3'
+gem 'oj', '2.16.1'
+gem 'puma', '3.12.1'
 gem 'rack-attack', '4.3.0'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.11.1'  # segfaults with any version less than 4.2.8
 gem 'redis', '2.1.1'
 gem 'responders', '2.1.0'
 gem 'rspec-virtus', '1.0.2'
