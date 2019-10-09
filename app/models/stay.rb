@@ -39,7 +39,7 @@ class Stay
 
     taxes = rate[:base][:taxes] || []
     taxes = [taxes[:tax]] if taxes.is_a?(Hash)
-    taxes = taxes.map { |t| { amount: t[:@amount].to_f } }
+    taxes = taxes.map { |t| { amount: t.first[:@amount].to_f } }
 
     fees = rate[:fees][:fee]
     fees = [fees] if fees.is_a?(Hash)
