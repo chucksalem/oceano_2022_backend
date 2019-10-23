@@ -12,6 +12,14 @@ bundle exec foreman start  # Start the Rails server
 open http://localhost:5000 # Open in web browser
 ```
 
+or in development
+
+if you checkout the `run_master_in_docker` branch you can just run
+```
+docker-comopse up
+```
+as long as you have docker and docker-compose installed
+
 ### Processes
 
 | Name | Description |
