@@ -18,7 +18,9 @@ if you checkout the `run_master_in_docker` branch you can just run
 ```
 docker-comopse up
 ```
-as long as you have docker and docker-compose installed
+as long as you have docker and docker-compose installed.
+
+It's a good idea to rebase master into the run_master_in_docker branch when master is updated.
 
 ### Processes
 
@@ -45,3 +47,6 @@ Deploy to Staging with:
 ```bash
 bundle exec cap staging deploy
 ```
+I like to use the docker setup from the run_master_in_docker branch, copy my
+ssh keys into the rails docker container, so I don't have to remember the
+password to the server's deploy user.
