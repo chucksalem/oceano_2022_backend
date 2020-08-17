@@ -11,10 +11,6 @@
     .nav-bar {
         padding: 30px 0;
 
-        .subpage & {
-            background: $white;
-        }
-
         .brand-container {
             display: inline-block;
             vertical-align: bottom;
@@ -25,10 +21,6 @@
                 display: inline-block;
                 fill: $white;
                 width: 90px;
-
-                .subpage & {
-                    fill: $cerulean;
-                }
             }
         }
         .main-navigation {
@@ -58,10 +50,6 @@
                     }
                     .wf-active & {
                       visibility: visibile;
-                    }
-
-                    .subpage & {
-                        color: $brown;
                     }
                 }
             }
