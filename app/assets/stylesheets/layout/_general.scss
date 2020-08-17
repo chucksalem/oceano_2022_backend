@@ -1,6 +1,23 @@
 /* @general layout
 -----------------------------------------------------  */
 
+.glass-background {
+    background: rgba(255,255,255,0.3);
+    box-shadow: 1px 5px 15px 7px rgba(0,0,0,0.2);
+}
+
+.glass-background-over-light {
+    background: rgba(255,255,255,0.2);
+}
+
+.glass-background-dark {
+    background: rgba(0,0,0,0.5);
+}
+
+.glass-background-darker {
+    background: rgba(0,0,0,0.7);
+}
+
 .layout-container {
     @include clearfix();
     margin-left: auto;

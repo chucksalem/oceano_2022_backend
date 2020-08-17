@@ -1,8 +1,6 @@
 /* @site-footer
 -----------------------------------------------------  */
 .site-footer {
-    @include scallop-top($brown);
-    background-color: $brown;
     padding-top: 60px;
     padding-bottom: 30px;
     @include bp-until($breakpoint__md) { text-align: center; }
@@ -93,15 +91,14 @@
         @extend %sans--medium;
         color: $white;
         display: inline-block;
-        background: $dark-brown;
         padding: 20px 40px;
         width: 220px;
         text-align: left;
-        margin-top: -63px;
+        margin-top: -60px;
         @include bp-at-least($breakpoint__sm) {
             position: absolute;
             right: 30px;
-            top: -63px;
+            top: -60px;
             bottom: -30px;
             margin-top: 0;
         }

@@ -6,21 +6,6 @@
     &.full-background {
         background-color: #000;
         position: relative;
-        
-        &:before {
-            background: image-url('hero.jpg') bottom center no-repeat;
-            background-size: cover;
-            content: "";
-            height: 100%;
-            left: 0;
-            opacity: .75;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
-        .hero {
-            background: none;
-        }
     }
 
     .nav-bar {
@@ -83,27 +68,7 @@
         }
     }
     .hero {
-        background-color: #000;
         position: relative;
-        
-        &:before {
-            background: image-url('hero.jpg') center center no-repeat;
-            background-size: cover;
-            content: "";
-            height: 100%;
-            left: 0;
-            opacity: .75;
-            position: absolute;
-            top: 0;
-            width: 100%;
-        }
-        &.no-bg {
-            background: none;
-
-            &:before {
-                display: none;
-            }
-        }
 
         &.hero-small {
             .layout-container {
@@ -120,17 +85,6 @@
 
             &.bottom-border {
                 position: relative;
-
-                &:after {
-                    content: "";
-                    position: absolute;
-                    bottom: -10px;
-                    left: 50%;
-                    margin-left: -20px;
-                    width: 40px;
-                    height: 3px;
-                    background-color: $white;
-                }
             }
         }
         .lede {

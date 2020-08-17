@@ -10,7 +10,6 @@ section.beige-bg {
 }
 section {
     position: relative;
-    background-color: $white;
 
     &.scallop-top {
         @include scallop-top(white);
