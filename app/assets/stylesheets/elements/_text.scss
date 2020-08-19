@@ -25,6 +25,7 @@ p {
 b,
 strong {
   @extend %serif--semi-bold;
+  color: $white;
 
   .sans & {
     @extend %sans--bold;
