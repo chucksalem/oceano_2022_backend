@@ -20,6 +20,10 @@
             display: inline-block;
             font-size: 1.4em;
             vertical-align: middle;
+
+            &.slate {
+                color: $slate;
+            }
         }
     }
 }

@@ -3,33 +3,31 @@
 <% content_for :hero_title, @property_title.html_safe %>
 <% content_for :lede, @property_subtitle.html_safe %>
 
-<section class="scallop-top">
-  <div class="layout-container">
+<section>
+  <div class="glass-background layout-container">
     <div class="md-two-thirds">
       <ul class="offerings">
         <li>
-          <i class="icon icon-bath"></i>
-          <span class="detail"><%= @unit.bathrooms %> Bath</span>
+          <i class="icon icon-bath slate"></i>
+          <span class="detail slate"><%= @unit.bathrooms %> Bath</span>
         </li>
         <li>
-          <i class="icon icon-bed"></i>
-          <span class="detail"><%= @unit.bedrooms %> Beds</span>
+          <i class="icon icon-bed slate"></i>
+          <span class="detail slate"><%= @unit.bedrooms %> Beds</span>
         </li>
         <li>
-          <i class="icon icon-guests"></i>
-          <span class="detail"><%= @unit.occupancy %> Guests</span>
+          <i class="icon icon-guests slate"></i>
+          <span class="detail slate"><%= @unit.occupancy %> Guests</span>
         </li>
         <li>
-          <i class="icon icon-apartment"></i>
-          <span class="detail"><%= @unit.type.capitalize %></span>
+          <i class="icon icon-apartment slate"></i>
+          <span class="detail slate"><%= @unit.type.capitalize %></span>
         </li>
       </ul>
     </div>
-  </div>
-</section>
 
-<section class="padded-top padded-bottom beige-bg">
-  <div class="layout-container">
+    <%#======================================================================%>
+
     <%= render 'rate_panel' %>
 
     <div class="property-details md-two-thirds">
@@ -88,7 +86,7 @@
 
       <div class="gw">
         <div class="g md-one-fourth">
-          <h2 class="heading-two">Description</h2>
+          <h2 class="heading-two alt">Description</h2>
         </div>
         <div class="g md-three-fourths">
           <p><%= @unit.descriptions[:text][0][:description] %></p>
@@ -99,15 +97,15 @@
 
       <div class="gw">
         <div class="g md-one-fourth">
-          <h2 class="heading-two">Property Details</h2>
+          <h2 class="heading-two alt">Property Details</h2>
         </div>
         <div class="g md-three-fourths">
           <ul class="gw no-gutter no-padding">
-            <li class="g md-one-half padded-right"><p><b>Property Type:</b> <%= @unit.type.capitalize %></p></li>
-            <li class="g md-one-half padded-right"><p><b>Bedrooms:</b> <%= @unit.bedrooms %></p></li>
-            <li class="g md-one-half padded-right"><p><b>Bathrooms:</b> <%= @unit.bathrooms %></p></li>
-            <li class="g md-one-half padded-right"><p><b>Floors:</b> <%= @unit.num_floors %></p></li>
-            <li class="g md-one-half padded-right"><p><b>Occupancy:</b> <%= @unit.occupancy %></p></li>
+            <li class="g md-one-half padded-right"><p><b class="slate">Property Type:</b> <%= @unit.type.capitalize %></p></li>
+            <li class="g md-one-half padded-right"><p><b class="slate">Bedrooms:</b> <%= @unit.bedrooms %></p></li>
+            <li class="g md-one-half padded-right"><p><b class="slate">Bathrooms:</b> <%= @unit.bathrooms %></p></li>
+            <li class="g md-one-half padded-right"><p><b class="slate">Floors:</b> <%= @unit.num_floors %></p></li>
+            <li class="g md-one-half padded-right"><p><b class="slate">Occupancy:</b> <%= @unit.occupancy %></p></li>
           </ul>
         </div>
       </div>
@@ -115,7 +113,7 @@
       <hr>
       <div class="gw">
         <div class="g md-one-fourth">
-          <h2 class="heading-two">Amenities</h2>
+          <h2 class="heading-two alt">Amenities</h2>
         </div>
         <div class="g md-three-fourths">
           <ul class="gw no-gutter no-padding">
@@ -132,9 +130,9 @@
 <%- @unit.reviews.sample(3).compact.tap do |reviews| %>
 <%- break if reviews.empty? %>
 <section class="padded-top padded-bottom">
-  <div class="layout-container">
+  <div class="glass-background layout-container padding-vertical">
     <div class="md-two-thirds">
-      <h2 class="heading-two bottom-spacing-large">Testimonies</h2>
+      <h2 class="heading-medium bottom-spacing-large">Testimonies</h2>
       <ul class="testimonials testimonials-paginated normal gw large-gutter">
         <%- reviews.each do |review| %>
         <li class="g sm-one-whole">
@@ -161,8 +159,8 @@
 </div>
 
 <section class="padded-top padded-bottom related-places">
-  <div class="layout-container">
-    <h2 class="heading-two bottom-spacing-large">Other Places</h2>
+  <div class="glass-background layout-container padding-vertical">
+    <h2 class="heading-medium bottom-spacing-large">Other Places</h2>
     <ul class="gw large-gutter no-padding">
     <%- @random_units.each do |unit| %>
       <li class="g md-one-third">
