@@ -22,6 +22,8 @@
     <%= stylesheet_link_tag("application") %>
     <%= yield :stylesheets %>
 
+    <%= favicon_link_tag asset_path('logo.png') %>
+
 <body<% unless home? %> class="subpage"<% end %>>
 
     <!-- Social Icon SVG definitions -->
