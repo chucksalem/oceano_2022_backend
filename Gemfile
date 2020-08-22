@@ -31,6 +31,7 @@ group :development, :test do
   gem 'byebug', '6.0.2'
   gem 'dotenv-rails', '0.7.0'
   gem 'pry-rails', '0.3.4'
+  gem 'pry-remote'
   gem 'rubocop', '0.33.0'
 end
 
