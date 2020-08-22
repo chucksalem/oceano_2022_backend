@@ -21,10 +21,11 @@
 
     <%= stylesheet_link_tag("application") %>
     <%= yield :stylesheets %>
+
+    <%= favicon_link_tag asset_path('logo.png') %>
 </head>
 
 <body>
-
     <!-- Social Icon SVG definitions -->
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="twitter" viewBox="0 0 20 16">
