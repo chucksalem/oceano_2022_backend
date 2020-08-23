@@ -29,11 +29,10 @@ class PagesController < ApplicationController
 
   def owners_thank_you
     ContactMailer.work_order(
-      email:      params[:email],
-      first_name: params[:firstname],
-      last_name:  params[:lastname],
-      phone:      params[:phone],
-      message:    params[:message]
+      email:         params[:email],
+      owner_name:    params[:owner_name],
+      property_name: params[:property_name],
+      message:       params[:message],
     ).deliver_now
   end
 
