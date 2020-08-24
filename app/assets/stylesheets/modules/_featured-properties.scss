@@ -64,7 +64,8 @@
                 padding: 0 20px;
                 position: relative;
                 text-transform: uppercase;
-                top: 50%;
+                //top: 50%;
+                top: 5%;
                 z-index: 2;
                 -webkit-transform: translateY(-50%);
                 -ms-transform: translateY(-50%);
@@ -92,11 +93,11 @@
                     -ms-transform: translateY(-50%);
                     transform: translateY(-50%);
 
-                    @include bp-until(768px) {
-                      .no-touch-title {
-                        display: none !important;
-                      }
-                    }
+                    //@include bp-until(768px) {
+                    //  .no-touch-title {
+                    //    display: none !important;
+                    //  }
+                    //}
 
                     .no-touch-title {
                         display: none;
