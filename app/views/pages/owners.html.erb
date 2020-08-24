@@ -12,23 +12,24 @@
 
                 <h2 class="heading-small">Work Order</h2>
                 <p>Please fill out the following form to submit a work order. You will receive a response within 24 hours.</p>
+
                 <form class="dark" method="post" action="/owners/thank-you">
                     <%= tag(:input, type: "hidden", name: request_forgery_protection_token.to_s, value: form_authenticity_token) %>
                     <fieldset class="half">
                         <label for="ownerName">Owner Name<span class="important">*</span></label>
-                        <input type="text" id="ownerName" required>
+                        <input type="text" id="ownerName" name="owner_name" required>
                     </fieldset>
                     <fieldset class="half">
                         <label for="propertyName">Property Name<span class="important">*</span></label>
-                        <input type="text" id="propertyName" required>
+                        <input type="text" id="propertyName" name="propery_name" required>
                     </fieldset>
                     <fieldset class="half">
                         <label for="email">Contact Email<span class="important">*</span></label>
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" name="email" required>
                     </fieldset>
                     <fieldset>
                         <label for="problem">Problem Description<span class="important">*</span></label>
-                        <textarea id="problem" required></textarea>
+                        <textarea id="problem" name="message" equired></textarea>
                     </fieldset>
                     <p class="important">* denotes a required field</p>
                     <input class="btn submit" type="submit" value="Submit Form">
