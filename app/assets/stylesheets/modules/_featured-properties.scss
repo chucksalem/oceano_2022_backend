@@ -31,6 +31,8 @@
         .over {
             .offerings {
                 @include bp-until(768px) { margin: 0.8em 0; }
+
+                margin-bottom: 1em;
                 list-style: none;
                 padding-left: 0;
                 margin-top: 0;
@@ -91,11 +93,15 @@
                     transform: translateY(-50%);
 
                     @include bp-until(768px) {
-                      .no-touch-title { display: none !important; }
+                      .no-touch-title {
+                        display: none !important;
+                      }
                     }
 
                     .no-touch-title {
                         display: none;
+                        font-size: 1.3em;
+                        padding: 0;
 
                         .touch & {
                             display: block;
@@ -109,6 +115,8 @@
                       p { margin-bottom: 0.2em; }
                       a { padding: 0.5em 1.25em; }
                     }
+                    p { margin-bottom: 0.4em; }
+                    a { padding: 0.25em 1.25em; }
                 }
 
             }
