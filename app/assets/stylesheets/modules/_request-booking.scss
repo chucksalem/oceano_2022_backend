@@ -1,7 +1,7 @@
 .request-booking {
     @include bp-at-least($breakpoint__md) { float: right; }
     @include bp-until($breakpoint__md) { margin-bottom: 5em; }
-    @include bp-at-least($breakpoint__md) { margin-top: -23em; }
+    @include bp-at-least($breakpoint__md) { margin-top: -53px; }
 
     .booking-header {
         background-color: $cerulean;

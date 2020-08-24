@@ -1,7 +1,7 @@
 .subnav {
     margin-bottom: 5em;
     @include bp-at-least($breakpoint__md) { margin-bottom: 0; }
-    
+
     ul {
         list-style: none;
         padding-left: 0;
@@ -27,7 +27,7 @@
 
                 &:hover,
                 &.current {
-                    color: $cerulean;
+                    color: $white;
                 }
             }
         }

@@ -1,68 +1,70 @@
-<% content_for :header_class, 'full-background' %>
-<% content_for :hero_class, 'no-bg' %>
+<% content_for :header_class %>
+<% content_for :hero_class %>
 <% content_for :hero_size, 'hero-medium' %>
 <% content_for :hero_title, "Welcome to Oc&eacute;ano Rentals".html_safe %>
 <% content_for :lede, "The largest selection of beach house rentals and condos in Rocky Point".html_safe %>
 
-<section class="scallop-top padded-top padded-bottom main-content">
-  <div class="layout-container layout-centered">
-    <div class="property-search">
-      <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
-        <fieldset class="g sm-one-whole md-one-fifth">
-          <label class="is-visually-hidden">Where are you going?</label>
-          <div class="select-style">
-            <select name="area">
-              <option disabled selected>Where are you going?</option>
-              <option value="all">Any</option>
-              <% areas.each do |a| %>
-                <option value="<%= a[:key] %>"><%= a[:name] %></option>
-              <% end %>
-            </select>
-          </div>
-        </fieldset>
-        <fieldset class="g sm-one-third md-one-eighth">
-          <input id="start_date" class="no-borders datepicker" type="text" name="start_date" placeholder="Arrive">
-        </fieldset>
-        <fieldset class="g sm-one-third md-one-eighth">
-          <input id="end_date" class="no-borders datepicker" type="text" name="end_date" placeholder="Depart">
-        </fieldset>
-        <fieldset class="g sm-one-third md-one-tenth">
-          <label class="is-visually-hidden" for="guests">Guests</label>
-          <div class="select-style">
-            <select name="guests">
-              <option disabled selected>Guests</option>
-              <option value="all">Any</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-          </div>
-        </fieldset>
-        <fieldset class="g sm-one-third md-one-seventh">
-          <div class="select-style">
-            <%- beachfront_options = [['Beachfront', nil, { disabled: 'disabled', selected: 'selected' }], ['Any', nil], ['Yes', true], ['No', false]] %>
-            <%= select_tag 'beachfront', options_for_select(beachfront_options, @beachfront) %>
-          </div>
-        </fieldset>
-        <fieldset class="g md-one-eighth">
-          <label class="is-visually-hidden" for="sort">Sort by</label>
-          <div class="select-style">
-            <%- sort_options = [['Sort by', '-', { disabled: 'disabled', selected: 'selected' }]] + sort_by %>
-            <%= select_tag "sort", options_for_select(sort_options, @sort) %>
-          </div>
-        </fieldset>
-        <footer class="g md-two-elevenths">
-          <input class="btn btn--green no-min-width max-width" type="submit" value="Search">
-        </footer>
-      <%- end %>
-    </div>
+<section class="padded-top padded-bottom main-content">
+
+  <div class="glass-background property-search">
+    <%= form_tag("/accommodations", {method: 'get', class: 'gw no-gutter'}) do %>
+      <fieldset class="g sm-one-whole md-one-fifth">
+        <label class="is-visually-hidden">Where are you going?</label>
+        <div class="select-style">
+          <select name="area">
+            <option disabled selected>Where are you going?</option>
+            <option value="all">Any</option>
+            <% areas.each do |a| %>
+              <option value="<%= a[:key] %>"><%= a[:name] %></option>
+            <% end %>
+          </select>
+        </div>
+      </fieldset>
+      <fieldset class="g sm-one-third md-one-eighth">
+        <input id="start_date" class="no-borders datepicker" type="text" name="start_date" placeholder="Arrive">
+      </fieldset>
+      <fieldset class="g sm-one-third md-one-eighth">
+        <input id="end_date" class="no-borders datepicker" type="text" name="end_date" placeholder="Depart">
+      </fieldset>
+      <fieldset class="g sm-one-third md-one-tenth">
+        <label class="is-visually-hidden" for="guests">Guests</label>
+        <div class="select-style">
+          <select name="guests">
+            <option disabled selected>Guests</option>
+            <option value="all">Any</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </fieldset>
+      <fieldset class="g sm-one-third md-one-seventh">
+        <div class="select-style">
+          <%- beachfront_options = [['Beachfront', nil, { disabled: 'disabled', selected: 'selected' }], ['Any', nil], ['Yes', true], ['No', false]] %>
+          <%= select_tag 'beachfront', options_for_select(beachfront_options, @beachfront) %>
+        </div>
+      </fieldset>
+      <fieldset class="g md-one-eighth">
+        <label class="is-visually-hidden" for="sort">Sort by</label>
+        <div class="select-style">
+          <%- sort_options = [['Sort by', '-', { disabled: 'disabled', selected: 'selected' }]] + sort_by %>
+          <%= select_tag "sort", options_for_select(sort_options, @sort) %>
+        </div>
+      </fieldset>
+      <footer class="g md-two-elevenths">
+        <input class="btn btn--green no-min-width max-width" type="submit" value="Search">
+      </footer>
+    <%- end %>
+  </div>
+
+  <div class="glass-background layout-container layout-centered padding-vertical">
     <h1 class="heading-medium-small up alt">Featured Properties</h1>
     <h2 class="heading-subheader">Discover new, inspiring places close to home.</h2>
     <div class="featured-properties">
@@ -113,7 +115,7 @@
   </div>
 </section>
 
-<section class="featured-map padded-top padded-bottom">
+<section class="glass-background-dark featured-map padded-top padded-bottom">
   <div class="layout-container">
     <div class="content md-one-half">
       <h1 class="heading-medium">Find the perfect rental for your needs.</h1>
