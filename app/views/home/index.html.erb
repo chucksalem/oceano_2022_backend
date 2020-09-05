@@ -69,47 +69,46 @@
     <h2 class="heading-subheader">Discover new, inspiring places close to home.</h2>
     <div class="featured-properties">
       <% @random_units.each_with_index do |unit, index| %>
-
-      <% if index == 0 || index == 2 %>
-        <div class="row">
-      <% end %>
-
-        <% if index == 0 %>
-          <article class="one-whole md-two-thirds tile property-details">
-        <% else %>
-          <article class="one-whole md-one-third tile property-details">
+        <% if index == 0 || index == 2 %>
+          <div class="row">
         <% end %>
-          <div class="contain">
-            <div class="featured-property-image-container" style="background-image: url('<%= unit.large_images[0][:url] %>');"></div>
-            <div class="over">
-              <h2><%= unit.name %></h2>
-              <div class="info">
-                <div class="info-wrapper">
-                  <h2 class="no-touch-title"><%= unit.name %></h2>
-                  <ul class="offerings">
-                    <li>
-                      <i class="icon white icon-bath"></i>
-                      <span class="detail"><%= unit.bathrooms %> bath</span>
-                    </li>
-                    <li>
-                      <i class="icon white icon-bed"></i>
-                      <span class="detail"><%= unit.bedrooms %> beds</span>
-                    </li>
-                    <li>
-                      <i class="icon white icon-guests"></i>
-                      <span class="detail"><%= unit.occupancy %> guests</span>
-                    </li>
-                  </ul>
-                  <p><%= ellipsis(unit.long_description, length: 50) %></p>
-                  <a href="<%= accommodation_url(unit.code) %>" class="btn btn--tertiary">More Information</a>
+
+          <% if index == 0 %>
+            <article class="one-whole md-two-thirds tile property-details">
+          <% else %>
+            <article class="one-whole md-one-third tile property-details">
+          <% end %>
+            <div class="contain">
+              <div class="featured-property-image-container" style="background-image: url('<%= unit.large_images[0][:url] %>');"></div>
+              <div class="over">
+                <h2 class="big title"><%= trim_at unit.name, 70 %></h2>
+                <div class="info">
+                  <div class="info-wrapper">
+                    <h2 class="no-touch-title small title"><%= trim_at unit.name, 70 %></h2>
+                    <ul class="offerings">
+                      <li>
+                        <i class="icon white icon-bath"></i>
+                        <span class="detail"><%= unit.bathrooms %> bath</span>
+                      </li>
+                      <li>
+                        <i class="icon white icon-bed"></i>
+                        <span class="detail"><%= unit.bedrooms %> beds</span>
+                      </li>
+                      <li>
+                        <i class="icon white icon-guests"></i>
+                        <span class="detail"><%= unit.occupancy %> guests</span>
+                      </li>
+                    </ul>
+                    <p><%= trim_at unit.long_description, 60 %></p>
+                    <a href="<%= accommodation_url(unit.code) %>" class="btn btn--tertiary">More Information</a>
+                  </div>
                 </div>
               </div>
             </div>
+          </article>
+        <% if index == 1 || index == @random_units.length %>
           </div>
-        </article>
-      <% if index == 1 || index == @random_units.length %>
-        </div>
-      <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>

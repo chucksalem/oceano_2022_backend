@@ -17,4 +17,8 @@ module ApplicationHelper
   def ellipsis(str, length:)
     str[0..length].gsub(/\s\w+\s*$/,'...')
   end
+
+  def trim_at(str, len)
+    str[0..(len - 3)] + ( len < str.length ? '...' : '' )
+  end
 end
