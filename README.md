@@ -12,13 +12,12 @@ bundle exec foreman start  # Start the Rails server
 open http://localhost:5000 # Open in web browser
 ```
 
-or in development
-
-simply run
-```
-docker-compose up
-```
+or in development simply run `docker-compose up --build`
 as long as you have docker and docker-compose installed.
+
+Once the docker image is built you will have to run
+`docker-compose exec rails bundle exec rake assets:precompile`
+before the page will load.
 
 ### Processes
 
