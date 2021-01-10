@@ -4,13 +4,15 @@
                 <div class="weather-widget-contain">
                     <div class="weather-widget-wrap">
                         <div class="temp">
-                            <h2>Right Now <i class="icon icon-<%= @weather[:currently][:icon] %> white"></i></h2>
-                            <h3 class="current-temp"><%= @weather[:currently][:temperature].round %>º</h3>
-                            <div class="low-high">
-                                <span class="high"><%= @weather[:daily][:data][0][:temperatureMax].round %>º <svg width="8" height="7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 7"><path fill="#d0cfca" d="M6.9,6.9C6.6,6.9,6.2,6.7,6,6.4L4,2.9L1.8,6.4C1.6,6.9,0.9,7,0.5,6.7C0,6.4-0.1,5.8,0.2,5.4l3.1-4.9C3.4,0.2,3.7,0,4.1,0c0.4,0,0.7,0.2,0.8,0.5l2.8,4.9C8,5.9,7.9,6.5,7.4,6.8C7.2,6.8,7.1,6.9,6.9,6.9z"/></svg></span>
-                                <span class="low"><%= @weather[:daily][:data][0][:temperatureMin].round %>º <svg width="8" height="7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 7"><path fill="#d0cfca" d="M1,0c0.3,0,0.7,0.2,0.9,0.5l2,3.5L6,0.5C6.3,0,7-0.1,7.4,0.2C7.9,0.4,8,1.1,7.7,1.5L4.7,6.4C4.5,6.7,4.2,6.9,3.8,6.9C3.5,6.9,3.2,6.7,3,6.4L0.1,1.5C-0.1,1,0,0.4,0.5,0.1C0.7,0,0.8,0,1,0z"/></svg></span>
-                            </div>
-                            <p class="current-conditions"><%= @weather[:currently][:summary] %></p>
+                            <% if @weather.present? %>
+                                <h2>Right Now <i class="icon icon-<%= @weather[:currently][:icon] %> white"></i></h2>
+                                <h3 class="current-temp"><%= @weather[:currently][:temperature].round %>º</h3>
+                                <div class="low-high">
+                                    <span class="high"><%= @weather[:daily][:data][0][:temperatureMax].round %>º <svg width="8" height="7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 7"><path fill="#d0cfca" d="M6.9,6.9C6.6,6.9,6.2,6.7,6,6.4L4,2.9L1.8,6.4C1.6,6.9,0.9,7,0.5,6.7C0,6.4-0.1,5.8,0.2,5.4l3.1-4.9C3.4,0.2,3.7,0,4.1,0c0.4,0,0.7,0.2,0.8,0.5l2.8,4.9C8,5.9,7.9,6.5,7.4,6.8C7.2,6.8,7.1,6.9,6.9,6.9z"/></svg></span>
+                                    <span class="low"><%= @weather[:daily][:data][0][:temperatureMin].round %>º <svg width="8" height="7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 7"><path fill="#d0cfca" d="M1,0c0.3,0,0.7,0.2,0.9,0.5l2,3.5L6,0.5C6.3,0,7-0.1,7.4,0.2C7.9,0.4,8,1.1,7.7,1.5L4.7,6.4C4.5,6.7,4.2,6.9,3.8,6.9C3.5,6.9,3.2,6.7,3,6.4L0.1,1.5C-0.1,1,0,0.4,0.5,0.1C0.7,0,0.8,0,1,0z"/></svg></span>
+                                </div>
+                                <p class="current-conditions"><%= @weather[:currently][:summary] %></p>
+                            <% end %>
                         <div class="contact">
                             <p>Phone: <a href="tel:+18883288491">1-888-328-8491</a></p>
                             <p>Email: <a href="mailto:info@gooceano.com">info@gooceano.com</a></p>

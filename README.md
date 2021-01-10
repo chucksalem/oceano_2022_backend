@@ -14,13 +14,11 @@ open http://localhost:5000 # Open in web browser
 
 or in development
 
-if you checkout the `run_master_in_docker` branch you can just run
+simply run
 ```
-docker-comopse up
+docker-compose up
 ```
 as long as you have docker and docker-compose installed.
-
-It's a good idea to rebase master into the run_master_in_docker branch when master is updated.
 
 ### Processes
 

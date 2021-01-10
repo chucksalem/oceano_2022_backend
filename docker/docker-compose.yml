@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  rails:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    hostname: rails
+    environment:
+      RAILS_ENV: development
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    stdin_open: true
+    tty: true
