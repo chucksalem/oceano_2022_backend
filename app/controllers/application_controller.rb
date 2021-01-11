@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :home?
   helper_method :property_detail?
 
-  before_filter :weather
+  before_action :weather
 
   private
 

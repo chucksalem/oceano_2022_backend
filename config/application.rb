@@ -1,5 +1,5 @@
 require File.expand_path('../boot', __FILE__)
-
+require 'rails'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
@@ -11,6 +11,7 @@ Bundler.require(*Rails.groups)
 
 module OceanoRails
   class Application < Rails::Application
+    config.load_defaults 5.2
     config.autoload_paths << "#{Rails.root}/lib"
     config.assets.version = '1.0.1'
     config.middleware.use Rack::Attack

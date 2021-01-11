@@ -12,4 +12,4 @@ set -ex
 
 service redis-server start &
 bundle check || bundle install
-bundle exec foreman start
+bundle exec rails s -b 0.0.0.0

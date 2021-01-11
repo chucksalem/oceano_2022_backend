@@ -1,4 +1,4 @@
-FROM ruby:2.4.9
+FROM ruby:2.6.6
 
 # install essentials, node, and bash preferences
 RUN echo "alias l='ls -lahAF'" > /root/.bashrc && \
