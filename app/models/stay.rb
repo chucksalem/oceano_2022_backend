@@ -41,9 +41,9 @@ class Stay
     taxes = [taxes[:tax]] if taxes.is_a?(Hash)
     taxes = taxes.map { |t| { amount: t.first[:@amount].to_f } }
 
-    fees = rate[:fees][:fee]
+    fees = rate[:fees] ? rate[:fees][:fee] : nil
     fees = [fees] if fees.is_a?(Hash)
-    fees = fees.map do |f|
+    fees = fees&.map do |f|
       description = f[:description].select { |d| d[:@name] == 'Charge Description' }
       {
         name:           description.count > 0 ? description[0][:text] : '',
