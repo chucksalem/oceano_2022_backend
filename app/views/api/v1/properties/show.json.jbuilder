@@ -1,0 +1,21 @@
+json.id @unit.code
+json.address @unit.address
+json.name @unit.name
+json.longDescription @unit.descriptions[:text][0][:description]
+json.type @unit.type
+json.availableAmenities @unit.amenities
+json.bedrooms @unit.bedrooms
+json.bathrooms @unit.bathrooms
+json.occupancy @unit.occupancy
+json.position @unit.position
+json.stay do
+  json.baseAmount @base_amount
+  json.totalAmount @total_amount
+  json.fees @fees
+  json.taxes @tax_amount
+end
+json.reviews @unit.reviews
+json.standardImages @unit.standard_images
+json.largeImages @unit.large_images
+json.videos @unit.videos
+json.nearbyProperties @random_units

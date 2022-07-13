@@ -4,6 +4,7 @@ ruby '2.6.6'
 
 gem 'forecast_io', '2.0.2'
 gem 'foreman'
+gem 'rack-cors', '1.1.1'
 gem 'multi_json', '1.15.0'
 gem 'mailgun-ruby', '~>1.2.0'
 gem 'nokogiri', '~>1.11.1'

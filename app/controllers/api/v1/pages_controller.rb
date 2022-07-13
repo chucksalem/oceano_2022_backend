@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < BaseController
   before_action :validate_email, only: :contact_thank_you
 
   def resources

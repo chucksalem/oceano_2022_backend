@@ -44,17 +44,17 @@ class CacheProperties
     logger.info('Done.')
   end
 
-  def fetch_all_units(codes)
+  def fetch_all_units(values)
     logger.info('Fetching units...')
-    units = codes.map do |code|
-      logger.info(code)
+    units = values.map do |value|
+      logger.info(value["code"])
       begin
-        unit = Unit.get(code)
-        redis.setex(unit_key(code), TTL_SECONDS, MultiJson.dump(unit))
-        redis.sadd(all_units_key, code)
+        unit = Unit.get(value["code"], value["preview_amount"])
+        redis.setex(unit_key(value["code"]), TTL_SECONDS, MultiJson.dump(unit))
+        redis.sadd(all_units_key, value["code"])
         unit
       rescue
-        logger.error("skipping #{code}")
+        logger.error("skipping #{value["code"]}")
         nil
       end
     end

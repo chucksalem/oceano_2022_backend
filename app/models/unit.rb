@@ -4,19 +4,20 @@ class Unit
 
   class NotFound < StandardError; end
 
-  attribute :address,      UnitAddress
-  attribute :amenities,    UnitAmenities
-  attribute :bathrooms,    Integer, default: 0
-  attribute :bedrooms,     Integer, default: 0
-  attribute :code,         String
-  attribute :descriptions, UnitDescriptions
-  attribute :name,         String
-  attribute :num_floors,   Integer, default: 1
-  attribute :occupancy,    Integer, default: 0
-  attribute :position,     UnitPosition
-  attribute :type,         Symbol
-  attribute :reviews,      Array
-  attribute :beachfront,   Boolean, default: false
+  attribute :address,         UnitAddress
+  attribute :amenities,       UnitAmenities
+  attribute :bathrooms,       Integer, default: 0
+  attribute :bedrooms,        Integer, default: 0
+  attribute :code,            String
+  attribute :descriptions,    UnitDescriptions
+  attribute :name,            String
+  attribute :num_floors,      Integer, default: 1
+  attribute :occupancy,       Integer, default: 0
+  attribute :position,        UnitPosition
+  attribute :type,            Symbol
+  attribute :reviews,         Array
+  attribute :beachfront,      Boolean, default: false
+  attribute :preview_amount,  Float, default: 0.0
 
   def self.from_hash(hash)
     new.tap do |unit|
@@ -26,7 +27,7 @@ class Unit
     end
   end
 
-  def self.get(id)
+  def self.get(id, amount)
     search   = Escapia::UnitDescriptiveInfo.new
     response = search.execute(unit_id: id)
     content  = response[:unit_descriptive_contents][:unit_descriptive_content]
@@ -43,18 +44,22 @@ class Unit
       reviews:       content[:unit_reviews],
       rooms:         info[:category_codes][:room_info],
       type_code:     info[:category_codes][:unit_category][:@code],
-      beachfront:    has_beachfront?(info)
+      beachfront:    has_beachfront?(info),
+      preview_amount:   amount
     )
   end
 
   def self.search(*criteria)
     search   = Escapia::UnitSearch.new
     response = search.execute(*criteria)
-
     if response[:units]
-      return response[:units][:unit].map { |unit| unit[:@unit_code] }
+      return response[:units][:unit].map do |unit|
+        {
+          code: unit[:@unit_code],
+          preview_amount: unit[:rate_range][:@fixed_rate].present? ? unit[:rate_range][:@fixed_rent] : 0.0
+        }.with_indifferent_access
+      end
     end
-
     []
   end
 
@@ -69,20 +74,21 @@ class Unit
                                reviews:,
                                rooms:,
                                type_code:,
-                               beachfront:)
+                               beachfront:,
+                               preview_amount:)
     unit = new
-
     unit.type         = UnitType.from_code(type_code)
     unit.code         = code
     unit.name         = name
     unit.num_floors   = num_floors.to_i unless num_floors.nil?
     unit.occupancy    = occupancy.to_i
     unit.amenities    = UnitAmenities.from_codes(amenities)
+    unit.descriptions = UnitDescriptions.from_descriptions(descriptions)
     unit.bathrooms    = UnitRooms.count_for_code(:bathrooms, rooms)
     unit.bedrooms     = UnitRooms.count_for_code(:bedrooms, rooms)
-    unit.descriptions = UnitDescriptions.from_descriptions(descriptions)
     unit.reviews      = UnitReviews.from_response(reviews)
     unit.beachfront   = beachfront
+    unit.preview_amount  = preview_amount 
 
     unit.address = {
       street:      address[:address_line],

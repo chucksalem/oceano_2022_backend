@@ -44,7 +44,7 @@ describe Unit do
       units = Unit.search(address: { country: 'MX' })
 
       expect(units.size).to eq(55)
-      expect(units.first).to eq('1911-89479')
+      expect(units.first['code']).to eq('1911-89479')
     end
   end
 end

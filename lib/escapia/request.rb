@@ -12,7 +12,6 @@ module Escapia
 
     def execute(*kwargs)
       response = client.call(operation, xml: payload(*kwargs).to_xml)
-
       if ENV['RECORD_ESCAPIA']
         File.open(Rails.root.join('tmp', "#{operation}-#{Time.now.iso8601}.xml"), 'w') do |f|
           f.write(response.http.raw_body.force_encoding('UTF-8'))
