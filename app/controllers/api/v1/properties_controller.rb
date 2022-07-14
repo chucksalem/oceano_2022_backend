@@ -10,13 +10,11 @@ module Api
         @adults     = params[:adults]
         @kids       = params[:kids]
         @pets       = params[:pets]
-        @beachfront = params[:beachfront] || 'all'
-        @sort       = params[:sort] || 'P'
 
         if is_search_request
           @units = search_results
         else
-          @units = UnitRepository.random_units(limit: 10)
+          @units = UnitRepository.random_units(limit: 100)
         end
       end
 
@@ -30,17 +28,26 @@ module Api
         @id                = params[:id]
         @booking_id        = params[:id].to_str.split('-', 2).last
         @unit              = UnitRepository.get(@id)
+        @unit.reviews      = @unit.reviews.compact
         @property_title    = @unit.name
         @address           = @unit.address
         @amenities         = @unit.available_amenities
-        @guests            = params[:guests] || 1
+        @guests            = (params[:adults] || 1)+ (params[:kids] || 0)
         @guest_amount_list = (1..@unit.occupancy).map { |v| v }
         @start_date        = !params[:start_date].blank? ? params[:start_date] : (Date.today + 1.day ).strftime(DATE_FORMAT)
         @end_date          = !params[:end_date].blank?   ? params[:end_date]   : (Date.today + 8.days).strftime(DATE_FORMAT)
         @random_units      = UnitRepository.random_units(limit: 3, except: [@id])
 
-        lookup_rates if [:start_date, :end_date, :guests].all? { |k| params.key?(k) && !params[k].blank? }
+        lookup_rates if [:start_date, :end_date, :adults].all? { |k| params.key?(k) && !params[k].nil? }
         get_images
+      end
+
+      def stay 
+        @id = params[:id]
+        @start_date        = params[:start_date].present? ? params[:start_date] : 1.day.from_now.strftime(DATE_FORMAT)
+        @end_date          = params[:end_date].present?   ? params[:end_date]   : 8.days.from_now.strftime(DATE_FORMAT)
+        @guests            = (params[:adults] || 1) + (params[:kids] || 0)
+        lookup_rates
       end
 
       private
@@ -65,8 +72,6 @@ module Api
 
         values = []
         OceanoConfig[:cache_population_searches].each do |criteria|
-          criteria[:sort]       = params[:sort] || 'G'
-          criteria[:sort]       = 'G' if criteria[:sort] == '-'
           if date_range
             criteria[:date_range] = date_range
           else
@@ -76,12 +81,8 @@ module Api
             criteria[:guests] = [{type: 10, count: params[:adults]},{type: 8, count: params[:kids]}]
           end
           unless is_not_present?(params[:pets])
-            criteria[:pets][:allowed] = true
-          end
-          unless is_not_present?(params[:min]) && is_not_present?(params[:max])
-            criteria[:rate_range] = {
-              min: params[:min],
-              max: params[:max]
+            criteria[:pets]= {
+              allowed: true
             }
           end
           values += UnitRepository.search(criteria)
@@ -105,6 +106,8 @@ module Api
         units = units.compact
         units = apply_type_filter(units, params[:type])
         units = apply_amenities_filter(units, params[:amenities])
+        units = min_filter(units, params[:min])
+        units = max_filter(units, params[:max])
         @units = units
       end
 
@@ -120,11 +123,11 @@ module Api
                             start_date: start_date,
                             end_date: end_date,
                             guests: @guests)
-        @nightly_rate      = '%.2f' % (@rates.base_amount / @length_of_stay)
-        @base_amount       = '%.2f' % @rates.base_amount
-        @tax_amount        = '%.2f' % @rates.taxes[0].amount
+        @nightly_rate      = @rates.base_amount / @length_of_stay
+        @base_amount       = @rates.base_amount
+        @tax_amount        = @rates.taxes[0].amount
         @fees              = @rates.fees
-        @total_amount      = '%.2f' % @rates.total_amount
+        @total_amount      = @rates.total_amount
       rescue Stay::Unavailable
         @available = false
       end
@@ -144,6 +147,29 @@ module Api
         return units if is_not_present?(amenities)
         units = units.select { |unit| amenities.map {|amenity| unit.amenities[amenity]}.uniq == [true] }
       end
+
+      def min_filter(units, min)
+        return units if [nil, '', 'all'].include?(min)
+
+        units = units.map do |unit|
+          next unless unit.preview_amount >= min
+
+          unit
+        end
+        units.compact
+      end
+
+      def max_filter(units, max)
+        return units if [nil, '', 'all'].include?(max)
+        
+        units = units.map do |unit|
+          next unless unit.preview_amount <= max
+
+          unit
+        end
+        units.compact
+      end
+
     end
   end
 end

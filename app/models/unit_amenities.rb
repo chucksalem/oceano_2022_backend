@@ -3,14 +3,12 @@ class UnitAmenities
 
   attribute :air_conditioning,      Boolean, default: false
   attribute :beach,                 Boolean, default: false
-  attribute :biking,                Boolean, default: false
   attribute :boating,               Boolean, default: false
   attribute :fishing,               Boolean, default: false
   attribute :hot_tub,               Boolean, default: false
   attribute :internet_access,       Boolean, default: false
   attribute :kitchen,               Boolean, default: false
   attribute :pool,                  Boolean, default: false
-  attribute :skiing,                Boolean, default: false
   attribute :washer_dryer,          Boolean, default: false
   attribute :wheelchair_accessible, Boolean, default: false
   attribute :golf,                  Boolean, default: false
@@ -24,27 +22,23 @@ class UnitAmenities
     6  => :pool,
     7  => :washer_dryer,
     8  => :beach,
-    9  => :biking,
     10 => :boating,
     11 => :fishing,
     12 => :golf,
-    13 => :skiing
   }
 
   AMENITIES = [
+    'Beach',
+    'Internet Access',
+    'Pool',
+    'Kitchen',
     'Air Conditioning',
     'Wheelchair Accessible',
-    'Internet Access',
     'Hot Tub',
-    'Kitchen',
-    'Pool',
     'Washer Dryer',
-    'Beach',
-    'Biking',
     'Boating',
     'Fishing',
     'Golf',
-    'Skiing'
   ]
   
   def self.from_codes(codes)

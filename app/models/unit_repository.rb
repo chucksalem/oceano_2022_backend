@@ -25,8 +25,13 @@ class UnitRepository
     values
   end
 
-  def self.units_in_area(key)
-    redis.smembers("areas:#{key}")
+  def self.units_in_area(areas)
+    keys = []
+    areas.map do |key|
+      key = redis.smembers("areas:#{key}")
+      keys.push(key)
+    end
+    keys.flatten
   end
 
   def self.get(code)
@@ -38,8 +43,8 @@ class UnitRepository
 
   def self.get_filters()
     keys = redis.keys('*')
-    keys = keys.select { |key| key.include? 'areas:' }
-    keys.map { |key| key.sub('areas:', '').gsub('_', ' ').gsub('/ ', '/') } 
+    keys = keys.select {|key| key.include? "areas:"}
+    keys.map {|key| key.sub!('areas:', '')} 
   end
 
   def self.random_units(limit: 2, except: [])

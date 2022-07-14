@@ -56,7 +56,7 @@ class Unit
       return response[:units][:unit].map do |unit|
         {
           code: unit[:@unit_code],
-          preview_amount: unit[:rate_range][:@fixed_rate].present? ? unit[:rate_range][:@fixed_rent] : 0.0
+          preview_amount: unit[:rate_range][:@fixed_rent].present? ? unit[:rate_range][:@fixed_rent] : 0.0
         }.with_indifferent_access
       end
     end

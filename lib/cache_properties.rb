@@ -79,7 +79,7 @@ class CacheProperties
   end
 
   def area_key(slug)
-    "areas:#{slug}"
+    "areas:#{slug.gsub('_', ' ').gsub('/ ', '/')}"
   end
 
   def area_key_from_name(name)
