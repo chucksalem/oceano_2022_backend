@@ -31,6 +31,22 @@ class UnitAmenities
     13 => :skiing
   }
 
+  AMENITIES = [
+    'Air Conditioning',
+    'Wheelchair Accessible',
+    'Internet Access',
+    'Hot Tub',
+    'Kitchen',
+    'Pool',
+    'Washer Dryer',
+    'Beach',
+    'Biking',
+    'Boating',
+    'Fishing',
+    'Golf',
+    'Skiing'
+  ]
+  
   def self.from_codes(codes)
     amenities = new
     return amenities unless codes.is_a?(Array)

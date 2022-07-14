@@ -13,13 +13,4 @@ class ContactMailer < ActionMailer::Base
       subject: 'Contact Form'
     )
   end
-
-  def work_order(email:, owner_name:, property_name:, message:)
-    @email      = email
-    @owner_name = owner_name
-    @property_name = property_name
-    @message    = message
-
-    mail(subject: 'Work Order Form')
-  end
 end

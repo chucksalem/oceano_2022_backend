@@ -14,7 +14,23 @@ module UnitType
     8    => :condominium
   }.freeze
 
+  TYPES = [
+    'Cottage',
+    'Duplex',
+    'Triplex',
+    'Fourplex',
+    'House',
+    'Townhouse',
+    'Hotel',
+    'Lodge',
+    'Apartment',
+    'Villa',
+    'Cabin',
+    'Condominium'
+  ].freeze
+
   def self.from_code(code)
     CODES[code.to_i] || :unknown
   end
+
 end

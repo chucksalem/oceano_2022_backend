@@ -36,6 +36,12 @@ class UnitRepository
     Unit.from_hash(hash)
   end
 
+  def self.get_filters()
+    keys = redis.keys('*')
+    keys = keys.select { |key| key.include? 'areas:' }
+    keys.map { |key| key.sub('areas:', '').gsub('_', ' ').gsub('/ ', '/') } 
+  end
+
   def self.random_units(limit: 2, except: [])
     except_keys = except.map { |code| "units:#{code}" }
     all         = redis.keys('units:*') - except_keys

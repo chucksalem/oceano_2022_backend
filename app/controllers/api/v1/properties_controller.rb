@@ -7,7 +7,9 @@ module Api
         @area       = params[:area] || 'all'
         @start_date = params[:start_date]
         @end_date   = params[:end_date]
-        @guests     = params[:guests]
+        @adults     = params[:adults]
+        @kids       = params[:kids]
+        @pets       = params[:pets]
         @beachfront = params[:beachfront] || 'all'
         @sort       = params[:sort] || 'P'
 
@@ -18,14 +20,10 @@ module Api
         end
       end
 
-      def properties
-        @sort = params[:sort] || 'P'
-
-        if is_search_request
-          search_results
-        else
-          @units = UnitRepository.random_units(limit: 100)
-        end
+      def filters
+        @areas = UnitRepository.get_filters
+        @amenities = UnitAmenities::AMENITIES
+        @types = UnitType::TYPES
       end
 
       def show
@@ -48,11 +46,15 @@ module Api
       private
 
       def is_search_request
-        [:area, :start_date, :end_date, :guests, :beachfront].any? { |k| params.dig(k).present? }
+        [:area, :start_date, :end_date, :adults, :kids, :pets, :beachfront].any? { |k| params.dig(k).present? }
+      end
+
+      def is_not_present?(param)
+        [nil, '', 'all'].include?(param)
       end
 
       def search_results
-        start_date, end_date, guests = params[:start_date], params[:end_date], params[:guests]
+        start_date, end_date = params[:start_date], params[:end_date]
         date_range =
           if [start_date, end_date].all?(&:present?)
             {
@@ -70,18 +72,27 @@ module Api
           else
             criteria.delete(:date_range)
           end
-          unless [nil, '', 'all'].include?(params[:guests])
-            criteria[:guests] = [{type: 10, count: params[:guests]}]
+          unless is_not_present?(params[:adults]) && is_not_present?(params[:kids])
+            criteria[:guests] = [{type: 10, count: params[:adults]},{type: 8, count: params[:kids]}]
+          end
+          unless is_not_present?(params[:pets])
+            criteria[:pets][:allowed] = true
+          end
+          unless is_not_present?(params[:min]) && is_not_present?(params[:max])
+            criteria[:rate_range] = {
+              min: params[:min],
+              max: params[:max]
+            }
           end
           values += UnitRepository.search(criteria)
         end
 
         values = values.uniq
-
-        unless params[:area] == 'all' || params[:area].blank?
-          in_area_codes = UnitRepository.units_in_area(params[:area])
-          codes = codes & in_area_codes
+        unless params[:area] == 'all' || params[:area].blank? || values.length == 0
+          in_area_values = UnitRepository.units_in_area(params[:area])
+          values = in_area_values.map {|c| values.select {|val| val["code"] == c }[0]}
         end
+        values = values.compact
         units = []
         values.map do |value|
           begin
@@ -92,7 +103,8 @@ module Api
           end      
         end
         units = units.compact
-        units = apply_beachfront_filter(units, params[:beachfront])
+        units = apply_type_filter(units, params[:type])
+        units = apply_amenities_filter(units, params[:amenities])
         @units = units
       end
 
@@ -123,11 +135,14 @@ module Api
         @large_images = @unit.large_images
       end
 
-      def apply_beachfront_filter(units, beachfront)
-        return units if %w(true false).exclude?(beachfront)
+      def apply_type_filter(units, types)
+        return units if is_not_present?(types)
+        units = units.select { |unit| types.include?(unit.type.to_s) }
+      end
 
-        method = beachfront == "true" ? :select : :reject
-        units.public_send(method, &:beachfront)
+      def apply_amenities_filter(units, amenities)
+        return units if is_not_present?(amenities)
+        units = units.select { |unit| amenities.map {|amenity| unit.amenities[amenity]}.uniq == [true] }
       end
     end
   end
