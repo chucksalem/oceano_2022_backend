@@ -1,6 +1,4 @@
 class CacheProperties
-  TTL_SECONDS = (24 * 60 * 60).freeze
-
   def initialize(config:, logger:, redis:)
     @config = config
     @redis  = redis
@@ -38,9 +36,6 @@ class CacheProperties
       touched_areas << set_key
     end
 
-    touched_areas.uniq.each do |key|
-      redis.expire(key, TTL_SECONDS)
-    end
     logger.info('Done.')
   end
 
@@ -50,7 +45,7 @@ class CacheProperties
       logger.info(value["code"])
       begin
         unit = Unit.get(value["code"], value["preview_amount"])
-        redis.setex(unit_key(value["code"]), TTL_SECONDS, MultiJson.dump(unit))
+        redis.set(unit_key(value["code"]), MultiJson.dump(unit))
         redis.sadd(all_units_key, value["code"])
         unit
       rescue
