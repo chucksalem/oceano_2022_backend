@@ -17,6 +17,7 @@ class Unit
   attribute :type,            Symbol
   attribute :reviews,         Array
   attribute :beachfront,      Boolean, default: false
+  attribute :pets,            Boolean, default: false
   attribute :preview_amount,  Float, default: 0.0
 
   def self.from_hash(hash)
@@ -45,6 +46,7 @@ class Unit
       rooms:         info[:category_codes][:room_info],
       type_code:     info[:category_codes][:unit_category][:@code],
       beachfront:    has_beachfront?(info),
+      pets:          allows_pets?(content[:policies][:policy][:pets_policies][:@pets_allowed_code]),
       preview_amount:   amount
     )
   end
@@ -75,6 +77,7 @@ class Unit
                                rooms:,
                                type_code:,
                                beachfront:,
+                               pets:,
                                preview_amount:)
     unit = new
     unit.type         = UnitType.from_code(type_code)
@@ -88,6 +91,7 @@ class Unit
     unit.bedrooms     = UnitRooms.count_for_code(:bedrooms, rooms)
     unit.reviews      = UnitReviews.from_response(reviews)
     unit.beachfront   = beachfront
+    unit.pets         = pets
     unit.preview_amount  = preview_amount 
 
     unit.address = {
@@ -144,5 +148,10 @@ class Unit
     info[:category_codes][:custom_category_group].any? do |custom_category|
       flatten_nested_hash(custom_category).has_value?("Beachfront")
     end
+  end
+
+  def self.allows_pets?(info)
+    return false if info == 'Pets Not Allowed'
+    return true if info == 'Pets Allowed'
   end
 end
