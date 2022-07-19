@@ -7,11 +7,11 @@ module Escapia
     def payload(unit_id:, start_date:, end_date:)
       builder do |xml|
         envelope(xml) do
-          unit_descriptive_info(xml) do
+          unit_calendar_avail(xml) do
             auth(xml)
             xml.UnitRef('UnitCode' => unit_id)
-            xml.CalendarDateRange('Start' => start_date.strftime('%m/%d/%Y'),
-                                  'End'   => end_date.strftime('%m/%d/%Y'))
+            xml.CalendarDateRange('Start' => start_date,
+                                  'End'   => end_date)
           end
         end
       end

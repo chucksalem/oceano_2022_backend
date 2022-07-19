@@ -50,6 +50,13 @@ module Api
         lookup_rates
       end
 
+      def calendar_availability
+        @id = params[:id]
+        @start_date = params[:start_date]
+        @end_date = params[:end_date]
+        @availability = Unit.get_availability(@id, @start_date, @end_date)
+      end
+
       private
 
       def is_search_request

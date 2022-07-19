@@ -28,6 +28,16 @@ class Unit
     end
   end
 
+  def self.get_availability(id, start_date, end_date)
+    search = Escapia::UnitCalendarAvailability.new
+    response = search.execute(
+      unit_id: id,
+      start_date: start_date,
+      end_date: end_date
+    )
+    response[:unit_calendar_avail_segments][:unit_calendar_avail_segment][:daily_availability]
+  end
+
   def self.get(id, amount)
     search   = Escapia::UnitDescriptiveInfo.new
     response = search.execute(unit_id: id)
