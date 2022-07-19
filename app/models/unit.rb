@@ -139,7 +139,7 @@ class Unit
   end
 
   def videos
-    descriptions.videos
+    descriptions.videos.map { |i| i[:formats] }
   end
 
   private
@@ -151,7 +151,6 @@ class Unit
   end
 
   def self.allows_pets?(info)
-    return false if info == 'Pets Not Allowed'
-    return true if info == 'Pets Allowed'
+    info == 'Pets Allowed'
   end
 end
