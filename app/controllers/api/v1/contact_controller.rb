@@ -15,12 +15,11 @@ module Api
             message:    contact_params[:message]
           ).deliver_now
         end
-      rescue Mailgun::CommunicationError
-        render plain: 'Something went wrong with the email delivery service, please try again later.'
-      rescue Exception
-        render plain: 'Sorry something went wrong, try again later.'
+        @result = true
+      rescue StandardError
+        @result = false
       end
-
+      
       private
 
       def contact_params
