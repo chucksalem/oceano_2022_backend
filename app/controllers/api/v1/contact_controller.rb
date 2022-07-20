@@ -16,12 +16,10 @@ module Api
           ).deliver_now
         end
         @result = true
-      rescue Mailgun::CommunicationError
-        @result = false
-      rescue Exception
+      rescue StandardError
         @result = false
       end
-
+      
       private
 
       def contact_params

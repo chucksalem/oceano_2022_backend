@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       post '/properties', to: 'properties#index'
       post '/property/:id', to: 'properties#show'
       post '/property/stay/:id', to: 'properties#stay'
-      post '/property/avail/:id', to: 'properties#calendar_availability'
+      post '/property/availability/:id', to: 'properties#calendar_availability'
       # resources :properties, only: %i(index show)
     end
     resources :units, only: [:index, :show] do
