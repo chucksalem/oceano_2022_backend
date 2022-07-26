@@ -10,7 +10,6 @@ module Api
         @adults     = params[:adults]
         @kids       = params[:kids]
         @pets       = params[:pets]
-        @exact_dates  = params[:exact_dates]
 
         if is_search_request
           @units = search_results
@@ -61,7 +60,7 @@ module Api
       private
 
       def is_search_request
-        [:area, :start_date, :end_date, :adults, :kids, :pets, :exact_dates].any? { |k| params.dig(k).present? }
+        [:area, :start_date, :end_date, :adults, :kids, :pets, :beachfront].any? { |k| params.dig(k).present? }
       end
 
       def is_not_present?(param)
@@ -80,7 +79,6 @@ module Api
 
         values = []
         OceanoConfig[:cache_population_searches].each do |criteria|
-          exact_dates = params[:exact_dates].to_i
           if date_range
             criteria[:date_range] = date_range
           else
@@ -94,35 +92,19 @@ module Api
               allowed: true
             }
           end
-          if date_range && exact_dates > 0
-            start_at, end_at = [Date.strptime(start_date, DATE_FORMAT), Date.strptime(end_date, DATE_FORMAT)]
-            
-            if start_at > Date.today + 2.days
-              exact_dates_list = (exact_dates*-1..exact_dates)
-            else
-              exact_dates_list = (1..exact_dates)
-            end
-            repeated_list = exact_dates_list.map{|item| {start: start_at + item.days, end:  end_at + item.days}}
-
-            repeated_list.each do |item|
-              criteria[:date_range] = item
-              values += UnitRepository.search(criteria)
-            end
-          else
-            values += UnitRepository.search(criteria)
-          end
+          values += UnitRepository.search(criteria)
         end
-        values = values.map {|v| v["code"]}
+
         values = values.uniq
         unless params[:area] == 'all' || params[:area].blank? || values.length == 0
           in_area_values = UnitRepository.units_in_area(params[:area])
-          values = in_area_values.map {|c| values.select {|val| val == c }[0]}
+          values = in_area_values.map {|c| values.select {|val| val["code"] == c }[0]}
         end
         values = values.compact
         units = []
         values.map do |value|
           begin
-            unit = UnitRepository.get(value)
+            unit = UnitRepository.get(value["code"])
             units.push(unit)
           rescue Unit::NotFound
             next
