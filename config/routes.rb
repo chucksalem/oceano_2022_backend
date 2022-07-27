@@ -8,7 +8,8 @@ Rails.application.routes.draw do
         post :import_csv
       end
     end
-
+    resources :recommendeds
+        
     root to: "reviews#index"
   end
 

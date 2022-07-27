@@ -17,5 +17,3 @@ RUN bundle config --global jobs 4 && \
 RUN cp .env.sample .env
 
 CMD [ "/bin/bash" ]
-
-ENTRYPOINT docker/entrypoint.sh
