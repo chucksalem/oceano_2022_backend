@@ -1,0 +1,26 @@
+<% content_for(:title) do %>
+    import csv file
+<% end %>
+
+<header class="main-content__header" role="banner">
+    <h1 class="main-content__page-title" id="page-title">Import CSV file</h1>
+    <div>
+        <%= link_to('Back', admin_reviews_path, class: 'button') %>
+    </div>
+</header>
+
+<section class="main-content__body">
+    <%= form_tag import_csv_admin_reviews_path, class: 'form', id: 'new_csv', multipart: true %>
+        <div class="field-unit field-unit--string field-unit--required">
+            <div class="field-unit__label">
+                <label for="csv_file">CSV File</label>
+            </div>
+            <div class="field-unit__field">
+                <%= file_field_tag :csv_file%>
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="submit" name="commit" value="Import CSV">
+        </div>
+    </form>
+</section>

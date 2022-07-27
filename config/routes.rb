@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  devise_for :users
+  
+  namespace :admin do
+    resources :reviews do
+      collection do
+        get :new_csv
+        post :import_csv
+      end
+    end
+
+    root to: "reviews#index"
+  end
+
   namespace :api do
     namespace :v1 do
       get '/', to: 'home#index'

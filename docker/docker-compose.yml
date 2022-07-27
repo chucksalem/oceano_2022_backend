@@ -1,10 +1,25 @@
 version: '3'
 
 services:
+  db:
+    image: postgres:10.18-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
   rails:
     build:
       context: .
       dockerfile: docker/Dockerfile
+    command: ./docker/entrypoint.sh
+    depends_on:
+      - db
+    links:
+      - db:db
     hostname: rails
     container_name: rails
     environment:
@@ -15,3 +30,7 @@ services:
       - ./:/app
     stdin_open: true
     tty: true
+
+volumes:
+  db:
+    driver: local

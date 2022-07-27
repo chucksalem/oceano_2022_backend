@@ -1,5 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 require 'rails'
+require 'rails/all'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
