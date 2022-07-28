@@ -8,6 +8,9 @@
 class ApplicationController < Administrate::ApplicationController
   before_action :authenticate_user! # use devise authentication
 
+  def after_sign_out_path_for(resource_or_scope)
+    request.referrer
+  end
   # Override this value to specify the number of elements to display at a time
   # on index pages. Defaults to 20.
   # def records_per_page
