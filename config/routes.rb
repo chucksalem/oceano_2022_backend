@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users
-  
+  devise_for :user, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
+
   namespace :admin do
     resources :reviews do
       collection do
         get :new_csv
         post :import_csv
+        get :delete_all
       end
     end
-
+    resources :recommendations
+        
     root to: "reviews#index"
   end
 
