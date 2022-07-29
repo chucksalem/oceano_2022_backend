@@ -41,6 +41,15 @@ class UnitRepository
     Unit.from_hash(hash)
   end
 
+  def self.get_multiple(codes)
+    return [] if codes.empty?
+    raw = redis.mget(codes.map { |k| "units:#{k.unit_id}"})
+    units = raw.map do |item|
+      hash = MultiJson.load(item, symbolize_keys: true)
+      Unit.from_hash(hash)
+    end
+  end
+
   def self.get_filters()
     keys = redis.keys('*')
     keys = keys.select {|key| key.include? "areas:"}

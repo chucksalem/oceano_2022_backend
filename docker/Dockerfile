@@ -9,6 +9,11 @@ RUN echo "alias l='ls -lahAF'" > /root/.bashrc && \
 
 WORKDIR /app
 COPY . .
-RUN bin/setup
+# RUN bin/setup
 
-ENTRYPOINT docker/entrypoint.sh
+RUN gem install bundler --conservative
+RUN bundle config --global jobs 4 && \
+    bundle install
+RUN cp .env.sample .env
+
+CMD [ "/bin/bash" ]
