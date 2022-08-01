@@ -63,11 +63,12 @@ class UnitRepository
   def self.random_units(limit: 2, except: [])
     except_keys = except.map { |code| "units:#{code}" }
     all         = redis.keys('units:*') - except_keys
-    units       = all.sample(limit).map! { |k| {
-       unit: self.get(k.sub('units:', '')),
-       text: ''
+    units       = all.sample(limit).map do |k|
+      {
+        unit: self.get(k.sub('units:', '')),
+        text: ''
       }
-    }
+    end
   end
 
   def self.hash_to_key(hash)
