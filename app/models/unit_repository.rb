@@ -46,7 +46,11 @@ class UnitRepository
     raw = redis.mget(codes.map { |k| "units:#{k.unit_id}"})
     units = raw.map do |item|
       hash = MultiJson.load(item, symbolize_keys: true)
-      Unit.from_hash(hash)
+      unit = Unit.from_hash(hash) 
+      unit = {
+        unit: unit,
+        text: codes.select {|c| c.unit_id == unit.code}[0].text
+      }
     end
   end
 
@@ -59,7 +63,11 @@ class UnitRepository
   def self.random_units(limit: 2, except: [])
     except_keys = except.map { |code| "units:#{code}" }
     all         = redis.keys('units:*') - except_keys
-    units       = all.sample(limit).map! { |k| self.get(k.sub('units:', '')) }
+    units       = all.sample(limit).map! { |k| {
+       unit: self.get(k.sub('units:', '')),
+       text: ''
+      }
+    }
   end
 
   def self.hash_to_key(hash)
