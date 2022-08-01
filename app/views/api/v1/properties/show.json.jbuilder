@@ -13,7 +13,7 @@ json.unit do
   end
   json.nearbyProperties do
     json.array! @random_units do |unit|
-      json.partial! 'api/v1/shared/unit', unit: unit
+      json.partial! 'api/v1/shared/unit', unit: unit[:unit]
     end
   end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
     end
     resources :recommendations
+    resources :deals
         
     root to: "reviews#index"
   end
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/', to: 'home#index'
+      get '/deals', to: 'home#deals'
       get '/filters', to: 'properties#filters'
       post '/contact-us', to: 'contact#contact_thank_you'
       post '/properties', to: 'properties#index'
