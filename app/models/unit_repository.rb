@@ -49,7 +49,7 @@ class UnitRepository
       unit = Unit.from_hash(hash) 
       unit = {
         unit: unit,
-        text: codes.select {|c| c.unit_id == unit.code}[0].text
+        text: codes.select { |c| c.unit_id == unit.code }[0].text
       }
     end
   end
