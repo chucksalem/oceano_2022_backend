@@ -1,8 +1,6 @@
 class UnitRepository
   include Hashable
 
-  TTL_SECONDS = (24 * 60 * 60).freeze
-
   def self.stay(code, criteria)
     Stay.lookup(code, criteria)
   end
@@ -13,13 +11,13 @@ class UnitRepository
     return MultiJson.load(value) unless value.nil?
     values = Unit.search(criteria)
     values.each do |value|
-      redis.setex(value["code"], TTL_SECONDS, MultiJson.dump(value["code"]))
+      redis.set(value["code"], MultiJson.dump(value["code"]))
       raw = redis.get("units:#{value["code"]}")
       next if raw.nil?
       hash = MultiJson.load(raw, symbolize_keys: true)
       unit = Unit.from_hash(hash)
       unit.preview_amount = value["preview_amount"]
-      redis.setex("units:#{value["code"]}", TTL_SECONDS, MultiJson.dump(unit))
+      redis.set("units:#{value["code"]}", MultiJson.dump(unit))
       redis.sadd('temp:units:all', value["code"])
     end
     values
