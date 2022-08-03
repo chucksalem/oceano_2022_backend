@@ -90,11 +90,6 @@ module Api
           unless is_not_present?(params[:adults]) && is_not_present?(params[:kids])
             criteria[:guests] = [{type: 10, count: params[:adults]},{type: 8, count: params[:kids]}]
           end
-          unless is_not_present?(params[:pets])
-            criteria[:pets]= {
-              allowed: true
-            }
-          end
           if date_range && exact_dates > 0
             start_at, end_at = [Date.strptime(start_date, DATE_FORMAT), Date.strptime(end_date, DATE_FORMAT)]
             
@@ -112,6 +107,9 @@ module Api
           else
             values += UnitRepository.search(criteria)
           end
+        end
+        unless is_not_present?(params[:pets])
+          values = pet_friendly_filter(values)
         end
         values = values.map {|v| v["code"]}
         values = values.uniq
@@ -194,6 +192,10 @@ module Api
           unit
         end
         units.compact
+      end
+
+      def pet_friendly_filter(values)
+        values.select { |v| v["pets"] }
       end
 
     end

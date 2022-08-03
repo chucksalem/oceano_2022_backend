@@ -1,8 +1,6 @@
 class UnitRepository
   include Hashable
 
-  TTL_SECONDS = (24 * 60 * 60).freeze
-
   def self.stay(code, criteria)
     Stay.lookup(code, criteria)
   end
@@ -13,13 +11,13 @@ class UnitRepository
     return MultiJson.load(value) unless value.nil?
     values = Unit.search(criteria)
     values.each do |value|
-      redis.setex(value["code"], TTL_SECONDS, MultiJson.dump(value["code"]))
+      redis.set(value["code"], MultiJson.dump(value["code"]))
       raw = redis.get("units:#{value["code"]}")
       next if raw.nil?
       hash = MultiJson.load(raw, symbolize_keys: true)
       unit = Unit.from_hash(hash)
       unit.preview_amount = value["preview_amount"]
-      redis.setex("units:#{value["code"]}", TTL_SECONDS, MultiJson.dump(unit))
+      redis.set("units:#{value["code"]}", MultiJson.dump(unit))
       redis.sadd('temp:units:all', value["code"])
     end
     values
@@ -47,9 +45,15 @@ class UnitRepository
     units = raw.map do |item|
       hash = MultiJson.load(item, symbolize_keys: true)
       unit = Unit.from_hash(hash) 
+<<<<<<< HEAD
+      {
+        unit: unit,
+        text: codes.find { |c| c.unit_id == unit.code }.text
+=======
       unit = {
         unit: unit,
         text: codes.select { |c| c.unit_id == unit.code }[0].text
+>>>>>>> develop
       }
     end
   end
@@ -63,9 +67,15 @@ class UnitRepository
   def self.random_units(limit: 2, except: [])
     except_keys = except.map { |code| "units:#{code}" }
     all         = redis.keys('units:*') - except_keys
+<<<<<<< HEAD
+    all.sample(limit).map do |k|
+      {
+        unit: get(k.sub('units:', '')),
+=======
     units       = all.sample(limit).map do |k|
       {
         unit: self.get(k.sub('units:', '')),
+>>>>>>> develop
         text: ''
       }
     end
