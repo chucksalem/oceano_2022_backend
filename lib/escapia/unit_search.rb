@@ -84,10 +84,8 @@ module Escapia
 
     def pets(xml, criteria)
       return if criteria[:pets].nil?
-
       allowed  = criteria[:pets][:allowed] || true
       policies = criteria[:pets][:policies] || []
-
       xml.PetsPolicies('PetsAllowedCode' => allowed ? 'Pets Allowed' : 'Pets Not Allowed') do
         policies.each do |policy|
           xml.PetsPolicy('Code' => policy)
