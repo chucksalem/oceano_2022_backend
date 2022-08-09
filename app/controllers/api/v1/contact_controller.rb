@@ -16,8 +16,7 @@ module Api
           ).deliver_now
           @result = true
         end
-      rescue Mailgun::CommunicationError => error
-        p error
+      rescue Mailgun::CommunicationError
         @result = false
       end
       

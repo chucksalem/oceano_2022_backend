@@ -1,9 +1,7 @@
 class ContactMailer < ActionMailer::Base
-  # default from: 'info@oceano-rentals.com'
-  # default to: 'info@gooceano.com'
 
-  default from: 'info@oceano-rentals.com'
-  default to: 'julietadubra@neocoast.com'
+  default from: ENV['EMAIL_DEFAULT_FROM']
+  default to: ENV['EMAIL_DEFAULT_TO']
 
   def contact(email:, first_name:, last_name:, phone:, message:)
     @email      = email
