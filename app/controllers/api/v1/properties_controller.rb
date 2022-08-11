@@ -15,7 +15,7 @@ module Api
         if is_search_request
           @units = search_results
         else
-          @units = UnitRepository.random_units(limit: 100)
+          @units = UnitRepository.all_units
         end
       end
 

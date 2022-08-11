@@ -69,6 +69,11 @@ class UnitRepository
     end
   end
 
+  def self.all_units
+    all = redis.keys('units:*')
+    all.map { |k| get(k.sub('units:', ''))}
+  end
+
   def self.hash_to_key(hash)
     flatten_nested_hash(hash).flatten.join(':')
   end
