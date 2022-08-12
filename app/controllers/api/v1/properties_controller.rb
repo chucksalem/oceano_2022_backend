@@ -20,7 +20,7 @@ module Api
       end
 
       def filters
-        @areas = UnitRepository.get_filters
+        @areas = UnitRepository.get_filters.filter {|l| l != 'section #7 lot#106  las conchas'}
         @amenities = UnitAmenities::AMENITIES
         @types = UnitType::TYPES
       end
@@ -149,7 +149,8 @@ module Api
                             guests: @guests)
         @nightly_rate      = @rates.base_amount / @length_of_stay
         @base_amount       = @rates.base_amount
-        @tax_amount        = @rates.taxes[0].amount
+        @taxes             = @rates.taxes.map { |t| t.amount }
+        @tax_amount        = @taxes.sum
         @fees              = @rates.fees
         @total_amount      = @rates.total_amount
       rescue Stay::Unavailable
