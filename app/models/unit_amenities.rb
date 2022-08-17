@@ -12,6 +12,17 @@ class UnitAmenities
   attribute :washer_dryer,          Boolean, default: false
   attribute :wheelchair_accessible, Boolean, default: false
   attribute :golf,                  Boolean, default: false
+  attribute :patio,                 Boolean, default: false
+  attribute :balcony,               Boolean, default: false
+  attribute :grill,                 Boolean, default: false
+  attribute :parking,               Boolean, default: false
+  attribute :linens,                Boolean, default: false
+  attribute :towels,                Boolean, default: false
+  attribute :telephone,             Boolean, default: false
+  attribute :television,            Boolean, default: false
+  attribute :heating,               Boolean, default: false
+  attribute :beachfront,            Boolean, default: false
+  attribute :dishwasher,            Boolean, default: false
 
   CODES = {
     1  => :air_conditioning,
@@ -25,7 +36,21 @@ class UnitAmenities
     10 => :boating,
     11 => :fishing,
     12 => :golf,
-  }
+  }.freeze
+
+  FROM_SERVICES = [
+    { patio: ['Patio', 'Deck / Patio'] },
+    { balcony: ['Balcony'] },
+    { grill: ['BBQ Grill', 'Outdoor Grill'] },
+    { parking: ['Parking'] },
+    { linens: ['Linens', 'Linens Provided'] },
+    { towels: ['Towels', 'Towels Provided'] },
+    { telephone: ['Telephone'] },
+    { television: ['Television'] },
+    { heating: ['Heating'] },
+    { beachfront: ['Beachfront'] },
+    { dishwasher: ['Dishwasher'] }
+  ].freeze
 
   AMENITIES = [
     'Beach',
@@ -39,13 +64,28 @@ class UnitAmenities
     'Boating',
     'Fishing',
     'Golf',
-  ]
+    'Patio',
+    'Balcony',
+    'Grill',
+    'Parking',
+    'Linens Provided',
+    'Towels Provided',
+    'Telephone',
+    'Television',
+    'Heating',
+    'Beachfront',
+    'Dishwasher'
+  ].freeze
   
-  def self.from_codes(codes)
+  def self.from_codes(codes, services)
     amenities = new
     return amenities unless codes.is_a?(Array)
     codes.each do |amenity|
       activate_amenity_with_code(amenities, amenity[:@code])
+    end
+    FROM_SERVICES.each do |amenity|
+      key = amenity.keys[0]
+      amenities[key] = (amenity[key] & services).any?
     end
     amenities
   end

@@ -46,6 +46,7 @@ class Unit
     create_from_results(
       address:       info[:address],
       amenities:     info[:unit_amenity],
+      services:      info[:services][:service].map { |s| s[:descriptive_text] },
       code:          content[:@unit_code],
       descriptions:  info[:descriptions],
       name:          info[:unit_name],
@@ -78,6 +79,7 @@ class Unit
 
   def self.create_from_results(address:,
                                amenities:,
+                               services:,
                                code:,
                                descriptions:,
                                name:,
@@ -96,7 +98,7 @@ class Unit
     unit.name         = name
     unit.num_floors   = num_floors.to_i unless num_floors.nil?
     unit.occupancy    = occupancy.to_i
-    unit.amenities    = UnitAmenities.from_codes(amenities)
+    unit.amenities    = UnitAmenities.from_codes(amenities, services)
     unit.descriptions = UnitDescriptions.from_descriptions(descriptions)
     unit.bathrooms    = UnitRooms.count_for_code(:bathrooms, rooms)
     unit.bedrooms     = UnitRooms.count_for_code(:bedrooms, rooms)
