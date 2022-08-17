@@ -11,6 +11,7 @@ module Api
         @kids       = params[:kids]
         @pets       = params[:pets]
         @exact_dates  = params[:exact_dates]
+        @sort         = params[:sort] || 'P'
 
         if is_search_request
           @units = search_results
@@ -20,7 +21,7 @@ module Api
       end
 
       def filters
-        @areas = UnitRepository.get_filters.filter {|l| l != 'section #7 lot#106  las conchas'}
+        @areas = UnitRepository.get_filters.filter {|l| l != 'section #7 lot#106  las conchas' && l != 'los langostino, playa encanto'}
         @amenities = UnitAmenities::AMENITIES
         @types = UnitType::TYPES
       end
@@ -81,6 +82,8 @@ module Api
 
         values = []
         OceanoConfig[:cache_population_searches].each do |criteria|
+          criteria[:sort]         = params[:sort] || 'G'
+          criteria[:sort]         = 'G' if criteria[:sort] == '-'
           exact_dates = params[:exact_dates].to_i
           if date_range
             criteria[:date_range] = date_range
