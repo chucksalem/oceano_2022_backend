@@ -39,17 +39,17 @@ class UnitAmenities
   }.freeze
 
   FROM_SERVICES = [
-    {patio: ["Patio", "Deck / Patio"]},
-    {balcony: ["Balcony"]},
-    {grill: ["BBQ Grill", "Outdoor Grill"]},
-    {parking: ["Parking"]},
-    {linens: ["Linens", "Linens Provided"]},
-    {towels: ["Towels", "Towels Provided"]},
-    {telephone: ["Telephone"]},
-    {television: ["Television"]},
-    {heating: ["Heating"]},
-    {beachfront: ["Beachfront"]},
-    {dishwasher: ["Dishwasher"]}
+    { patio: ['Patio', 'Deck / Patio'] },
+    { balcony: ['Balcony'] },
+    { grill: ['BBQ Grill', 'Outdoor Grill'] },
+    { parking: ['Parking'] },
+    { linens: ['Linens', 'Linens Provided'] },
+    { towels: ['Towels', 'Towels Provided'] },
+    { telephone: ['Telephone'] },
+    { television: ['Television'] },
+    { heating: ['Heating'] },
+    { beachfront: ['Beachfront'] },
+    { dishwasher: ['Dishwasher'] }
   ].freeze
 
   AMENITIES = [
@@ -64,17 +64,17 @@ class UnitAmenities
     'Boating',
     'Fishing',
     'Golf',
-    "Patio",
-    "Balcony",
-    "Grill",
-    "Parking",
-    "Linens Provided",
-    "Towels Provided",
-    "Telephone",
-    "Television",
-    "Heating",
-    "Beachfront",
-    "Dishwasher"
+    'Patio',
+    'Balcony',
+    'Grill',
+    'Parking',
+    'Linens Provided',
+    'Towels Provided',
+    'Telephone',
+    'Television',
+    'Heating',
+    'Beachfront',
+    'Dishwasher'
   ].freeze
   
   def self.from_codes(codes, services)
