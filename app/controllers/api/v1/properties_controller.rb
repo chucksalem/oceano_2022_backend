@@ -21,7 +21,7 @@ module Api
       end
 
       def filters
-        @areas = UnitRepository.get_filters.filter { |l| !l.in? ['section #7 lot#106  las conchas', 'los langostino, playa encanto'] }
+        @areas = UnitRepository.get_filters.filter { |location| !location.in? ['section #7 lot#106  las conchas', 'los langostino, playa encanto'] }
         @amenities = UnitAmenities::AMENITIES
         @types = UnitType::TYPES
       end
@@ -82,7 +82,7 @@ module Api
 
         values = []
         OceanoConfig[:cache_population_searches].each do |criteria|
-          criteria[:sort] = params[:sort].present? && params[:sort] != '-' ? params[:sort]  : 'G'
+          criteria[:sort] = params[:sort].present? && params[:sort] != '-' ? params[:sort] : 'G'
           exact_dates = params[:exact_dates].to_i
           if date_range
             criteria[:date_range] = date_range
@@ -117,7 +117,7 @@ module Api
         values = values.uniq
         unless params[:area] == 'all' || params[:area].blank? || values.length == 0
           in_area_values = UnitRepository.units_in_area(params[:area])
-          values = in_area_values.map {|c| values.select {|val| val == c }[0]}
+          values = in_area_values.map {|code| values.select {|val| val == code }[0]}
         end
         values = values.compact
         units = []
@@ -151,7 +151,7 @@ module Api
                             guests: @guests)
         @nightly_rate      = @rates.base_amount / @length_of_stay
         @base_amount       = @rates.base_amount
-        @taxes             = @rates.taxes.map { |t| t.amount }
+        @taxes             = @rates.taxes.map { |tax| tax.amount }
         @tax_amount        = @taxes.sum
         @fees              = @rates.fees
         @total_amount      = @rates.total_amount
@@ -198,7 +198,7 @@ module Api
       end
 
       def pet_friendly_filter(values)
-        values.select { |v| v["pets"] }
+        values.select { |value| value["pets"] }
       end
 
     end
