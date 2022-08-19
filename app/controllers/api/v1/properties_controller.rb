@@ -82,8 +82,7 @@ module Api
 
         values = []
         OceanoConfig[:cache_population_searches].each do |criteria|
-          criteria[:sort]         = params[:sort] || 'G'
-          criteria[:sort]         = 'G' if criteria[:sort] == '-'
+          criteria[:sort] = params[:sort].present? && params[:sort] != '-' ? params[:sort]  : 'G'
           exact_dates = params[:exact_dates].to_i
           if date_range
             criteria[:date_range] = date_range
