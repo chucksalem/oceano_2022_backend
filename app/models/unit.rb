@@ -46,7 +46,7 @@ class Unit
     create_from_results(
       address:       info[:address],
       amenities:     info[:unit_amenity],
-      services:      info[:services][:service].map { |s| s[:descriptive_text] },
+      services:      info[:services].nil? ? [] : info[:services][:service].map { |s| s[:descriptive_text] },
       code:          content[:@unit_code],
       descriptions:  info[:descriptions],
       name:          info[:unit_name],

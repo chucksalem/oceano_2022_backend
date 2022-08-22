@@ -19,7 +19,14 @@ class CacheProperties
   def prune_groups(units)
     logger.info('Pruning uncached units from areas...')
     units.each do |unit|
-      area_key  = area_key_from_name(unit.address.street)
+      street = unit.address.street
+      if street == 'section #7 lot#106  las conchas'
+        street = 'Las Conchas'
+      end
+      if street == 'Los Langostino, Playa Encanto'
+        street = 'Playa Encanto'
+      end
+      area_key  = area_key_from_name(street)
       old_codes = redis.sdiff(area_key, all_units_key)
       next if old_codes.empty?
       redis.srem(area_key, old_codes)
@@ -31,7 +38,14 @@ class CacheProperties
     logger.info('Grouping by area...')
     touched_areas = []
     units.each do |unit|
-      set_key = area_key_from_name(unit.address.street)
+      street = unit.address.street
+      if street == 'section #7 lot#106  las conchas'
+        street = 'Las Conchas'
+      end
+      if street == 'Los Langostino, Playa Encanto'
+        street = 'Playa Encanto'
+      end
+      set_key = area_key_from_name(street)
       redis.sadd(set_key, unit.code)
       touched_areas << set_key
     end
@@ -48,7 +62,8 @@ class CacheProperties
         redis.set(unit_key(value["code"]), MultiJson.dump(unit))
         redis.sadd(all_units_key, value["code"])
         unit
-      rescue
+      rescue => error
+        p error
         logger.error("skipping #{value["code"]}")
         nil
       end
