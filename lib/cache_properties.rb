@@ -20,12 +20,8 @@ class CacheProperties
     logger.info('Pruning uncached units from areas...')
     units.each do |unit|
       street = unit.address.street
-      if street == 'section #7 lot#106  las conchas'
-        street = 'Las Conchas'
-      end
-      if street == 'Los Langostino, Playa Encanto'
-        street = 'Playa Encanto'
-      end
+      street = 'Las Conchas' if street == 'section #7 lot#106  las conchas'
+      street = 'Playa Encanto' if street == 'Los Langostino, Playa Encanto'
       area_key  = area_key_from_name(street)
       old_codes = redis.sdiff(area_key, all_units_key)
       next if old_codes.empty?
@@ -39,12 +35,8 @@ class CacheProperties
     touched_areas = []
     units.each do |unit|
       street = unit.address.street
-      if street == 'section #7 lot#106  las conchas'
-        street = 'Las Conchas'
-      end
-      if street == 'Los Langostino, Playa Encanto'
-        street = 'Playa Encanto'
-      end
+      street = 'Las Conchas' if street == 'section #7 lot#106  las conchas'
+      street = 'Playa Encanto' if street == 'Los Langostino, Playa Encanto'
       set_key = area_key_from_name(street)
       redis.sadd(set_key, unit.code)
       touched_areas << set_key
@@ -62,8 +54,7 @@ class CacheProperties
         redis.set(unit_key(value["code"]), MultiJson.dump(unit))
         redis.sadd(all_units_key, value["code"])
         unit
-      rescue => error
-        p error
+      rescue
         logger.error("skipping #{value["code"]}")
         nil
       end
