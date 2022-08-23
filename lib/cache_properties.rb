@@ -6,6 +6,7 @@ class CacheProperties
   end
 
   def perform!
+    delete_all_area_keys
     redis.del(all_units_key)
     units = fetch_all_units(fetch_all_codes)
     group_by_area(units)
@@ -19,7 +20,8 @@ class CacheProperties
   def prune_groups(units)
     logger.info('Pruning uncached units from areas...')
     units.each do |unit|
-      area_key  = area_key_from_name(unit.address.street)
+      street = get_street_name(unit.address.street)
+      area_key  = area_key_from_name(street)
       old_codes = redis.sdiff(area_key, all_units_key)
       next if old_codes.empty?
       redis.srem(area_key, old_codes)
@@ -31,7 +33,8 @@ class CacheProperties
     logger.info('Grouping by area...')
     touched_areas = []
     units.each do |unit|
-      set_key = area_key_from_name(unit.address.street)
+      street = get_street_name(unit.address.street)
+      set_key = area_key_from_name(street)
       redis.sadd(set_key, unit.code)
       touched_areas << set_key
     end
@@ -65,6 +68,12 @@ class CacheProperties
     codes.uniq
   end
 
+  def delete_all_area_keys
+    keys = redis.keys('*')
+    keys = keys.select {|key| key.include? "areas:"}
+    redis.del(keys)
+  end
+
   def all_units_key
     'temp:units:all'
   end
@@ -79,5 +88,11 @@ class CacheProperties
 
   def area_key_from_name(name)
     area_key(name.tr(' ', '_').underscore)
+  end
+
+  def get_street_name(street)
+    street = 'Las Conchas' if street == 'Section #7 Lot#106  Las Conchas'
+    street = 'Playa Encanto' if street == 'Los Langostino, Playa Encanto'
+    street
   end
 end

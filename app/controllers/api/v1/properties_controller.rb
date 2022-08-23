@@ -21,7 +21,7 @@ module Api
       end
 
       def filters
-        @areas = UnitRepository.get_filters.filter { |location| !location.in? ['section #7 lot#106  las conchas', 'los langostino, playa encanto'] }
+        @areas = UnitRepository.get_filters
         @amenities = UnitAmenities::AMENITIES
         @types = UnitType::TYPES
       end
