@@ -71,7 +71,7 @@ class CacheProperties
   def delete_all_area_keys
     keys = redis.keys('*')
     keys = keys.select {|key| key.include? "areas:"}
-    redis.del(keys)
+    keys.map { |key| redis.del(key) }
   end
 
   def all_units_key
