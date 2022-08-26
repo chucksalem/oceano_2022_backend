@@ -23,6 +23,12 @@ class UnitAmenities
   attribute :heating,               Boolean, default: false
   attribute :beachfront,            Boolean, default: false
   attribute :dishwasher,            Boolean, default: false
+  attribute :coffe_maker,           Boolean, default: false
+  attribute :dishes_utensils,       Boolean, default: false
+  attribute :microwave,             Boolean, default: false
+  attribute :refrigerator,          Boolean, default: false
+  attribute :stove,                 Boolean, default: false
+  attribute :toaster,               Boolean, default: false
 
   CODES = {
     1  => :air_conditioning,
@@ -49,7 +55,13 @@ class UnitAmenities
     { television: ['Television'] },
     { heating: ['Heating'] },
     { beachfront: ['Beachfront'] },
-    { dishwasher: ['Dishwasher'] }
+    { dishwasher: ['Dishwasher'] },
+    { coffe_maker: ['Coffee Maker'] },
+    { dishes_utensils: ['Dishes & Utensils'] },
+    { microwave: ['Microwave'] },
+    { refrigerator: ['Refrigerator'] },
+    { stove: ['Stove'] },
+    { toaster: ['Toaster'] },
   ].freeze
 
   AMENITIES = [
@@ -74,7 +86,13 @@ class UnitAmenities
     'Television',
     'Heating',
     'Beachfront',
-    'Dishwasher'
+    'Dishwasher',
+    'Coffee Maker',
+    'Dishes & Utensils',
+    'Microwave',
+    'Refrigerator',
+    'Stove',
+    'Toaster'
   ].freeze
   
   def self.from_codes(codes, services)
