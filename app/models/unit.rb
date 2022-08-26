@@ -69,7 +69,7 @@ class Unit
       return response[:units][:unit].map do |unit|
         {
           code: unit[:@unit_code],
-          preview_amount: unit[:rate_range][:@fixed_rent].present? ? unit[:rate_range][:@fixed_rent] : 0.0,
+          preview_amount: unit[:rate_range][:@fixed_rent].present? && !criteria[0][:date_range].nil? ? unit[:rate_range][:@fixed_rent] : 0.0,
           pets: unit[:unit_summary][:pets_policies][:@pets_allowed_code] != "Pets Not Allowed"
         }.with_indifferent_access
       end
