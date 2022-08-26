@@ -70,7 +70,6 @@ class UnitRepository
   end
 
   def self.all_units
-    p 'sup'
     all = redis.keys('units:*')
     all.map do |key|
       unit = get(key.sub('units:', ''))
