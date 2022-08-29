@@ -62,6 +62,7 @@ class UnitAmenities
     { refrigerator: ['Refrigerator'] },
     { stove: ['Stove'] },
     { toaster: ['Toaster'] },
+    { pool: ['Communal Pool', 'Community pool']}
   ].freeze
 
   AMENITIES = [
