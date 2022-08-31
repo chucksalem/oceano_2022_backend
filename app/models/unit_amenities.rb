@@ -16,15 +16,15 @@ class UnitAmenities
   attribute :balcony,               Boolean, default: false
   attribute :grill,                 Boolean, default: false
   attribute :parking,               Boolean, default: false
-  attribute :linens,                Boolean, default: false
-  attribute :towels,                Boolean, default: false
+  attribute :linens_provided,       Boolean, default: false
+  attribute :towels_provided,       Boolean, default: false
   attribute :telephone,             Boolean, default: false
   attribute :television,            Boolean, default: false
   attribute :heating,               Boolean, default: false
   attribute :beachfront,            Boolean, default: false
   attribute :dishwasher,            Boolean, default: false
-  attribute :coffe_maker,           Boolean, default: false
-  attribute :dishes_utensils,       Boolean, default: false
+  attribute :coffee_maker,          Boolean, default: false
+  attribute :dishes_and_utensils,   Boolean, default: false
   attribute :microwave,             Boolean, default: false
   attribute :refrigerator,          Boolean, default: false
   attribute :stove,                 Boolean, default: false
@@ -49,15 +49,15 @@ class UnitAmenities
     { balcony: ['Balcony'] },
     { grill: ['BBQ Grill', 'Outdoor Grill'] },
     { parking: ['Parking'] },
-    { linens: ['Linens', 'Linens Provided'] },
-    { towels: ['Towels', 'Towels Provided'] },
+    { linens_provided: ['Linens', 'Linens Provided'] },
+    { towels_provided: ['Towels', 'Towels Provided'] },
     { telephone: ['Telephone'] },
     { television: ['Television'] },
     { heating: ['Heating'] },
     { beachfront: ['Beachfront'] },
     { dishwasher: ['Dishwasher'] },
-    { coffe_maker: ['Coffee Maker'] },
-    { dishes_utensils: ['Dishes & Utensils'] },
+    { coffee_maker: ['Coffee Maker'] },
+    { dishes_and_utensils: ['Dishes & Utensils'] },
     { microwave: ['Microwave'] },
     { refrigerator: ['Refrigerator'] },
     { stove: ['Stove'] },
@@ -89,7 +89,7 @@ class UnitAmenities
     'Beachfront',
     'Dishwasher',
     'Coffee Maker',
-    'Dishes & Utensils',
+    'Dishes and Utensils',
     'Microwave',
     'Refrigerator',
     'Stove',
