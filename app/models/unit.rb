@@ -98,7 +98,7 @@ class Unit
     unit.name         = name
     unit.num_floors   = num_floors.to_i unless num_floors.nil?
     unit.occupancy    = occupancy.to_i
-    unit.amenities    = UnitAmenities.from_codes(amenities, services)
+    unit.amenities    = UnitAmenities.from_codes(amenities, services, pets)
     unit.descriptions = UnitDescriptions.from_descriptions(descriptions)
     unit.bathrooms    = UnitRooms.count_for_code(:bathrooms, rooms)
     unit.bedrooms     = UnitRooms.count_for_code(:bedrooms, rooms)
