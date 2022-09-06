@@ -16,7 +16,8 @@ module Api
         if is_search_request
           @units = search_results
         else
-          @units = UnitRepository.all_units
+          units = UnitRepository.all_units
+          @units = additional_sort(units, params[:additional_sort], params[:sort_amenity])
         end
       end
 
@@ -201,6 +202,14 @@ module Api
         values.select { |value| value["pets"] }
       end
 
+      def additional_sort(units, sort, isAmenity)
+        return units if [nil, '', 'all'].include?(sort)
+        if (isAmenity)
+          units = units.sort_by { |unit| unit.amenities[sort] ? 0 : 1 }
+        else
+          units = units.sort_by { |unit| unit[sort] }
+        end
+      end
     end
   end
 end
