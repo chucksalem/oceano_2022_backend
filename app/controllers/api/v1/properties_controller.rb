@@ -135,6 +135,7 @@ module Api
         units = apply_amenities_filter(units, params[:amenities])
         units = min_filter(units, params[:min])
         units = max_filter(units, params[:max])
+        units = additional_sort(units, params[:additional_sort], params[:sort_amenity])
         @units = units
       end
 
