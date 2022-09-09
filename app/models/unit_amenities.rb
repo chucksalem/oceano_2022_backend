@@ -92,12 +92,13 @@ class UnitAmenities
     'Microwave',
     'Refrigerator',
     'Stove',
-    'Toaster',
+    'Toaster'
   ].freeze
   
   def self.from_codes(codes, services, pets)
     amenities = new
     return amenities unless codes.is_a?(Array)
+    
     codes.each do |amenity|
       activate_amenity_with_code(amenities, amenity[:@code])
     end
@@ -105,7 +106,7 @@ class UnitAmenities
       key = amenity.keys[0]
       amenities[key] = (amenity[key] & services).any?
     end
-      amenities['pets'] = pets
+    amenities['pets'] = pets
     amenities
   end
 
