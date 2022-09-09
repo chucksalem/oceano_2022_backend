@@ -3,6 +3,22 @@ module Api
     class PropertiesController < BaseController
       DATE_FORMAT = '%m/%d/%Y'.freeze
 
+      SORT_VALUES = [
+        'name',
+        'bedrooms',
+        'bathrooms',
+        'occupancy',
+        'beachfront',
+        'pets',
+        'internet_access',
+        'telephone',
+        'air_conditioning',
+        'heating',
+        'grill',
+        'pool',
+        'hot_tub'
+      ].freeze
+
       def index
         @area       = params[:area] || 'all'
         @start_date = params[:start_date]
@@ -16,7 +32,8 @@ module Api
         if is_search_request
           @units = search_results
         else
-          @units = UnitRepository.all_units
+          units = UnitRepository.all_units
+          @units = additional_sort(units, params[:additional_sort], params[:sort_amenity])
         end
       end
 
@@ -38,9 +55,8 @@ module Api
         @guest_amount_list = (1..@unit.occupancy).map { |v| v }
         @start_date        = !params[:start_date].blank? ? params[:start_date] : (Date.today + 1.day ).strftime(DATE_FORMAT)
         @end_date          = !params[:end_date].blank?   ? params[:end_date]   : (Date.today + 8.days).strftime(DATE_FORMAT)
-        @random_units      = UnitRepository.random_units(limit: 3, except: [@id])
+        @random_units      = UnitRepository.closest_units(10, [@unit.position.latitude, @unit.position.longitude] ,except: [@id])
         @reviews           = Review.where(unit_id: @id)
-
         lookup_rates if [:start_date, :end_date, :adults].all? { |k| params.key?(k) && !params[k].nil? }
         get_images
       end
@@ -134,6 +150,7 @@ module Api
         units = apply_amenities_filter(units, params[:amenities])
         units = min_filter(units, params[:min])
         units = max_filter(units, params[:max])
+        units = additional_sort(units, params[:additional_sort], params[:sort_amenity])
         @units = units
       end
 
@@ -201,6 +218,19 @@ module Api
         values.select { |value| value["pets"] }
       end
 
+      def is_incorrect_sort(sort)
+        return !SORT_VALUES.include?(sort)        
+      end
+
+      def additional_sort(units, sort, is_amenity)
+        return units if [nil, '', 'all'].include?(sort) || is_incorrect_sort(sort)
+        
+        if (is_amenity)
+          units = units.sort_by { |unit| unit.amenities[sort] ? 0 : 1 }
+        else
+          units = units.sort_by { |unit| unit[sort] }
+        end
+      end
     end
   end
 end

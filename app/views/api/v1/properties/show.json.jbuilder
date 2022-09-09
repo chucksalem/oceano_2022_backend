@@ -1,6 +1,6 @@
 json.unit do
   json.id @unit.code
-  json.extract! @unit, :address, :name, :type, :pets, :bedrooms, :bathrooms, :occupancy, :position, :videos
+  json.extract! @unit, :address, :name, :type, :bedrooms, :bathrooms, :occupancy, :position, :videos
   json.longDescription @unit.descriptions[:text][0][:description]
   json.availableAmenities @unit.amenities
   json.partial! 'api/v1/shared/stay'
@@ -13,7 +13,7 @@ json.unit do
   end
   json.nearbyProperties do
     json.array! @random_units do |unit|
-      json.partial! 'api/v1/shared/unit', unit: unit[:unit]
+      json.partial! 'api/v1/shared/unit', unit: unit
     end
   end
 end

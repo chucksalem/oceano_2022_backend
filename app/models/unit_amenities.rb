@@ -2,7 +2,6 @@ class UnitAmenities
   include Virtus.model
 
   attribute :air_conditioning,      Boolean, default: false
-  attribute :beach,                 Boolean, default: false
   attribute :boating,               Boolean, default: false
   attribute :fishing,               Boolean, default: false
   attribute :hot_tub,               Boolean, default: false
@@ -29,6 +28,7 @@ class UnitAmenities
   attribute :refrigerator,          Boolean, default: false
   attribute :stove,                 Boolean, default: false
   attribute :toaster,               Boolean, default: false
+  attribute :pets,                  Boolean, default: false
 
   CODES = {
     1  => :air_conditioning,
@@ -38,7 +38,6 @@ class UnitAmenities
     5  => :kitchen,
     6  => :pool,
     7  => :washer_dryer,
-    8  => :beach,
     10 => :boating,
     11 => :fishing,
     12 => :golf,
@@ -66,27 +65,27 @@ class UnitAmenities
   ].freeze
 
   AMENITIES = [
-    'Beach',
+    'Beachfront',
     'Internet Access',
+    'Pets',
     'Pool',
-    'Kitchen',
     'Air Conditioning',
-    'Wheelchair Accessible',
+    'Heating',
+    'Grill',
     'Hot Tub',
+    'Television',
     'Washer Dryer',
+    'Wheelchair Accessible',
     'Boating',
     'Fishing',
     'Golf',
     'Patio',
     'Balcony',
-    'Grill',
     'Parking',
     'Linens Provided',
+    'Kitchen',
     'Towels Provided',
     'Telephone',
-    'Television',
-    'Heating',
-    'Beachfront',
     'Dishwasher',
     'Coffee Maker',
     'Dishes and Utensils',
@@ -96,9 +95,10 @@ class UnitAmenities
     'Toaster'
   ].freeze
   
-  def self.from_codes(codes, services)
+  def self.from_codes(codes, services, pets)
     amenities = new
     return amenities unless codes.is_a?(Array)
+    
     codes.each do |amenity|
       activate_amenity_with_code(amenities, amenity[:@code])
     end
@@ -106,6 +106,7 @@ class UnitAmenities
       key = amenity.keys[0]
       amenities[key] = (amenity[key] & services).any?
     end
+    amenities['pets'] = pets
     amenities
   end
 
