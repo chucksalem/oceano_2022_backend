@@ -3,6 +3,22 @@ module Api
     class PropertiesController < BaseController
       DATE_FORMAT = '%m/%d/%Y'.freeze
 
+      SORT_VALUES = [
+        'name',
+        'bedrooms',
+        'bathrooms',
+        'occupancy',
+        'beachfront',
+        'pets',
+        'internet_access',
+        'telephone',
+        'air_conditioning',
+        'heating',
+        'grill',
+        'pool',
+        'hot_tub'
+      ].freeze
+
       def index
         @area       = params[:area] || 'all'
         @start_date = params[:start_date]
@@ -203,9 +219,14 @@ module Api
         values.select { |value| value["pets"] }
       end
 
-      def additional_sort(units, sort, isAmenity)
-        return units if [nil, '', 'all'].include?(sort)
-        if (isAmenity)
+      def is_incorrect_sort(sort)
+        return !SORT_VALUES.include?(sort)        
+      end
+
+      def additional_sort(units, sort, is_amenity)
+        return units if [nil, '', 'all'].include?(sort) || is_incorrect_sort(sort)
+        
+        if (is_amenity)
           units = units.sort_by { |unit| unit.amenities[sort] ? 0 : 1 }
         else
           units = units.sort_by { |unit| unit[sort] }
