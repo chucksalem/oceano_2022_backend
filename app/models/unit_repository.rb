@@ -89,18 +89,18 @@ class UnitRepository
   def self.closest_units(amount, loc, except: [])
     except_keys = except.map { |code| "units:#{code}" }
     all         = redis.keys('units:*') - except_keys
-    unit_distance = []
+    distances = []
     all.each do |key|
       unit = get(key.sub('units:', ''))
       value = {
         unit: unit,
         distance: distance(loc, [unit.position.latitude, unit.position.longitude])
       }
-      unit_distance.push(value)
+      distances.push(value)
     end
-    unit_distance = unit_distance.sort_by { |value| value[:distance] }
-    unit_distance = unit_distance.map { |value| value[:unit]}
-    unit_distance.slice(0, amount)
+    distances = distances.sort_by { |value| value[:distance] }
+    units = distances.map { |value| value[:unit]}
+    units.slice(0, amount)
   end
 
   def self.distance(loc1, loc2)
