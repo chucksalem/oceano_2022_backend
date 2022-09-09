@@ -40,7 +40,6 @@ module Api
         @end_date          = !params[:end_date].blank?   ? params[:end_date]   : (Date.today + 8.days).strftime(DATE_FORMAT)
         @random_units      = UnitRepository.closest_units(10, [@unit.position.latitude, @unit.position.longitude] ,except: [@id])
         @reviews           = Review.where(unit_id: @id)
-        p @random_units
         lookup_rates if [:start_date, :end_date, :adults].all? { |k| params.key?(k) && !params[k].nil? }
         get_images
       end
