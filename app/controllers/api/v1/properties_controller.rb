@@ -3,6 +3,22 @@ module Api
     class PropertiesController < BaseController
       DATE_FORMAT = '%m/%d/%Y'.freeze
 
+      SORT_VALUES = [
+        'name',
+        'bedrooms',
+        'bathrooms',
+        'occupancy',
+        'beachfront',
+        'pets',
+        'internet_access',
+        'telephone',
+        'air_conditioning',
+        'heating',
+        'grill',
+        'pool',
+        'hot_tub'
+      ].freeze
+
       def index
         @area       = params[:area] || 'all'
         @start_date = params[:start_date]
@@ -16,7 +32,8 @@ module Api
         if is_search_request
           @units = search_results
         else
-          @units = UnitRepository.all_units
+          units = UnitRepository.all_units
+          @units = additional_sort(units, params[:additional_sort], params[:sort_amenity])
         end
       end
 
@@ -133,6 +150,7 @@ module Api
         units = apply_amenities_filter(units, params[:amenities])
         units = min_filter(units, params[:min])
         units = max_filter(units, params[:max])
+        units = additional_sort(units, params[:additional_sort], params[:sort_amenity])
         @units = units
       end
 
@@ -200,6 +218,19 @@ module Api
         values.select { |value| value["pets"] }
       end
 
+      def is_incorrect_sort(sort)
+        return !SORT_VALUES.include?(sort)        
+      end
+
+      def additional_sort(units, sort, is_amenity)
+        return units if [nil, '', 'all'].include?(sort) || is_incorrect_sort(sort)
+        
+        if (is_amenity)
+          units = units.sort_by { |unit| unit.amenities[sort] ? 0 : 1 }
+        else
+          units = units.sort_by { |unit| unit[sort] }
+        end
+      end
     end
   end
 end
