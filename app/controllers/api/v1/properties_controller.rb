@@ -33,7 +33,7 @@ module Api
           @units = search_results
         else
           units = UnitRepository.all_units
-          @units = additional_sort(units, params[:additional_sort], params[:sort_amenity])
+          @units = additional_sort(units, params[:additional_sort], params[:sort_amenity], params[:sort_direction])
         end
       end
 
@@ -150,7 +150,7 @@ module Api
         units = apply_amenities_filter(units, params[:amenities])
         units = min_filter(units, params[:min])
         units = max_filter(units, params[:max])
-        units = additional_sort(units, params[:additional_sort], params[:sort_amenity])
+        units = additional_sort(units, params[:additional_sort], params[:sort_amenity], params[:sort_direction])
         @units = units
       end
 
@@ -222,7 +222,7 @@ module Api
         return !SORT_VALUES.include?(sort)        
       end
 
-      def additional_sort(units, sort, is_amenity)
+      def additional_sort(units, sort, is_amenity, direction)
         return units if [nil, '', 'all'].include?(sort) || is_incorrect_sort(sort)
         
         if (is_amenity)
@@ -230,6 +230,10 @@ module Api
         else
           units = units.sort_by { |unit| unit[sort] }
         end
+        if (direction)
+          units = units.reverse
+        end
+        units
       end
     end
   end
