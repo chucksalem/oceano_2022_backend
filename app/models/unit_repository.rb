@@ -92,6 +92,7 @@ class UnitRepository
     distances = []
     all.each do |key|
       unit = get(key.sub('units:', ''))
+      unit.preview_amount = 0
       value = {
         unit: unit,
         distance: distance(loc, [unit.position.latitude, unit.position.longitude])
