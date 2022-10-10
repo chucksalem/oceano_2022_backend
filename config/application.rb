@@ -1,5 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 require 'rails'
+require 'rails/all'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
@@ -19,7 +20,7 @@ module OceanoRails
     config.action_mailer.delivery_method = :mailgun
     config.action_mailer.mailgun_settings = {
       api_key: ENV['MAILGUN_API_KEY'],
-      domain: 'mg.oceano-rentals.com'
+      domain: ENV['MAILGUN_BASE_URL']
     }
   end
 end

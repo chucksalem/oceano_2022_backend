@@ -1,6 +1,7 @@
 class ContactMailer < ActionMailer::Base
-  default from: 'info@oceano-rentals.com'
-  default to: 'info@gooceano.com'
+
+  default from: ENV['EMAIL_DEFAULT_FROM']
+  default to: ENV['EMAIL_DEFAULT_TO']
 
   def contact(email:, first_name:, last_name:, phone:, message:)
     @email      = email
@@ -12,14 +13,5 @@ class ContactMailer < ActionMailer::Base
       from: email,
       subject: 'Contact Form'
     )
-  end
-
-  def work_order(email:, owner_name:, property_name:, message:)
-    @email      = email
-    @owner_name = owner_name
-    @property_name = property_name
-    @message    = message
-
-    mail(subject: 'Work Order Form')
   end
 end
