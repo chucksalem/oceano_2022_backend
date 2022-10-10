@@ -95,4 +95,10 @@ class CacheProperties
     street = 'Playa Encanto' if street == 'Los Langostino, Playa Encanto'
     street
   end
+
+  def get_street_name(street)
+    street = 'Las Conchas' if street == 'Section #7 Lot#106  Las Conchas'
+    street = 'Playa Encanto' if street == 'Los Langostino, Playa Encanto'
+    street
+  end
 end
