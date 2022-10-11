@@ -7,6 +7,7 @@ module UnitRooms
   }.freeze
 
   def self.count_for_code(target_type, codes)
+    codes = [codes] if !codes.kind_of?(Array)
     codes.each do |r|
       type = CODES[r[:@code].to_i]
       next unless type.present? && type == target_type
