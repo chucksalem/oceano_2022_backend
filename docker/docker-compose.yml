@@ -7,8 +7,6 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
     volumes: 
       - db:/var/lib/postgresql/data
   rails:
@@ -24,8 +22,6 @@ services:
     container_name: rails
     environment:
       RAILS_ENV: development
-    ports:
-      - 3000:3000
     volumes:
       - ./:/app
     stdin_open: true
@@ -36,6 +32,7 @@ services:
       - rails:rails
       - frontend:frontend
     ports:
+      - 80:80
       - 443:443 
       - 5000:5000
     volumes:
@@ -48,8 +45,6 @@ services:
     build:
       context: ../oceano_2022
       dockerfile: /home/neocoast/oceano_2022/Dockerfile
-    ports:
-      - 3001:3001
 
 
 
