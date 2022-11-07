@@ -20,11 +20,13 @@ class CacheProperties
   def prune_groups(units)
     logger.info('Pruning uncached units from areas...')
     units.each do |unit|
-      street = get_street_name(unit.address.street)
-      area_key  = area_key_from_name(street)
-      old_codes = redis.sdiff(area_key, all_units_key)
-      next if old_codes.empty?
-      redis.srem(area_key, old_codes)
+      if !unit.address.street.nil?
+        street = get_street_name(unit.address.street)
+        area_key  = area_key_from_name(street)
+        old_codes = redis.sdiff(area_key, all_units_key)
+        next if old_codes.empty?
+        redis.srem(area_key, old_codes)
+      end
     end
     logger.info('Done.')
   end
@@ -33,10 +35,12 @@ class CacheProperties
     logger.info('Grouping by area...')
     touched_areas = []
     units.each do |unit|
-      street = get_street_name(unit.address.street)
-      set_key = area_key_from_name(street)
-      redis.sadd(set_key, unit.code)
-      touched_areas << set_key
+      if !unit.address.street.nil?
+        street = get_street_name(unit.address.street)
+        set_key = area_key_from_name(street)
+        redis.sadd(set_key, unit.code)
+        touched_areas << set_key
+      end
     end
 
     logger.info('Done.')
