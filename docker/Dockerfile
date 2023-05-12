@@ -18,4 +18,11 @@ RUN bundle config --global jobs 4 && \
 RUN cp .env.sample .env
 RUN whenever --update-crontab
 
+ARG PORT=3000
+ENV PORT=${PORT}
+EXPOSE ${PORT}
+
+ENTRYPOINT ["./entrypoint.sh"]
+
 CMD [ "/bin/bash" ]
+
