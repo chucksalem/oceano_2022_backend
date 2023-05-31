@@ -91,7 +91,7 @@ class CacheProperties
   end
 
   def area_key_from_name(name)
-    area_key(name.tr(' ', '_').underscore)
+    area_key(name.to_s.tr(' ', '_').underscore)
   end
 
   def get_street_name(street)
