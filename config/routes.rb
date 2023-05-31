@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
     resources :recommendations
     resources :deals
+    resources :announcements
         
     root to: "reviews#index"
   end
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
       post '/property/stay/:id', to: 'properties#stay'
       post '/property/availability/:id', to: 'properties#calendar_availability'
       # resources :properties, only: %i(index show)
+      get '/announcements', to: 'announcements#index'
     end
     resources :units, only: [:index, :show] do
       resources :stays, only: [:get]
