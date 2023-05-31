@@ -66,12 +66,23 @@ class Unit
     search   = Escapia::UnitSearch.new
     response = search.execute(*criteria)
     if response[:units]
-      return response[:units][:unit].map do |unit|
-        {
-          code: unit[:@unit_code],
-          preview_amount: unit[:rate_range][:@fixed_rent].present? && !criteria[0][:date_range].nil? ? unit[:rate_range][:@fixed_rent] : 0.0,
-          pets: unit[:unit_summary][:pets_policies][:@pets_allowed_code] != "Pets Not Allowed"
-        }.with_indifferent_access
+      record = response[:units][:unit]
+      if record.is_a?(Array)
+        return record.map do |unit|
+          {
+            code: unit[:@unit_code],
+            preview_amount: unit[:rate_range][:@fixed_rent].present? && !criteria[0][:date_range].nil? ? unit[:rate_range][:@fixed_rent] : 0.0,
+            pets: unit[:unit_summary][:pets_policies][:@pets_allowed_code] != "Pets Not Allowed"
+          }.with_indifferent_access
+        end
+      else
+        [
+          {
+            code: record[:@unit_code],
+            preview_amount: record[:rate_range][:@fixed_rent].present? && !criteria[0][:date_range].nil? ? record[:rate_range][:@fixed_rent] : 0.0,
+            pets: record[:unit_summary][:pets_policies][:@pets_allowed_code] != "Pets Not Allowed"
+          }.with_indifferent_access
+        ]
       end
     end
     []
