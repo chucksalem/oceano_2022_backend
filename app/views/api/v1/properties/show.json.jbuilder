@@ -6,6 +6,7 @@ json.unit do
   json.partial! 'api/v1/shared/stay'
   json.standardImages @unit.standard_images
   json.largeImages @unit.large_images
+  json.previewAmount @unit.preview_amount
   json.reviews do 
     json.array! @reviews do |review|
       json.partial! 'api/v1/shared/review', review: review
