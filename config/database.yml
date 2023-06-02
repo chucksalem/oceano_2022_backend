@@ -20,12 +20,11 @@ default: &default
   encoding: unicode
   pool: 5
   host: db
-  port: 5432
+  portf: 5432
   username: postgres
   password: postgres
 development:
   <<: *default
-  host: localhost
   database: oceano_rentals_development
 test:
   <<: *default
