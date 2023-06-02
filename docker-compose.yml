@@ -22,6 +22,8 @@ services:
     container_name: rails
     environment:
       RAILS_ENV: development
+      ESCAPIA_USERNAME: OceanoWyt
+      ESCAPIA_PASSWORD: GYH9n3CMyL2s
     volumes:
       - ./:/app
     stdin_open: true
@@ -33,7 +35,7 @@ services:
       - frontend:frontend
     ports:
       - 80:80
-      - 443:443 
+      - 443:443
       - 5000:5000
     volumes:
       - /etc/nginx/vhost.d
@@ -42,9 +44,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
   frontend:
-    image: chucksalem/oceano-frontend:latest
-
-
+     image: chucksalem/oceano-frontend
 
 
 volumes:
