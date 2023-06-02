@@ -31,6 +31,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootsnap', '>=1.1.0', require: false
 gem 'haml-rails', '~> 2.0'
 gem 'administrate', '~> 0.16.0'
+gem 'administrate-field-date_picker', '~> 0.3.0'
 gem 'devise'
 gem 'psych', '< 4'
 
