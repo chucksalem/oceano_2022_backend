@@ -2,7 +2,7 @@ module Api
   module V1
     class AnnouncementsController < BaseController
       def index
-        @announcements = Announcement.recentsq
+        @announcements = Announcement.recents
       end
     end
   end
