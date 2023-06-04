@@ -19,6 +19,7 @@ class Unit
   attribute :beachfront,      Boolean, default: false
   attribute :pets,            Boolean, default: false
   attribute :preview_amount,  Float, default: 0.0
+  attribute :temporary_amount,Float, default: 0.0
 
   def self.from_hash(hash)
     new.tap do |unit|
@@ -116,7 +117,8 @@ class Unit
     unit.reviews      = UnitReviews.from_response(reviews)
     unit.beachfront   = beachfront
     unit.pets         = pets
-    unit.preview_amount  = preview_amount 
+    unit.preview_amount  = preview_amount
+    unit.temporary_amount  = preview_amount 
 
     unit.address = {
       street:      address[:address_line],

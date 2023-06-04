@@ -17,6 +17,7 @@ class UnitRepository
       hash = MultiJson.load(raw, symbolize_keys: true)
       unit = Unit.from_hash(hash)
       unit.preview_amount = value["preview_amount"]
+      unit.temporary_amount = value["preview_amount"]
       redis.set("units:#{value["code"]}", MultiJson.dump(unit))
       redis.sadd('temp:units:all', value["code"])
     end
@@ -44,7 +45,7 @@ class UnitRepository
     raw = redis.mget(codes.map { |k| "units:#{k.unit_id}"})
     units = raw.map do |item|
       hash = MultiJson.load(item, symbolize_keys: true)
-      unit = Unit.from_hash(hash) 
+      unit = Unit.from_hash(hash)
       {
         unit: unit,
         text: codes.find { |c| c.unit_id == unit.code }.text
@@ -73,6 +74,7 @@ class UnitRepository
     all = redis.keys('units:*')
     all.map do |key|
       unit = get(key.sub('units:', ''))
+      unit.temporary_amount = unit.preview_amount
       unit.preview_amount = 0
       unit
     end
@@ -92,6 +94,7 @@ class UnitRepository
     distances = []
     all.each do |key|
       unit = get(key.sub('units:', ''))
+      unit.temporary_amount = unit.preview_amount
       unit.preview_amount = 0
       value = {
         unit: unit,
