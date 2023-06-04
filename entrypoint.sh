@@ -13,5 +13,5 @@ set -ex
 service redis-server start &
 bundle check || bundle install
 rake oceano:cache:properties
-rails db:seed
+rails db:migrate db:seed
 bundle exec rails s -b 0.0.0.0
