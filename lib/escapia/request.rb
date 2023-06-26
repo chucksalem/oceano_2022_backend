@@ -10,7 +10,7 @@ module Escapia
       @client   = client
     end
 
-    def execute(*kwargs)
+    ruby2_keywords def execute(*kwargs)
       response = client.call(operation, xml: payload(*kwargs).to_xml)
       if ENV['RECORD_ESCAPIA']
         File.open(Rails.root.join('tmp', "#{operation}-#{Time.now.iso8601}.xml"), 'w') do |f|
