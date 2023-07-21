@@ -4,6 +4,7 @@ echo '##  starting entrypoint'
 echo '-----------------------'
 
 echo 'making sure server .pid is gone'
+rm -rf tmp/cache/assets
 rm tmp/pids/server.pid
 rm tmp/pids/puma.pid
 echo 'run startup script'

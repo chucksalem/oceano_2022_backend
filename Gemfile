@@ -33,9 +33,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootsnap', '>=1.1.0', require: false
 gem 'haml-rails', '~> 2.0'
 gem 'administrate', '~> 0.19.0'
-gem 'administrate-field-date_picker', '~> 0.3.0'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'psych', '< 4'
+gem 'net-smtp', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
