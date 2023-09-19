@@ -21,6 +21,7 @@ gem 'savon', '2.12.1'
 gem 'pg'
 gem 'sqlite3'
 gem 'virtus', '1.0.5'
+gem 'sidekiq'
 gem 'whenever', require: false
 gem 'kaminari'
 gem "figaro"

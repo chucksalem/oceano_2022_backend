@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post '/property/availability/:id', to: 'properties#calendar_availability'
       # resources :properties, only: %i(index show)
       get '/announcements', to: 'announcements#index'
+      resources :triggers, only: :create
     end
     resources :units, only: [:index, :show] do
       resources :stays, only: [:get]
