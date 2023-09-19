@@ -60,7 +60,6 @@ class CacheProperties
         nil
       end
     end
-
     units.compact.tap { |u| logger.info("Done. Found #{u.count} units.") }
   end
 

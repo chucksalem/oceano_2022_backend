@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :user, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
 
@@ -14,6 +16,7 @@ Rails.application.routes.draw do
     resources :announcements
 
     root to: "reviews#index"
+
   end
 
   namespace :api do
@@ -28,9 +31,13 @@ Rails.application.routes.draw do
       post '/property/availability/:id', to: 'properties#calendar_availability'
       # resources :properties, only: %i(index show)
       get '/announcements', to: 'announcements#index'
+      resources :triggers, only: :create
     end
+
     resources :units, only: [:index, :show] do
       resources :stays, only: [:get]
     end
   end
+
+  mount Sidekiq::Web => "/sidekiq"
 end

@@ -40,7 +40,7 @@ class Unit
   end
 
   def self.get(id, amount)
-    search   = Escapia::UnitDescriptiveInfo.new
+    search   = ::Escapia::UnitDescriptiveInfo.new
     response = search.execute(unit_id: id)
     content  = response[:unit_descriptive_contents][:unit_descriptive_content]
     info     = content[:unit_info]
@@ -118,7 +118,7 @@ class Unit
     unit.beachfront   = beachfront
     unit.pets         = pets
     unit.preview_amount  = preview_amount
-    unit.temporary_amount  = preview_amount 
+    unit.temporary_amount  = preview_amount
 
     unit.address = {
       street:      address[:address_line],

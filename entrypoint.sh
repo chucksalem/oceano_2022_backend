@@ -18,4 +18,5 @@ bundle exec rails db:seed
 bundle exec rake oceano:cache:properties
 # rake oceano:cache:properties
 # rails db:migrate db:seed
-bundle exec rails s -b 0.0.0.0
+bundle exec whenever --update-crontab
+cron && bundle exec rails s -b 0.0.0.0

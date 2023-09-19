@@ -15,4 +15,5 @@ service redis-server start &
 bundle check || bundle install
 #rails db:create db:migrate
 bundle exec rake oceano:cache:properties
-bundle exec rails s -b 0.0.0.0
+bundle exec whenever --update-crontab
+cron && bundle exec rails s -b 0.0.0.0
