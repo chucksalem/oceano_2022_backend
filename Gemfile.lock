@@ -98,6 +98,7 @@ GEM
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.1.10)
+    connection_pool (2.4.1)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -122,6 +123,8 @@ GEM
     equalizer (0.0.11)
     erubi (1.10.0)
     erubis (2.7.0)
+    et-orbi (1.2.7)
+      tzinfo
     execjs (2.8.1)
     faraday (2.3.0)
       faraday-net_http (~> 2.0)
@@ -137,6 +140,9 @@ GEM
       hashie
       multi_json
     foreman (0.87.2)
+    fugit (1.8.1)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     gyoku (1.4.0)
@@ -235,6 +241,7 @@ GEM
     psych (3.3.2)
     public_suffix (4.0.7)
     puma (3.12.6)
+    raabro (1.4.0)
     racc (1.6.0)
     rack (2.2.3)
     rack-attack (6.3.1)
@@ -357,6 +364,13 @@ GEM
       rdoc (>= 5.0)
     selectize-rails (0.12.6)
     sexp_processor (4.16.1)
+    sidekiq (6.5.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
+    sidekiq-cron (1.9.1)
+      fugit (~> 1.8)
+      sidekiq (>= 4.2.1)
     simplecov (0.21.2)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -462,6 +476,8 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   savon (= 2.12.1)
   sdoc (~> 2.0.3)
+  sidekiq
+  sidekiq-cron
   simplecov (= 0.21.2)
   sqlite3
   turbolinks (~> 5)
