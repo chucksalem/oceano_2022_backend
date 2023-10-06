@@ -1,3 +1,6 @@
+require 'sidekiq'
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :user, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
 
@@ -33,4 +36,9 @@ Rails.application.routes.draw do
       resources :stays, only: [:get]
     end
   end
+
+  authenticate :user, ->(u) { u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
 end
