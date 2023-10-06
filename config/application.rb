@@ -22,6 +22,7 @@ module OceanoRails
     config.autoload_paths << "#{Rails.root}/lib"
     config.assets.version = '1.0.1'
     config.middleware.use Rack::Attack
+    config.active_job.queue_adapter = :sidekiq
 
     config.action_mailer.delivery_method = :mailgun
     config.action_mailer.mailgun_settings = {
