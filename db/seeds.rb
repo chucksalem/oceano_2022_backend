@@ -4,5 +4,6 @@
 User.create(
   email:                 'chuck@chucksalem.com',
   password:              '3ka55up5m48u',
-  password_confirmation: '3ka55up5m48u'
+  password_confirmation: '3ka55up5m48u',
+  role:                   'admin'
 )
