@@ -36,11 +36,11 @@ module Admin
     #
     # def resource_params
     #   params.require(resource_class.model_name.param_key).
-    #     permit(dashboard.permitted_attributes).
+    #     permit(dashboard.permitted_attributes(action_name)).
     #     transform_values { |value| value == "" ? nil : value }
     # end
 
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
+    # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
   end
 end

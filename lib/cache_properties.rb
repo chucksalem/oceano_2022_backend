@@ -55,7 +55,7 @@ class CacheProperties
         redis.set(unit_key(value["code"]), MultiJson.dump(unit))
         redis.sadd(all_units_key, value["code"])
         unit
-      rescue
+      rescue Exception => e
         logger.error("skipping #{value["code"]}")
         nil
       end

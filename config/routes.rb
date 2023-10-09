@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :recommendations
     resources :deals
     resources :announcements
-        
+
     root to: "reviews#index"
   end
 

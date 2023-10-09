@@ -1,11 +1,16 @@
-FROM ruby:2.6.6
+FROM ruby:3.1.2
 
 # install essentials, node, and bash preferences
+# RUN echo "alias l='ls -lahAF'" > /root/.bashrc && \
+#     curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+#     apt-get update -qq && apt-get install -y \
+#     nodejs npm vim build-essential wget ca-certificates redis-server \
+#     postgresql libpq-dev sqlite libsqlite-dev
+
 RUN echo "alias l='ls -lahAF'" > /root/.bashrc && \
-    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update -qq && apt-get install -y \
     nodejs npm vim build-essential wget ca-certificates redis-server \
-    postgresql libpq-dev sqlite libsqlite-dev
+    postgresql libpq-dev sqlite3 libsqlite3-dev cron
 
 WORKDIR /app
 COPY . .
@@ -16,7 +21,7 @@ RUN gem install bundler --conservative
 RUN bundle config --global jobs 4 && \
     bundle install
 RUN cp .env.sample .env
-RUN whenever --update-crontab
+RUN bundle exec whenever --update-crontab
 
 ARG PORT=3000
 ENV PORT=${PORT}
