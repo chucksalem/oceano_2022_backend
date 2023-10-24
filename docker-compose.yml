@@ -61,7 +61,7 @@ services:
     env_file:
       - .env     
   frontend:
-     image: chucksalem/oceano-frontend
+     image: chucksalem/oceano-frontend:prod
   
 
 volumes:
