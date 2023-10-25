@@ -43,7 +43,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
   frontend:
-    image: chucksalem/oceano-frontend
+    image: chucksalem/oceano-frontend:staging
     ports:
       - 3001:3001
 
