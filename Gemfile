@@ -20,7 +20,7 @@ gem 'rspec-virtus', '1.0.2'
 gem 'savon', '2.12.1'
 gem  'sidekiq-cron'
 gem 'pg'
-gem 'sidekiq'
+gem 'sidekiq' , '<7'
 gem 'sqlite3'
 gem 'virtus', '1.0.5'
 gem 'whenever', require: false
