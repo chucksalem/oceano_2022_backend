@@ -59,7 +59,20 @@ services:
       - db
       - redis
     env_file:
-      - .env     
+      - .env  
+
+  sidekiq_web:
+    image: aschzero/sidekiq-web
+    environment:
+      REDIS_URL: redis://host:6379
+      SIDEKIQ_USER: myusername
+      SIDEKIQ_PASSWORD: password123
+     depends_on:
+      - sidekiq  
+    ports:
+      - 3030:3030
+
+
   frontend:
      image: chucksalem/oceano-frontend:prod
   
