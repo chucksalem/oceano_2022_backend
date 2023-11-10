@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Escapia
   class UnitDescriptiveInfo < Request
     def operation
@@ -27,9 +29,9 @@ module Escapia
     def unit_descriptive_info(xml, &blk)
       attrs = {
         'TransactionIdentifier' => identifier,
-        'EchoToken'             => 'request',
-        'Version'               => '1.0',
-        'xmlns'                 => 'http://www.escapia.com/EVRN/2007/02'
+        'EchoToken' => 'request',
+        'Version' => '1.0',
+        'xmlns' => 'http://www.escapia.com/EVRN/2007/02'
       }
 
       xml.EVRN_UnitDescriptiveInfoRQ(attrs, &blk)

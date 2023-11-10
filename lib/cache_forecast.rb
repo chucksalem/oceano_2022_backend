@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CacheForecast
   def initialize(config:, logger:, redis:)
     @latitude  = config[:weather][:latitude]
@@ -10,6 +12,7 @@ class CacheForecast
     logger.info('Fetching weather...')
     forecast = ForecastIO.forecast(latitude, longitude)
     return if forecast.nil?
+
     redis.set('weather', MultiJson.dump(forecast))
     logger.info('Done.')
   end

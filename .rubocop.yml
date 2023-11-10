@@ -1,6 +1,9 @@
-AllCops:
-  Excludes:
-    - db/schema.rb
+
+require: rubocop-rails
+
+# AllCops:
+#   Excludes:
+#     - db/schema.rb
 Documentation:
   Enabled: false
 LineLength:

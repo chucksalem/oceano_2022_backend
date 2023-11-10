@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UnitRooms
   CODES = {
     40 => :lofts,
@@ -7,10 +9,11 @@ module UnitRooms
   }.freeze
 
   def self.count_for_code(target_type, codes)
-    codes = [codes] if !codes.kind_of?(Array)
+    codes = [codes] unless codes.is_a?(Array)
     codes.each do |r|
       type = CODES[r[:@code].to_i]
       next unless type.present? && type == target_type
+
       value = r[:@quantity] || r[:@fixed]
       return value.to_i
     end

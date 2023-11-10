@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CacheProperties
   def initialize(config:, logger:, redis:)
     @config = config
@@ -20,13 +22,14 @@ class CacheProperties
   def prune_groups(units)
     logger.info('Pruning uncached units from areas...')
     units.each do |unit|
-      if !unit.address.street.nil?
-        street = get_street_name(unit.address.street)
-        area_key  = area_key_from_name(street)
-        old_codes = redis.sdiff(area_key, all_units_key)
-        next if old_codes.empty?
-        redis.srem(area_key, old_codes)
-      end
+      next if unit.address.street.nil?
+
+      street = get_street_name(unit.address.street)
+      area_key  = area_key_from_name(street)
+      old_codes = redis.sdiff(area_key, all_units_key)
+      next if old_codes.empty?
+
+      redis.srem(area_key, old_codes)
     end
     logger.info('Done.')
   end
@@ -35,12 +38,12 @@ class CacheProperties
     logger.info('Grouping by area...')
     touched_areas = []
     units.each do |unit|
-      if !unit.address.street.nil?
-        street = get_street_name(unit.address.street)
-        set_key = area_key_from_name(street)
-        redis.sadd(set_key, unit.code)
-        touched_areas << set_key
-      end
+      next if unit.address.street.nil?
+
+      street = get_street_name(unit.address.street)
+      set_key = area_key_from_name(street)
+      redis.sadd(set_key, unit.code)
+      touched_areas << set_key
     end
 
     logger.info('Done.')
@@ -49,14 +52,14 @@ class CacheProperties
   def fetch_all_units(values)
     logger.info('Fetching units...')
     units = values.map do |value|
-      logger.info(value["code"])
+      logger.info(value['code'])
       begin
-        unit = Unit.get(value["code"], value["preview_amount"])
-        redis.set(unit_key(value["code"]), MultiJson.dump(unit))
-        redis.sadd(all_units_key, value["code"])
+        unit = Unit.get(value['code'], value['preview_amount'])
+        redis.set(unit_key(value['code']), MultiJson.dump(unit))
+        redis.sadd(all_units_key, value['code'])
         unit
-      rescue Exception => e
-        logger.error("skipping #{value["code"]}")
+      rescue Exception
+        logger.error("skipping #{value['code']}")
         nil
       end
     end
@@ -74,7 +77,7 @@ class CacheProperties
 
   def delete_all_area_keys
     keys = redis.keys('*')
-    keys = keys.select {|key| key.include? "areas:"}
+    keys = keys.select { |key| key.include? 'areas:' }
     keys.map { |key| redis.del(key) }
   end
 

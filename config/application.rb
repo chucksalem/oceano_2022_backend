@@ -1,6 +1,8 @@
-require_relative "boot"
+# frozen_string_literal: true
 
-require "rails/all"
+require_relative 'boot'
+
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -19,7 +21,7 @@ module OceanoRails
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.autoload_paths << "#{Rails.root}/lib"
+    config.autoload_paths << Rails.root.join('lib').to_s
     config.assets.version = '1.0.1'
     config.middleware.use Rack::Attack
     config.active_job.queue_adapter = :sidekiq

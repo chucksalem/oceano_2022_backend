@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Escapia
   class UnitStay < Request
     def operation
@@ -20,13 +22,13 @@ module Escapia
     def unit_stay(xml, &blk)
       attrs = {
         'TransactionIdentifier' => identifier,
-        'EchoToken'             => 'request',
-        'Version'               => '1.0',
-        'MaxResponses'          => '2147483647',
-        'SortOrder'             => 'P',
-        'xmlns'                 => 'http://www.escapia.com/EVRN/2007/02',
-        'xmlns:xsi'             => 'http://www.w3.org/2001/XMLSchema-instance',
-        'xmlns:xsd'             => 'http://www.w3.org/2001/XMLSchema'
+        'EchoToken' => 'request',
+        'Version' => '1.0',
+        'MaxResponses' => '2147483647',
+        'SortOrder' => 'P',
+        'xmlns' => 'http://www.escapia.com/EVRN/2007/02',
+        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+        'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema'
       }
 
       xml.EVRN_UnitStayRQ(attrs, &blk)

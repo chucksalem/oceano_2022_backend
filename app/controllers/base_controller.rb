@@ -1,21 +1,22 @@
-class BaseController < ActionController::Base
+# frozen_string_literal: true
+
+class BaseController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+
   respond_to :json
   helper :all
   helper_method :home?
   helper_method :property_detail?
   before_action :set_default_response_format
-    
-  private
 
+  private
 
   def set_default_response_format
     request.format = :json
   end
 
   def render_error(status, messages)
-    render json: { errors: messages }, status: status
+    render json: { errors: messages }, status:
   end
 
   def home?

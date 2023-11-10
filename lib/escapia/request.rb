@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'securerandom'
 
 module Escapia
@@ -19,16 +21,17 @@ module Escapia
       end
 
       body = response.body["evrn_#{operation}_rs".to_sym]
-      fail Error.new(body[:errors][:error]) if body.key?(:errors)
+      raise Error.new(body[:errors][:error]) if body.key?(:errors)
+
       body
     end
 
     def payload
-      fail NotImplementedError.new('requests must implement payload')
+      raise NotImplementedError.new('requests must implement payload')
     end
 
     def operation
-      fail NotImplementedError.new('requests must implement operation')
+      raise NotImplementedError.new('requests must implement operation')
     end
 
     private

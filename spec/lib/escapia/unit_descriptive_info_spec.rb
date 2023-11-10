@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Escapia::UnitDescriptiveInfo do
@@ -9,13 +11,13 @@ describe Escapia::UnitDescriptiveInfo do
     { namespaces: { evrn: 'http://www.escapia.com/EVRN/2007/02' } }
   end
 
-  subject { Escapia::UnitDescriptiveInfo.new(username: username, password: password) }
+  subject { Escapia::UnitDescriptiveInfo.new(username:, password:) }
 
   context 'xml' do
     it 'builds unit lookup' do
-      body = subject.payload(unit_id: unit_id).to_xml
-      expect(body).to have_xpath(xpath: '//evrn:EVRN_UnitDescriptiveInfoRQ', opts: opts)
-      expect(body).to have_xpath(xpath: %(//evrn:UnitDescriptiveInfo[@UnitCode="#{unit_id}"]), opts: opts)
+      body = subject.payload(unit_id:).to_xml
+      expect(body).to have_xpath(xpath: '//evrn:EVRN_UnitDescriptiveInfoRQ', opts:)
+      expect(body).to have_xpath(xpath: %(//evrn:UnitDescriptiveInfo[@UnitCode="#{unit_id}"]), opts:)
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Escapia
   class UnitSearch < Request
     def operation
@@ -20,13 +22,13 @@ module Escapia
     def unit_search(xml, criteria, &blk)
       attrs = {
         'TransactionIdentifier' => identifier,
-        'EchoToken'             => 'request',
-        'Version'               => '1.0',
-        'MaxResponses'          => '2147483647',
-        'SortOrder'             => criteria[:sort],
-        'xmlns'                 => 'http://www.escapia.com/EVRN/2007/02',
-        'xmlns:xsi'             => 'http://www.w3.org/2001/XMLSchema-instance',
-        'xmlns:xsd'             => 'http://www.w3.org/2001/XMLSchema'
+        'EchoToken' => 'request',
+        'Version' => '1.0',
+        'MaxResponses' => '2147483647',
+        'SortOrder' => criteria[:sort],
+        'xmlns' => 'http://www.escapia.com/EVRN/2007/02',
+        'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+        'xmlns:xsd' => 'http://www.w3.org/2001/XMLSchema'
       }
 
       xml.EVRN_UnitSearchRQ(attrs, &blk)
@@ -78,12 +80,13 @@ module Escapia
       end_date   = criteria[:date_range][:end]
 
       xml.StayDateRange('Start' => start_date.strftime('%-m/%-d/%Y'),
-                        'End'   => end_date.strftime('%-m/%-d/%Y')) do
+                        'End' => end_date.strftime('%-m/%-d/%Y')) do
       end
     end
 
     def pets(xml, criteria)
       return if criteria[:pets].nil?
+
       allowed  = criteria[:pets][:allowed] || true
       policies = criteria[:pets][:policies] || []
       xml.PetsPolicies('PetsAllowedCode' => allowed ? 'Pets Allowed' : 'Pets Not Allowed') do

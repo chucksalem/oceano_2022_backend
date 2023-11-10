@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Unit
   include Virtus.model
   include Hashable
@@ -19,7 +21,7 @@ class Unit
   attribute :beachfront,      Boolean, default: false
   attribute :pets,            Boolean, default: false
   attribute :preview_amount,  Float, default: 0.0
-  attribute :temporary_amount,Float, default: 0.0
+  attribute :temporary_amount, Float, default: 0.0
 
   def self.from_hash(hash)
     new.tap do |unit|
@@ -33,8 +35,8 @@ class Unit
     search = Escapia::UnitCalendarAvailability.new
     response = search.execute(
       unit_id: id,
-      start_date: start_date,
-      end_date: end_date
+      start_date:,
+      end_date:
     )
     response[:unit_calendar_avail_segments][:unit_calendar_avail_segment][:daily_availability]
   end
@@ -45,21 +47,21 @@ class Unit
     content  = response[:unit_descriptive_contents][:unit_descriptive_content]
     info     = content[:unit_info]
     create_from_results(
-      address:       info[:address],
-      amenities:     info[:unit_amenity],
-      services:      info[:services].nil? ? [] : info[:services][:service].map { |service| service[:descriptive_text] },
-      code:          content[:@unit_code],
-      descriptions:  info[:descriptions],
-      name:          info[:unit_name],
-      num_floors:    info[:@num_floors],
-      occupancy:     info[:@max_occupancy],
-      position:      info[:position],
-      reviews:       content[:unit_reviews],
-      rooms:         info[:category_codes][:room_info],
-      type_code:     info[:category_codes][:unit_category][:@code],
-      beachfront:    has_beachfront?(info),
-      pets:          allows_pets?(content[:policies][:policy][:pets_policies][:@pets_allowed_code]),
-      preview_amount:   amount
+      address: info[:address],
+      amenities: info[:unit_amenity],
+      services: info[:services].nil? ? [] : info[:services][:service].map { |service| service[:descriptive_text] },
+      code: content[:@unit_code],
+      descriptions: info[:descriptions],
+      name: info[:unit_name],
+      num_floors: info[:@num_floors],
+      occupancy: info[:@max_occupancy],
+      position: info[:position],
+      reviews: content[:unit_reviews],
+      rooms: info[:category_codes][:room_info],
+      type_code: info[:category_codes][:unit_category][:@code],
+      beachfront: has_beachfront?(info),
+      pets: allows_pets?(content[:policies][:policy][:pets_policies][:@pets_allowed_code]),
+      preview_amount: amount
     )
   end
 
@@ -73,7 +75,7 @@ class Unit
           {
             code: unit[:@unit_code],
             preview_amount: unit[:rate_range][:@fixed_rent].present? && !criteria[0][:date_range].nil? ? unit[:rate_range][:@fixed_rent] : 0.0,
-            pets: unit[:unit_summary][:pets_policies][:@pets_allowed_code] != "Pets Not Allowed"
+            pets: unit[:unit_summary][:pets_policies][:@pets_allowed_code] != 'Pets Not Allowed'
           }.with_indifferent_access
         end
       else
@@ -81,7 +83,7 @@ class Unit
           {
             code: record[:@unit_code],
             preview_amount: record[:rate_range][:@fixed_rent].present? && !criteria[0][:date_range].nil? ? record[:rate_range][:@fixed_rent] : 0.0,
-            pets: record[:unit_summary][:pets_policies][:@pets_allowed_code] != "Pets Not Allowed"
+            pets: record[:unit_summary][:pets_policies][:@pets_allowed_code] != 'Pets Not Allowed'
           }.with_indifferent_access
         ]
       end
@@ -117,20 +119,20 @@ class Unit
     unit.reviews      = UnitReviews.from_response(reviews)
     unit.beachfront   = beachfront
     unit.pets         = pets
-    unit.preview_amount  = preview_amount
-    unit.temporary_amount  = preview_amount 
+    unit.preview_amount = preview_amount
+    unit.temporary_amount = preview_amount
 
     unit.address = {
-      street:      address[:address_line],
-      city:        address[:city_name],
+      street: address[:address_line],
+      city: address[:city_name],
       postal_code: address[:postal_code],
-      state:       address[:state_prov],
-      country:     address[:country_name]
+      state: address[:state_prov],
+      country: address[:country_name]
     }
 
     unless position.nil?
       unit.position = {
-        latitude:  position[:@latitude],
+        latitude: position[:@latitude],
         longitude: position[:@longitude]
       }
     end
@@ -141,15 +143,15 @@ class Unit
   def stay(start_date:, end_date:, guests:)
     stay = Escapia::UnitStay.new
     response = stay.execute({
-      date_range: { start: start_date, end: end_date, },
-      guests:     [{ type: 10, count: guests }],
-      unit_code:  code
-    })
+                              date_range: { start: start_date, end: end_date },
+                              guests: [{ type: 10, count: guests }],
+                              unit_code: code
+                            })
     response[:unit_stay][:unit_rates][:unit_rate]
   end
 
   def available_amenities
-    amenities.to_h.select { |k,v| v }.keys
+    amenities.to_h.select { |_k, v| v }.keys
   end
 
   def standard_images
@@ -168,11 +170,9 @@ class Unit
     descriptions.videos.map { |i| i[:formats] }
   end
 
-  private
-
   def self.has_beachfront?(info)
     info[:category_codes][:custom_category_group].any? do |custom_category|
-      flatten_nested_hash(custom_category).has_value?("Beachfront")
+      flatten_nested_hash(custom_category).value?('Beachfront')
     end
   end
 

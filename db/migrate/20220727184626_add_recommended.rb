@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddRecommended < ActiveRecord::Migration[5.2]
   def change
     create_table :recommendeds do |t|

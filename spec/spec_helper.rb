@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'webmock/rspec'
 require 'simplecov'
 SimpleCov.start
 
-Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

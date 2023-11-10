@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Escapia
   class UnitCalendarAvailability < Request
     def operation
@@ -11,7 +13,7 @@ module Escapia
             auth(xml)
             xml.UnitRef('UnitCode' => unit_id)
             xml.CalendarDateRange('Start' => start_date,
-                                  'End'   => end_date)
+                                  'End' => end_date)
           end
         end
       end
@@ -22,9 +24,9 @@ module Escapia
     def unit_calendar_avail(xml, &blk)
       attrs = {
         'TransactionIdentifier' => identifier,
-        'EchoToken'             => 'request',
-        'Version'               => '1.0',
-        'xmlns'                 => 'http://www.escapia.com/EVRN/2007/02'
+        'EchoToken' => 'request',
+        'Version' => '1.0',
+        'xmlns' => 'http://www.escapia.com/EVRN/2007/02'
       }
 
       xml.EVRN_UnitCalendarAvailRQ(attrs, &blk)

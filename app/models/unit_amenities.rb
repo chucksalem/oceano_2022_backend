@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UnitAmenities
   include Virtus.model
 
@@ -31,16 +33,16 @@ class UnitAmenities
   attribute :pets,                  Boolean, default: false
 
   CODES = {
-    1  => :air_conditioning,
-    2  => :wheelchair_accessible,
-    3  => :internet_access,
-    4  => :hot_tub,
-    5  => :kitchen,
-    6  => :pool,
-    7  => :washer_dryer,
+    1 => :air_conditioning,
+    2 => :wheelchair_accessible,
+    3 => :internet_access,
+    4 => :hot_tub,
+    5 => :kitchen,
+    6 => :pool,
+    7 => :washer_dryer,
     10 => :boating,
     11 => :fishing,
-    12 => :golf,
+    12 => :golf
   }.freeze
 
   FROM_SERVICES = [
@@ -61,7 +63,7 @@ class UnitAmenities
     { refrigerator: ['Refrigerator'] },
     { stove: ['Stove'] },
     { toaster: ['Toaster'] },
-    { pool: ['Communal Pool', 'Community pool']}
+    { pool: ['Communal Pool', 'Community pool'] }
   ].freeze
 
   AMENITIES = [
@@ -94,11 +96,11 @@ class UnitAmenities
     'Stove',
     'Toaster'
   ].freeze
-  
+
   def self.from_codes(codes, services, pets)
     amenities = new
     return amenities unless codes.is_a?(Array)
-    
+
     codes.each do |amenity|
       activate_amenity_with_code(amenities, amenity[:@code])
     end

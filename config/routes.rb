@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'sidekiq'
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  devise_for :user, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
+  devise_for :user, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
 
   namespace :admin do
     resources :reviews do
@@ -16,7 +18,7 @@ Rails.application.routes.draw do
     resources :deals
     resources :announcements
 
-    root to: "reviews#index"
+    root to: 'reviews#index'
   end
 
   namespace :api do
@@ -32,7 +34,7 @@ Rails.application.routes.draw do
       # resources :properties, only: %i(index show)
       get '/announcements', to: 'announcements#index'
     end
-    resources :units, only: [:index, :show] do
+    resources :units, only: %i[index show] do
       resources :stays, only: [:get]
     end
   end
@@ -40,5 +42,4 @@ Rails.application.routes.draw do
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-
 end

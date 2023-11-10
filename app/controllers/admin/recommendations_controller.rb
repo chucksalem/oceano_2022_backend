@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   class RecommendationsController < Admin::ApplicationController
     def show

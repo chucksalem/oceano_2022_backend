@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class DealDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -10,7 +12,7 @@ class DealDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     text: Field::String,
-    unit_id: Field::String,
+    unit_id: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES

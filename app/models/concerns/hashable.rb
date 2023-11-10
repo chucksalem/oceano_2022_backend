@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module Hashable
-  def self.included base
+  def self.included(base)
     base.extend(SingletonMethods)
   end
 

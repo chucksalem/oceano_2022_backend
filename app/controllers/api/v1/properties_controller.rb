@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class PropertiesController < BaseController
-      DATE_FORMAT = '%m/%d/%Y'.freeze
+      DATE_FORMAT = '%m/%d/%Y'
 
-      SORT_VALUES = [
-        'name',
-        'bedrooms',
-        'bathrooms',
-        'occupancy',
-        'beachfront',
-        'pets',
-        'internet_access',
-        'telephone',
-        'air_conditioning',
-        'heating',
-        'grill',
-        'pool',
-        'hot_tub'
+      SORT_VALUES = %w[
+        name
+        bedrooms
+        bathrooms
+        occupancy
+        beachfront
+        pets
+        internet_access
+        telephone
+        air_conditioning
+        heating
+        grill
+        pool
+        hot_tub
       ].freeze
 
       def index
@@ -51,20 +53,21 @@ module Api
         @property_title    = @unit.name
         @address           = @unit.address
         @amenities         = @unit.available_amenities
-        @guests            = (params[:adults] || 1)+ (params[:kids] || 0)
+        @guests            = (params[:adults] || 1) + (params[:kids] || 0)
         @guest_amount_list = (1..@unit.occupancy).map { |v| v }
-        @start_date        = !params[:start_date].blank? ? params[:start_date] : (Date.today + 1.day ).strftime(DATE_FORMAT)
-        @end_date          = !params[:end_date].blank?   ? params[:end_date]   : (Date.today + 8.days).strftime(DATE_FORMAT)
-        @random_units      = UnitRepository.closest_units(10, [@unit.position.latitude, @unit.position.longitude] ,except: [@id])
+        @start_date        = (params[:start_date].presence || (Time.zone.today + 1.day).strftime(DATE_FORMAT))
+        @end_date          = (params[:end_date].presence || (Time.zone.today + 8.days).strftime(DATE_FORMAT))
+        @random_units      = UnitRepository.closest_units(10, [@unit.position.latitude, @unit.position.longitude],
+                                                          except: [@id])
         @reviews           = Review.where(unit_id: @id)
-        lookup_rates if [:start_date, :end_date, :adults].all? { |k| params.key?(k) && !params[k].nil? }
+        lookup_rates if %i[start_date end_date adults].all? { |k| params.key?(k) && !params[k].nil? }
         get_images
       end
 
-      def stay 
+      def stay
         @id = params[:id]
-        @start_date        = params[:start_date].present? ? params[:start_date] : 1.day.from_now.strftime(DATE_FORMAT)
-        @end_date          = params[:end_date].present?   ? params[:end_date]   : 8.days.from_now.strftime(DATE_FORMAT)
+        @start_date        = (params[:start_date].presence || 1.day.from_now.strftime(DATE_FORMAT))
+        @end_date          = (params[:end_date].presence || 8.days.from_now.strftime(DATE_FORMAT))
         @guests            = (params[:adults] || 1) + (params[:kids] || 0)
         lookup_rates
       end
@@ -79,7 +82,7 @@ module Api
       private
 
       def is_search_request
-        [:area, :start_date, :end_date, :adults, :kids, :pets, :exact_dates].any? { |k| params.dig(k).present? }
+        %i[area start_date end_date adults kids pets exact_dates].any? { |k| params[k].present? }
       end
 
       def is_not_present?(param)
@@ -87,12 +90,13 @@ module Api
       end
 
       def search_results
-        start_date, end_date = params[:start_date], params[:end_date]
+        start_date = params[:start_date]
+        end_date = params[:end_date]
         date_range =
           if [start_date, end_date].all?(&:present?)
             {
-              start:  Date.strptime(start_date, DATE_FORMAT),
-              end:    Date.strptime(end_date, DATE_FORMAT)
+              start: Date.strptime(start_date, DATE_FORMAT),
+              end: Date.strptime(end_date, DATE_FORMAT)
             }
           end
 
@@ -106,17 +110,18 @@ module Api
             criteria.delete(:date_range)
           end
           unless is_not_present?(params[:adults]) && is_not_present?(params[:kids])
-            criteria[:guests] = [{type: 10, count: params[:adults]},{type: 8, count: params[:kids]}]
+            criteria[:guests] = [{ type: 10, count: params[:adults] }, { type: 8, count: params[:kids] }]
           end
-          if date_range && exact_dates > 0
-            start_at, end_at = [Date.strptime(start_date, DATE_FORMAT), Date.strptime(end_date, DATE_FORMAT)]
-            
-            if start_at > Date.today + 2.days
-              exact_dates_list = (exact_dates*-1..exact_dates)
-            else
-              exact_dates_list = (1..exact_dates)
-            end
-            repeated_list = exact_dates_list.map{|item| {start: start_at + item.days, end:  end_at + item.days}}
+          if date_range && exact_dates.positive?
+            start_at = Date.strptime(start_date, DATE_FORMAT)
+            end_at = Date.strptime(end_date, DATE_FORMAT)
+
+            exact_dates_list = if start_at > Time.zone.today + 2.days
+                                 (exact_dates * -1..exact_dates)
+                               else
+                                 (1..exact_dates)
+                               end
+            repeated_list = exact_dates_list.map { |item| { start: start_at + item.days, end: end_at + item.days } }
 
             repeated_list.each do |item|
               criteria[:date_range] = item
@@ -126,24 +131,20 @@ module Api
             values += UnitRepository.search(criteria)
           end
         end
-        unless is_not_present?(params[:pets])
-          values = pet_friendly_filter(values)
-        end
-        values = values.map {|v| v["code"]}
+        values = pet_friendly_filter(values) unless is_not_present?(params[:pets])
+        values = values.map { |v| v['code'] }
         values = values.uniq
-        unless params[:area] == 'all' || params[:area].blank? || values.length == 0
+        unless params[:area] == 'all' || params[:area].blank? || values.empty?
           in_area_values = UnitRepository.units_in_area(params[:area])
-          values = in_area_values.map {|code| values.select {|val| val == code }[0]}
+          values = in_area_values.map { |code| values.select { |val| val == code }[0] }
         end
         values = values.compact
         units = []
         values.map do |value|
-          begin
-            unit = UnitRepository.get(value)
-            units.push(unit)
-          rescue Unit::NotFound
-            next
-          end      
+          unit = UnitRepository.get(value)
+          units.push(unit)
+        rescue Unit::NotFound
+          next
         end
         units = units.compact
         units = apply_type_filter(units, params[:type])
@@ -160,15 +161,15 @@ module Api
         start_date      = Date.strptime(@start_date, DATE_FORMAT)
         end_date        = Date.strptime(@end_date, DATE_FORMAT)
         @length_of_stay = end_date.mjd - start_date.mjd
-        @guests         = @guests == "all" ? 1 : @guests
+        @guests         = @guests == 'all' ? 1 : @guests
 
         @rates = Stay.lookup(@id,
-                            start_date: start_date,
-                            end_date: end_date,
-                            guests: @guests)
+                             start_date:,
+                             end_date:,
+                             guests: @guests)
         @nightly_rate      = @rates.base_amount / @length_of_stay
         @base_amount       = @rates.base_amount
-        @taxes             = @rates.taxes.map { |tax| tax.amount }
+        @taxes             = @rates.taxes.map(&:amount)
         @tax_amount        = @taxes.sum
         @fees              = @rates.fees
         @total_amount      = @rates.total_amount
@@ -184,12 +185,14 @@ module Api
 
       def apply_type_filter(units, types)
         return units if is_not_present?(types)
-        units = units.select { |unit| types.include?(unit.type.to_s) }
+
+        units.select { |unit| types.include?(unit.type.to_s) }
       end
 
       def apply_amenities_filter(units, amenities)
         return units if is_not_present?(amenities)
-        units = units.select { |unit| amenities.map {|amenity| unit.amenities[amenity]}.uniq == [true] }
+
+        units.select { |unit| amenities.map { |amenity| unit.amenities[amenity] }.uniq == [true] }
       end
 
       def min_filter(units, min)
@@ -205,7 +208,7 @@ module Api
 
       def max_filter(units, max)
         return units if [nil, '', 'all'].include?(max)
-        
+
         units = units.map do |unit|
           next unless unit.preview_amount <= max
 
@@ -215,24 +218,22 @@ module Api
       end
 
       def pet_friendly_filter(values)
-        values.select { |value| value["pets"] }
+        values.select { |value| value['pets'] }
       end
 
       def is_incorrect_sort(sort)
-        return !SORT_VALUES.include?(sort)        
+        !SORT_VALUES.include?(sort)
       end
 
       def additional_sort(units, sort, is_amenity, direction)
         return units if [nil, '', 'all'].include?(sort) || is_incorrect_sort(sort)
-        
-        if (is_amenity)
-          units = units.sort_by { |unit| unit.amenities[sort] ? 0 : 1 }
-        else
-          units = units.sort_by { |unit| unit[sort] }
-        end
-        if (direction)
-          units = units.reverse
-        end
+
+        units = if is_amenity
+                  units.sort_by { |unit| unit.amenities[sort] ? 0 : 1 }
+                else
+                  units.sort_by { |unit| unit[sort] }
+                end
+        units = units.reverse if direction
         units
       end
     end

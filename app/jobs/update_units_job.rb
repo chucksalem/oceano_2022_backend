@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class UpdateUnitsJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform(*_args)
     c = CacheProperties.new(
-      config: OceanoConfig, 
-      logger: Logger.new(STDOUT),
-      redis:  RedisClient
+      config: OceanoConfig,
+      logger: Logger.new($stdout),
+      redis: RedisClient
     )
     c.perform!
   end

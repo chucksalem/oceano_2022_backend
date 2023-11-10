@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'nokogiri'
 
-RSpec::Matchers.define :have_xpath do |xpath:, value: nil, opts:|
+RSpec::Matchers.define :have_xpath do |xpath:, opts:, value: nil|
   match do |body|
     doc   = Nokogiri::XML::Document.parse(body)
     nodes = doc.xpath(xpath, opts[:namespaces])

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Unit do
@@ -14,7 +16,7 @@ describe Unit do
     it { expect(described_class).to have_attribute(:descriptions).of_type(UnitDescriptions) }
   end
 
-  let(:fixtures_path) { Rails.root.join('spec', 'fixtures') }
+  let(:fixtures_path) { Rails.root.join('spec/fixtures') }
 
   describe '#get' do
     let(:code) { '1911-89479' }

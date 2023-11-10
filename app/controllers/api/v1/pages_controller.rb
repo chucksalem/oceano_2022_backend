@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PagesController < BaseController
   before_action :validate_email, only: :contact_thank_you
 
@@ -14,11 +16,11 @@ class PagesController < BaseController
       render :contact
     else
       ContactMailer.contact(
-        email:      params[:email],
+        email: params[:email],
         first_name: params[:firstname],
-        last_name:  params[:lastname],
-        phone:      params[:phone],
-        message:    params[:message]
+        last_name: params[:lastname],
+        phone: params[:phone],
+        message: params[:message]
       ).deliver_now
     end
   rescue Mailgun::CommunicationError
@@ -29,10 +31,10 @@ class PagesController < BaseController
 
   def owners_thank_you
     ContactMailer.work_order(
-      email:         params[:email],
-      owner_name:    params[:owner_name],
+      email: params[:email],
+      owner_name: params[:owner_name],
       property_name: params[:property_name],
-      message:       params[:message],
+      message: params[:message]
     ).deliver_now
   end
 
@@ -59,7 +61,7 @@ class PagesController < BaseController
   private
 
   def validate_email
-    email_regexp = /[a-zA-Z0-9.!\#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*/
+    email_regexp = %r{[a-zA-Z0-9.!\#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*}
     @errors = ['Invalid email'] if params[:email].blank? || !params[:email].match(email_regexp)
   end
 end

@@ -1,5 +1,6 @@
-class ContactMailer < ActionMailer::Base
+# frozen_string_literal: true
 
+class ContactMailer < ApplicationMailer
   default from: ENV['EMAIL_DEFAULT_FROM']
   default to: ENV['EMAIL_DEFAULT_TO']
 
