@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   devise_for :user, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
 
   namespace :admin do
+    resources :blogs, except: [:show, :index]
+  
     resources :reviews do
       collection do
         get :new_csv
@@ -32,6 +34,7 @@ Rails.application.routes.draw do
       # resources :properties, only: %i(index show)
       get '/announcements', to: 'announcements#index'
       resources :triggers, only: :create
+      resources :blogs, only: [:index, :show]
     end
     resources :units, only: [:index, :show] do
       resources :stays, only: [:get]
