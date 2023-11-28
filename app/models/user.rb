@@ -3,8 +3,9 @@ class User < ApplicationRecord
 
   enum role: [:admin]
 
+  has_many :bookings
+
   def admin?
    self.role == 'admin'
   end
-
 end
