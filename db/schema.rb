@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_05_211433) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_28_223419) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,9 +23,51 @@ ActiveRecord::Schema.define(version: 2023_10_05_211433) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.boolean "admin_only", default: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_blogs_on_user_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "property_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.decimal "amount"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_bookings_on_property_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
   create_table "deals", force: :cascade do |t|
     t.string "unit_id"
     t.string "text"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.text "amenities"
+    t.integer "bathrooms"
+    t.integer "bedrooms"
+    t.string "code"
+    t.text "descriptions"
+    t.integer "num_floors"
+    t.integer "occupancy"
+    t.text "position"
+    t.string "type"
+    t.text "reviews"
+    t.boolean "beachfront"
+    t.boolean "pets"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "recommendations", force: :cascade do |t|
@@ -56,4 +98,7 @@ ActiveRecord::Schema.define(version: 2023_10_05_211433) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "blogs", "users"
+  add_foreign_key "bookings", "properties"
+  add_foreign_key "bookings", "users"
 end

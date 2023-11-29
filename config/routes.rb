@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       # resources :properties, only: %i(index show)
       get '/announcements', to: 'announcements#index'
       resources :triggers, only: :create
+      resources :bookings, only: [:create]
     end
     resources :units, only: [:index, :show] do
       resources :stays, only: [:get]
