@@ -38,6 +38,7 @@ gem 'administrate', '~> 0.19.0'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'psych', '< 4'
 gem 'net-smtp', require: false
+gem 'active_storage_validations'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

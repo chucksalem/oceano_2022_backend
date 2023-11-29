@@ -1,7 +1,7 @@
 # app/controllers/admin/blogs_controller.rb
 
-class Admin::BlogsController < ApplicationController
-  before_action :authenticate_admin!, except: [:index, :show]
+class Admin::BlogsController < BaseController
+  include ActiveStorage::SetCurrent
   before_action :set_blog, only: [:edit, :update, :destroy]
 
   def index
@@ -14,7 +14,7 @@ class Admin::BlogsController < ApplicationController
   end
 
   def create
-    @blog = Blog.new(blog_params.merge(admin_only: true))
+    @blog = Blog.new(blog_params.merge(admin_only: true, user_id: 1))
     if @blog.save
       render json: { message: 'Blog created successfully.' }, status: :created
     else
@@ -47,6 +47,6 @@ class Admin::BlogsController < ApplicationController
   end
 
   def blog_params
-    params.require(:blog).permit(:title, :content)
+    params.require(:blog).permit(:title, :content, :title_image, images: [])
   end
 end
