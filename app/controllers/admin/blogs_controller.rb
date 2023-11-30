@@ -3,6 +3,7 @@
 class Admin::BlogsController < BaseController
   include ActiveStorage::SetCurrent
   before_action :set_blog, only: [:edit, :update, :destroy]
+  before_action :authenticate_admin
 
   def index
     @blogs = Blog.all
@@ -48,5 +49,9 @@ class Admin::BlogsController < BaseController
 
   def blog_params
     params.require(:blog).permit(:title, :content, :title_image, images: [])
+  end
+
+  def authenticate_admin
+    authenticate_user!
   end
 end
