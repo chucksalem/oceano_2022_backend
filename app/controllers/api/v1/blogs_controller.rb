@@ -1,6 +1,6 @@
 # app/controllers/api/v1/blogs_controller.rb
 
-class Api::V1::BlogsController < ApplicationController
+class Api::V1::BlogsController < BaseController
   before_action :set_blog, only: [:show]
 
   def index

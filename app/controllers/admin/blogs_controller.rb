@@ -2,7 +2,7 @@
 
 class Admin::BlogsController < BaseController
   include ActiveStorage::SetCurrent
-  before_action :authenticate_admin
+  before_action :authenticate_admin, except: [:show, :index]
   before_action :set_blog, only: [:edit, :update, :destroy, :show]
 
   def index
@@ -19,7 +19,7 @@ class Admin::BlogsController < BaseController
   end
 
   def create
-    @blog = Blog.new(blog_params.merge(admin_only: true, user_id: 1))
+    @blog = Blog.new(blog_params.merge(admin_only: true, user_id: current_user.id))
     if @blog.save
       render json: { message: 'Blog created successfully.' }, status: :created
     else
