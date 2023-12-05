@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   devise_for :user, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
 
   namespace :admin do
+    resources :blogs
+  
     resources :reviews do
       collection do
         get :new_csv
@@ -21,6 +23,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      devise_scope :user do
+        post '/login', to: 'sessions#create'
+        delete '/logout', to: 'sessions#destroy'
+      end
       get '/', to: 'home#index'
       get '/deals', to: 'home#deals'
       get '/filters', to: 'properties#filters'
@@ -32,6 +38,7 @@ Rails.application.routes.draw do
       # resources :properties, only: %i(index show)
       get '/announcements', to: 'announcements#index'
       resources :triggers, only: :create
+      resources :blogs, only: [:index, :show]
     end
     resources :units, only: [:index, :show] do
       resources :stays, only: [:get]
