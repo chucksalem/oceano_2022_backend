@@ -2,11 +2,15 @@
 
 class Admin::BlogsController < BaseController
   include ActiveStorage::SetCurrent
-  before_action :set_blog, only: [:edit, :update, :destroy]
+  before_action :set_blog, only: [:edit, :update, :destroy, :show]
 
   def index
     @blogs = Blog.all
     render json: @blogs
+  end
+
+  def show
+    render json: @blog
   end
 
   def new
