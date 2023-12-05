@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      devise_scope :user do
+        post '/login', to: 'sessions#create'
+        delete '/logout', to: 'sessions#destroy'
+      end
       get '/', to: 'home#index'
       get '/deals', to: 'home#deals'
       get '/filters', to: 'properties#filters'
