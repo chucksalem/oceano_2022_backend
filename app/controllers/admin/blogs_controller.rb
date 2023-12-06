@@ -1,7 +1,6 @@
 # app/controllers/admin/blogs_controller.rb
 
 class Admin::BlogsController < BaseController
-  include ActiveStorage::SetCurrent
   before_action :authenticate_admin, except: [:show, :index]
   before_action :set_blog, only: [:edit, :update, :destroy, :show]
 
