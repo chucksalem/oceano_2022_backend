@@ -1,24 +1,22 @@
 # app/controllers/admin/blogs_controller.rb
 
 class Admin::BlogsController < BaseController
-  before_action :authenticate_admin, except: [:show, :index]
+  include ActiveStorage::SetCurrent
+  before_action :authenticate_admin
   before_action :set_blog, only: [:edit, :update, :destroy, :show]
 
   def index
     @blogs = Blog.all
-    render json: @blogs
   end
 
-  def show
-    render json: @blog
-  end
+  def show; end
 
   def new
     @blog = Blog.new
   end
 
   def create
-    @blog = Blog.new(blog_params.merge(admin_only: true, user_id: current_user.id))
+    @blog = Blog.new(blog_params)
     if @blog.save
       render json: { message: 'Blog created successfully.' }, status: :created
     else
@@ -42,19 +40,25 @@ class Admin::BlogsController < BaseController
   def destroy
     @blog.destroy
     render json: { message: 'Blog deleted successfully.' }
+  rescue StandardError => e
+    render json: { error: 'Failed to delete blog', details: e.message }, status: :unprocessable_entity
+
   end
 
   private
 
   def set_blog
-    @blog = Blog.find(params[:id])
+    @blog = Blog.find_by_id(params[:id])
+    render json: { error: 'Blog not found' }, status: :not_found unless @blog
   end
 
   def blog_params
-    params.require(:blog).permit(:title, :content, :title_image, images: [])
+    params.require(:blog).permit(:title, :content, :title_image, images: []).merge(admin_only: true, user_id: current_user.id)
   end
 
   def authenticate_admin
     authenticate_user!
+  rescue StandardError => e
+    render json: { error: 'Authentication failed', details: e.message }, status: :unauthorized
   end
 end
