@@ -13,7 +13,7 @@ gem 'puma', '~>3.11'
 gem 'rack-attack', '6.3.1'
 # gem 'rails', '5.2.2'  # segfaults with any version less than 4.2.8
 gem 'rails', '7.0.5'
-gem 'sprockets', '~> 4.0'
+gem 'sprockets-rails'
 gem 'redis', '4.2.5'
 gem 'responders', '3.0.1'
 gem 'rspec-virtus', '1.0.2'
@@ -38,6 +38,8 @@ gem 'administrate', '~> 0.19.0'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'psych', '< 4'
 gem 'net-smtp', require: false
+gem "image_processing", ">= 1.2"
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

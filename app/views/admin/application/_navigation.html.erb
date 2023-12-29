@@ -18,4 +18,5 @@ as defined by the routes in the `admin/` namespace
       class: "navigation__link navigation__link--#{nav_link_state(resource)}"
     ) if accessible_action?(model_from_resource(resource), :index) %>
   <% end %>
+  <%= button_to "Update data", api_v1_triggers_path, remote: true %>
 </nav>
