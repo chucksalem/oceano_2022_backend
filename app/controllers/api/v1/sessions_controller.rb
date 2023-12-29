@@ -2,7 +2,16 @@ class Api::V1::SessionsController < Devise::SessionsController
   skip_before_action :verify_authenticity_token
   respond_to :json
 
+  # Override the Devise method to allow access to create action for authenticated users
+  def require_no_authentication
+    assert_is_devise_resource!
+  end
+
   def create
+    if user_signed_in?
+      return render json: { message: 'Admin already signed in.', user: current_user }
+    end
+
     user = User.find_by(email: params[:email])
 
     if user && user.valid_password?(params[:password]) && user.admin?
