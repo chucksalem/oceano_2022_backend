@@ -38,7 +38,7 @@ gem 'administrate', '~> 0.19.0'
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'psych', '< 4'
 gem 'net-smtp', require: false
-gem 'active_storage_validations'
+gem "image_processing", ">= 1.2"
 gem "aws-sdk-s3", require: false
 
 group :development, :test do
