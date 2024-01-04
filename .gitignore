@@ -19,6 +19,8 @@ pickle-email-*.html
 .idea
 .ruby-gemset
 
+nginx.conf
+
 # these should all be checked in to normalise the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
 
