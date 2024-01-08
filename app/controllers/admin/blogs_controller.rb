@@ -17,6 +17,8 @@ class Admin::BlogsController < BaseController
 
   def create
     @blog = Blog.new(blog_params)
+    read_image_data
+
     if @blog.save
       render json: { message: 'Blog created successfully.' }, status: :created
     else
@@ -30,6 +32,7 @@ class Admin::BlogsController < BaseController
   end
 
   def update
+    read_image_data
     if @blog.update(blog_params)
       render json: { message: 'Blog updated successfully.' }
     else
@@ -53,12 +56,16 @@ class Admin::BlogsController < BaseController
   end
 
   def blog_params
-    params.require(:blog).permit(:title, :content, :title_image, images: []).merge(admin_only: true, user_id: current_user.id)
+    params.require(:blog).permit(:title, :content).merge(admin_only: true, user_id: current_user.id)
   end
 
   def authenticate_admin
     authenticate_user!
   rescue StandardError => e
     render json: { error: 'Authentication failed', details: e.message }, status: :unauthorized
+  end
+  
+  def read_image_data
+    @blog.image_data = params[:image].read if params[:image]
   end
 end
