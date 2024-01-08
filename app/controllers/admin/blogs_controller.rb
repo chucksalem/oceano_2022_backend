@@ -6,7 +6,7 @@ class Admin::BlogsController < BaseController
   before_action :set_blog, only: [:edit, :update, :destroy, :show]
 
   def index
-    @blogs = Blog.all
+    @blogs = Blog.order(id: :desc)
   end
 
   def show; end
