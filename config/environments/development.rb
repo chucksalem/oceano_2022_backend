@@ -72,4 +72,5 @@ Rails.application.configure do
   config.hosts << /.*\.oceano-rentals\.com/
   config.hosts << '.oceano-rentals.com'
   config.hosts << 'oceano-rentals.com'
+  config.hosts << "admin.oceano-rentals.com"
 end
