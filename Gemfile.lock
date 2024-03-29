@@ -178,6 +178,8 @@ GEM
       hashie
       multi_json
     foreman (0.87.2)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     fugit (1.9.0)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
@@ -267,6 +269,10 @@ GEM
     nokogiri (1.16.0-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.16.0-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.0-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
     nori (2.6.0)
     oj (3.10.18)
@@ -423,6 +429,8 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.7.0-aarch64-linux)
     sqlite3 (1.7.0-arm64-darwin)
+    sqlite3 (1.7.0-x86_64-darwin)
+    sqlite3 (1.7.0-x86_64-linux)
     sshkit (1.21.7)
       mutex_m
       net-scp (>= 1.1.2)
@@ -470,6 +478,8 @@ GEM
 PLATFORMS
   aarch64-linux
   arm64-darwin-23
+  x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   administrate (~> 0.19.0)
@@ -487,6 +497,7 @@ DEPENDENCIES
   figaro
   forecast_io (= 2.0.2)
   foreman
+  friendly_id
   haml-rails (~> 2.0)
   image_processing (>= 1.2)
   jbuilder (~> 2.5)

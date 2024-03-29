@@ -55,7 +55,7 @@ class Api::V1::BlogsController < BaseController
   end
 
   def set_blog
-    @blog = Blog.find_by_id(params[:id])
+    @blog = Blog.friendly.find(params[:id])
     render json: { error: 'Blog not found' }, status: :not_found unless @blog
   end
 

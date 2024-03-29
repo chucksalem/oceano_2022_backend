@@ -21,11 +21,11 @@ module Admin
         render :new, locals: { page: Administrate::Page::Form.new(dashboard, @blog) }
       end
     end
-
     # def update
     #   super
     #   send_foo_updated_email(requested_resource)
     # end
+
 
     # Override this method to specify custom lookup behavior.
     # This will be used to set the resource for the `show`, `edit`, and `update`
@@ -65,5 +65,6 @@ module Admin
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
+
   end
 end

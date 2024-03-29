@@ -26,6 +26,7 @@ gem 'virtus', '1.0.5'
 gem 'whenever', require: false
 gem 'kaminari'
 gem "figaro"
+gem "friendly_id"
 
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '4.4.0'
