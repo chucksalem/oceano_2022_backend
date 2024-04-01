@@ -39,6 +39,9 @@ Rails.application.routes.draw do
       get '/announcements', to: 'announcements#index'
       resources :triggers, only: :create
       resources :blogs
+
+      resources :subscriptions, only: [:new, :create]
+
     end
     resources :units, only: [:index, :show] do
       resources :stays, only: [:get]
