@@ -8,19 +8,24 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def create
+    logger.debug "Checking if user is already signed in."
     if user_signed_in?
-      return render json: { message: 'Admin already signed in.', user: current_user }
-    end
-
-    user = User.find_by(email: params[:email])
-
-    if user && user.valid_password?(params[:password]) && user.admin?
-      sign_in(user)
-      render json: { message: 'Admin signed in successfully.', user: user }
+      logger.debug "User is already signed in: #{current_user.inspect}"
+      render json: { message: 'Admin already signed in.', user: current_user }
     else
-      render json: { error: 'Invalid email or password.' }, status: :unauthorized
+      user = User.find_by(email: params[:email])
+      logger.debug "Found user: #{user.inspect}"
+      if user && user.valid_password?(params[:password]) && user.admin?
+        logger.debug "User is valid and an admin."
+        sign_in(user)
+        render json: { message: 'Admin signed in successfully.', user: user }
+      else
+        logger.debug "Invalid credentials or user is not an admin."
+        render json: { error: 'Invalid email or password.' }, status: :unauthorized
+      end
     end
   end
+
 
   def destroy
     signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))

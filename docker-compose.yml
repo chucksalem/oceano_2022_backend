@@ -13,6 +13,8 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
+    ports:
+      - 3000:3000
     command: ./docker/entrypoint.sh
     depends_on:
       - db
@@ -28,21 +30,21 @@ services:
       - ./:/app
     stdin_open: true
     tty: true
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    links:
-      - rails:rails
-      - frontend:frontend
-    ports:
-      - 80:80
-      - 443:443
-      - 5000:5000
-    volumes:
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html
-      - /etc/ssl/certs:/etc/nginx/certs
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
+#  nginx-proxy:
+#    image: jwilder/nginx-proxy
+#    links:
+#      - rails:rails
+#      - frontend:frontend
+#    ports:
+#      - 80:80
+#      - 443:443
+#      - 5000:5000
+#    volumes:
+#      - /etc/nginx/vhost.d
+#      - /usr/share/nginx/html
+#      - /etc/ssl/certs:/etc/nginx/certs
+#      - /var/run/docker.sock:/tmp/docker.sock:ro
+#      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
   
   redis:
     image: redis
@@ -59,9 +61,11 @@ services:
       - db
       - redis
     env_file:
-      - .env     
+      - .env
   frontend:
-     image: chucksalem/oceano-frontend:prod
+     image: chucksalem/oceano-frontend:staging
+     ports:
+      - 3001:3001
   
 
 volumes:
