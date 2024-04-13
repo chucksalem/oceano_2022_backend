@@ -12,6 +12,8 @@ and password needed to access the escapia API.
 In order for the application to load the pages, the following command has
 to be executed in the resulting docker container:
 
+To run the frontend independently, comment out the frontend service from docker-compose file.
+
 ```bash
 bundle exec rake oceano:cache:properties
 ```
