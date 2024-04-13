@@ -7,11 +7,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'oceano-rentals.com', 'www.oceano-rentals.com'
+    origins 'oceano-rentals.com', 'www.oceano-rentals.com','172.235.39.37:3001', 'localhost:3001'
 
     resource '*',
              headers: :any,
              methods: [:get, :post, :patch, :put, :delete, :options, :head],
-             credentials: true
+             credentials: Rails.env.production?
   end
 end
