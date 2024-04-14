@@ -13,6 +13,8 @@ class BlogDashboard < Administrate::BaseDashboard
     content: Field::Text,
     image_data: Administrate::Field::Image,
     title: Field::String,
+    meta_title: Field::String,
+    meta_desc: Field::String,
     user: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -35,9 +37,11 @@ class BlogDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     admin_only
+    title
     content
     image_data
-    title
+    meta_title
+    meta_desc
     user
     created_at
     updated_at
@@ -48,8 +52,10 @@ class BlogDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     admin_only
-    content
     title
+    content
+    meta_title
+    meta_desc
     user
     image_data
   ].freeze

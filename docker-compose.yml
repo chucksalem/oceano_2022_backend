@@ -51,22 +51,22 @@ services:
     ports:
       - '6379:6379'
 
-#  sidekiq:
-#    build:
-#      context: .
-#      dockerfile: docker/Dockerfile
-#    command: bundle exec sidekiq
-#    entrypoint: docker/sidekiq-entrypoint.sh
-#    links:
-#      - db
-#      - redis
-#    env_file:
-#      - .env
-#  frontend:
-#     image: chucksalem/oceano-frontend:staging
-#     platform: linux/amd64
-#     ports:
-#      - 3001:3001
+  sidekiq:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: bundle exec sidekiq
+    entrypoint: docker/sidekiq-entrypoint.sh
+    links:
+      - db
+      - redis
+    env_file:
+      - .env
+  frontend:
+     image: chucksalem/oceano-frontend:staging
+     platform: linux/amd64
+     ports:
+      - 3001:3001
   
 
 volumes:
