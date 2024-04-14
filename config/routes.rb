@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :deals
     resources :announcements
 
-    root to: "reviews#index"
+    root to: "reviews#blogs"
   end
 
   namespace :api do
