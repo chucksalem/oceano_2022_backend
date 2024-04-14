@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class BlogDashboard < Administrate::BaseDashboard
+class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,11 +9,13 @@ class BlogDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    admin_only: Field::Boolean,
-    content: Field::Text,
-    image_data: Administrate::Field::Image,
-    title: Field::String,
-    user: Field::BelongsTo,
+    blogs: Field::HasMany,
+    email: Field::String,
+    encrypted_password: Field::String,
+    remember_created_at: Field::DateTime,
+    reset_password_sent_at: Field::DateTime,
+    reset_password_token: Field::String,
+    role: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,20 +27,22 @@ class BlogDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    title
-    content
-    admin_only
+    blogs
+    email
+    encrypted_password
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    admin_only
-    content
-    image_data
-    title
-    user
+    blogs
+    email
+    encrypted_password
+    remember_created_at
+    reset_password_sent_at
+    reset_password_token
+    role
     created_at
     updated_at
   ].freeze
@@ -47,11 +51,13 @@ class BlogDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    admin_only
-    content
-    title
-    user
-    image_data
+    blogs
+    email
+    encrypted_password
+    remember_created_at
+    reset_password_sent_at
+    reset_password_token
+    role
   ].freeze
 
   # COLLECTION_FILTERS
@@ -66,10 +72,10 @@ class BlogDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how blogs are displayed
+  # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(blog)
-  #   "Blog ##{blog.id}"
-  # end
+  def display_resource(user)
+    "#{user.email}"
+  end
 end

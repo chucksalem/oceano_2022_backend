@@ -51,7 +51,13 @@ as well as a link to its edit page.
       </dt>
 
       <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
-          ><%= render_field attribute, page: page %></dd>
+          >
+        <% if attribute.attribute == :image_data %>
+          <img src="<%= page.resource.image_data %>" style="max-width: 500px; max-height: 300px;">
+        <% else %>
+          <%= render_field attribute, page: page %>
+        <% end %>
+      </dd>
     <% end %>
   </dl>
 </section>

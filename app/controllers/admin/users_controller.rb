@@ -1,27 +1,8 @@
 module Admin
-  class BlogsController < Admin::ApplicationController
+  class UsersController < Admin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
-
-    def create
-      # Build a new Blog object using strong parameters
-      @blog = resource_class.new(resource_params.except(:image_data))
-
-      if params[:blog][:image_data].present?
-        file = params[:blog][:image_data]
-        encoded = ::Base64.encode64(File.read(file.path)).delete("\n")
-        content_type = file.content_type # Make sure you store the content type
-        data_uri = "data:#{content_type};base64,#{encoded}"
-        @blog.image_data = data_uri
-      end
-
-      if @blog.save
-        redirect_to [:admin, @blog], notice: "Blog was successfully created."
-      else
-        render :new, locals: { page: Administrate::Page::Form.new(dashboard, @blog) }
-      end
-    end
-
+    #
     # def update
     #   super
     #   send_foo_updated_email(requested_resource)
@@ -53,10 +34,6 @@ module Admin
     # empty values into nil values. It uses other APIs such as `resource_class`
     # and `dashboard`:
     #
-
-    def resource_params
-      params.require(:blog).permit(:title, :content, :admin_only, :user_id, :image_data)
-    end
     # def resource_params
     #   params.require(resource_class.model_name.param_key).
     #     permit(dashboard.permitted_attributes(action_name)).
