@@ -40,7 +40,7 @@ module Api
       def filters
         @areas = UnitRepository.get_filters
         @amenities = UnitAmenities::AMENITIES
-        @types = UnitType::TYPES
+        @types = UnitRepository.all_units.collect(&:type).uniq
       end
 
       def show
