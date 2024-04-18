@@ -11,6 +11,7 @@ class Unit
   attribute :code,            String
   attribute :descriptions,    UnitDescriptions
   attribute :name,            String
+  attribute :location,        String
   attribute :num_floors,      Integer, default: 1
   attribute :occupancy,       Integer, default: 0
   attribute :position,        UnitPosition
@@ -59,6 +60,7 @@ class Unit
       type_code:     info[:category_codes][:unit_category][:@code],
       beachfront:    has_beachfront?(info),
       pets:          allows_pets?(content[:policies][:policy][:pets_policies][:@pets_allowed_code]),
+      location:      find_area(info),
       preview_amount:   amount
     )
   end
@@ -103,6 +105,7 @@ class Unit
                                type_code:,
                                beachfront:,
                                pets:,
+                               location:,
                                preview_amount:)
     unit = new
     unit.type         = UnitType.from_code(type_code)
@@ -117,6 +120,7 @@ class Unit
     unit.reviews      = UnitReviews.from_response(reviews)
     unit.beachfront   = beachfront
     unit.pets         = pets
+    unit.location     = location
     unit.preview_amount  = preview_amount
     unit.temporary_amount  = preview_amount 
 
@@ -174,6 +178,12 @@ class Unit
     info[:category_codes][:custom_category_group].any? do |custom_category|
       flatten_nested_hash(custom_category).has_value?("Beachfront")
     end
+  end
+
+  def self.find_area(info)
+    area_code_detail = info[:category_codes][:custom_category_group].find { |item| item[:@name] == "Area" }
+    return nil unless area_code_detail
+    area_code_detail[:custom_category][:@code_detail]
   end
 
   def self.allows_pets?(info)
