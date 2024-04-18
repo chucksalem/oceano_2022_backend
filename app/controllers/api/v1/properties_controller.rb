@@ -186,7 +186,7 @@ module Api
 
       def apply_location_filter(units, location)
         return units if is_not_present?(location)
-        units = units.select { |unit| location.include?(unit.location) }
+        units = units.select { |unit| unit_location = unit.location.downcase; location.any? { |loc| loc.downcase.include?(unit_location) } }
       end
 
       def apply_amenities_filter(units, amenities)
