@@ -38,7 +38,7 @@ module Api
       end
 
       def filters
-        @areas = UnitRepository.get_filters
+        @areas = UnitRepository.all_units.collect(&:location).uniq
         @amenities = UnitAmenities::AMENITIES
         @types = UnitRepository.all_units.collect(&:type).uniq
       end
@@ -131,10 +131,6 @@ module Api
         end
         values = values.map {|v| v["code"]}
         values = values.uniq
-        unless params[:area] == 'all' || params[:area].blank? || values.length == 0
-          in_area_values = UnitRepository.units_in_area(params[:area])
-          values = in_area_values.map {|code| values.select {|val| val == code }[0]}
-        end
         values = values.compact
         units = []
         values.map do |value|
@@ -147,6 +143,7 @@ module Api
         end
         units = units.compact
         units = apply_type_filter(units, params[:type])
+        units = apply_location_filter(units, params[:area])
         units = apply_amenities_filter(units, params[:amenities])
         units = min_filter(units, params[:min])
         units = max_filter(units, params[:max])
@@ -185,6 +182,11 @@ module Api
       def apply_type_filter(units, types)
         return units if is_not_present?(types)
         units = units.select { |unit| types.include?(unit.type.to_s) }
+      end
+
+      def apply_location_filter(units, location)
+        return units if is_not_present?(location)
+        units = units.select { |unit| location.include?(unit.location) }
       end
 
       def apply_amenities_filter(units, amenities)
