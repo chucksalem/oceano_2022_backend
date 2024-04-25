@@ -63,7 +63,7 @@ services:
     env_file:
       - .env
   frontend:
-     image: chucksalem/oceano-frontend:rs-prod
+     image: chucksalem/oceano-frontend:rs_prod
      platform: linux/amd64
      ports:
       - 3001:3001
