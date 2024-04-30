@@ -4,8 +4,4 @@ unit_job:
 
 forecast_job:
   cron: "*/15 * * * *" # execute at every 30 minutes
-  class: "UpdateUnitsJob"
-
-forecast_job:
-  cron: "*/15 * * * *" # execute at every 30 minutes
   class: "UpdateForecastJob"
