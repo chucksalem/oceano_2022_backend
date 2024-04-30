@@ -55,13 +55,15 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    command: bundle exec sidekiq
-    entrypoint: docker/sidekiq-entrypoint.sh
+#    command: bundle exec sidekiq
+    entrypoint: ./docker/sidekiq-entrypoint.sh
     links:
       - db
       - redis
     env_file:
       - .env
+    environment:
+      REDIS_URL: redis://redis:6379/0
   frontend:
      image: chucksalem/oceano-frontend:rc_prod
      platform: linux/amd64
