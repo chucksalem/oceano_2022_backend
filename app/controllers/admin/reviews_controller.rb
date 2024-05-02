@@ -30,7 +30,8 @@ module Admin
         last_name: row[1]&.strip,
         unit_id: row[2]&.strip,
         comment: row[3]&.strip,
-        stars: row[4]&.strip
+        stars: row[4]&.strip,
+        date:  row[5]&.strip
       }
     end
 
