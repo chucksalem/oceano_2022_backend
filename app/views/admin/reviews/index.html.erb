@@ -25,6 +25,7 @@
       class: "button",
     ) if valid_action?(:new) && show_action?(:new, new_resource) %>
     <%= link_to('Import CSV', new_csv_admin_reviews_path, class: 'button', remote: false) %>
+     <%= link_to('Download Reviews', download_csv_admin_reviews_path(format: 'csv'), class: 'button', remote: false) %>
     <%= link_to('Delete all reviews', delete_all_admin_reviews_path, class: 'button', remote: false) %>
   </div>
 </header>

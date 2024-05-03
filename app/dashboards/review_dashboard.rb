@@ -14,6 +14,7 @@ class ReviewDashboard < Administrate::BaseDashboard
     last_name: Field::String,
     stars: Field::Number,
     unit_id: Field::String,
+    date: Field::Date,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -28,6 +29,7 @@ class ReviewDashboard < Administrate::BaseDashboard
     comment
     first_name
     last_name
+    date
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -38,6 +40,7 @@ class ReviewDashboard < Administrate::BaseDashboard
     first_name
     last_name
     stars
+    date
     unit_id
     created_at
     updated_at
@@ -51,6 +54,7 @@ class ReviewDashboard < Administrate::BaseDashboard
     first_name
     last_name
     stars
+    date
     unit_id
   ].freeze
 
