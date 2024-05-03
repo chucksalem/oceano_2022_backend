@@ -4,8 +4,8 @@ module Admin
       created = 0
       updated = 0
       csv_file = params[:csv_file]
-      CSV.foreach(csv_file.path, encoding: "UTF-8") do |row|
-        review = Review.where(first_name: row[0]&.strip, last_name: row[1]&.strip, unit_id: row[2]&.strip).first
+      CSV.foreach(csv_file.path, encoding: "UTF-8", :headers => true) do |row|
+        review = Review.find_by(id: row["id"]) || Review.where(first_name: row["first_name"]&.strip, last_name: row["last_name"]&.strip, unit_id: row['unit_id']&.strip).first
         if review.present?
           review.update(review_params(row))
           updated += 1
@@ -15,6 +15,11 @@ module Admin
         end
       end
       redirect_to admin_reviews_path, notice: "CSV file imported successfully! Created: #{created} Updated: #{updated}"
+    end
+    def download_csv
+      respond_to do |format|
+        format.csv { send_data Review.to_csv, filename: "reviews-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"}
+      end
     end
 
     def delete_all
@@ -26,12 +31,12 @@ module Admin
 
     def review_params(row)
       {
-        first_name: row[0]&.strip,
-        last_name: row[1]&.strip,
-        unit_id: row[2]&.strip,
-        comment: row[3]&.strip,
-        stars: row[4]&.strip,
-        date:  row[5]&.strip
+        first_name: row['first_name']&.strip,
+        last_name: row['last_name']&.strip,
+        unit_id: row['unit_id']&.strip,
+        comment: row['comment']&.strip,
+        stars: row['stars']&.strip,
+        date:  row['date']&.strip
       }
     end
 

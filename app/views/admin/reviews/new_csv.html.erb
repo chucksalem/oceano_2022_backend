@@ -10,6 +10,9 @@
 </header>
 
 <section class="main-content__body">
+<div style="text-align: center;">
+ <%= link_to('Download Sample', '/review-sample.csv',download: '', class: 'button') %>
+ </div>
     <%= form_tag import_csv_admin_reviews_path, class: 'form', id: 'new_csv', multipart: true %>
         <div class="field-unit field-unit--string field-unit--required">
             <div class="field-unit__label">

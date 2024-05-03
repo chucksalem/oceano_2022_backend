@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         get :new_csv
         post :import_csv
         get :delete_all
+        get :download_csv
       end
     end
     resources :recommendations

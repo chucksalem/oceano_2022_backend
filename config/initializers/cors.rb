@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'oceano-rentals.com', 'www.oceano-rentals.com'
+    origins 'oceano-rentals.com', 'www.oceano-rentals.com','172.235.39.37:3001', '172.233.153.77:3001','localhost:3001', 'localhost:3000', 'oceano-rentals.com', 'rails', '/.*\.oceano-rentals\.com/', '.oceano-rentals.com'
 
     resource '*',
              headers: :any,
