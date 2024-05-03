@@ -26,6 +26,7 @@ gem 'virtus', '1.0.5'
 gem 'whenever', require: false
 gem 'kaminari'
 gem "figaro"
+gem "friendly_id"
 
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '4.4.0'
@@ -40,7 +41,7 @@ gem 'psych', '< 4'
 gem 'net-smtp', require: false
 gem "image_processing", ">= 1.2"
 gem "aws-sdk-s3", require: false
-
+gem 'administrate-field-image'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails', '2.7.6'

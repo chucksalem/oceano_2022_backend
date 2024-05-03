@@ -14,8 +14,9 @@ set -ex
 
 service redis-server start
 bundle install
+#bundle exec rails db:create
 bundle exec rails db:migrate
-bundle exec rails db:seed
+#bundle exec rails db:seed
 bundle exec rake oceano:cache:properties
 bundle exec whenever --update-crontab
 cron && bundle exec rails s -b 0.0.0.0

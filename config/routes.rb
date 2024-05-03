@@ -1,11 +1,13 @@
 require 'sidekiq'
 require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
   devise_for :user, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
 
   namespace :admin do
     resources :blogs
+    resources :subscriptions
   
     resources :reviews do
       collection do
@@ -39,7 +41,10 @@ Rails.application.routes.draw do
       # resources :properties, only: %i(index show)
       get '/announcements', to: 'announcements#index'
       resources :triggers, only: :create
-      resources :blogs, only: [:index, :show]
+      resources :blogs
+
+      resources :subscriptions, only: [:new, :create]
+
     end
     resources :units, only: [:index, :show] do
       resources :stays, only: [:get]

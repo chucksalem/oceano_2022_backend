@@ -13,6 +13,8 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
+    ports:
+      - 3000:3000
     command: ./docker/entrypoint.sh
     depends_on:
       - db
@@ -48,22 +50,31 @@ services:
     image: redis
     ports:
       - '6379:6379'
+    volumes:
+      - redis_data:/data
 
   sidekiq:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    command: bundle exec sidekiq
-    entrypoint: docker/sidekiq-entrypoint.sh
+#    command: bundle exec sidekiq
+    entrypoint: ./docker/sidekiq-entrypoint.sh
     links:
       - db
       - redis
     env_file:
-      - .env     
+      - .env
+    environment:
+      REDIS_URL: redis://redis:6379/0
   frontend:
-     image: chucksalem/oceano-frontend:prod
+     image: chucksalem/oceano-frontend:rc_prod
+     platform: linux/amd64
+     ports:
+      - 3001:3001
   
 
 volumes:
   db:
+    driver: local
+  redis_data:
     driver: local
