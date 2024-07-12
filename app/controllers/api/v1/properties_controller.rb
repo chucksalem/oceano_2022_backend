@@ -181,7 +181,7 @@ module Api
 
       def apply_type_filter(units, types)
         return units if is_not_present?(types)
-        units = units.select { |unit| types.include?(unit.type.to_s) }
+        units = units.select { |unit| types.include?(unit.type.to_s.downcase) }
       end
 
       def apply_location_filter(units, location)

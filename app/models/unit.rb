@@ -57,7 +57,7 @@ class Unit
       position:      info[:position],
       reviews:       content[:unit_reviews],
       rooms:         info[:category_codes][:room_info],
-      type_code:     info[:category_codes][:unit_category][:@code],
+      type_code:    find_type(info),
       beachfront:    has_beachfront?(info),
       pets:          allows_pets?(content[:policies][:policy][:pets_policies][:@pets_allowed_code]),
       location:      find_area(info),
@@ -108,7 +108,7 @@ class Unit
                                location:,
                                preview_amount:)
     unit = new
-    unit.type         = UnitType.from_code(type_code)
+    unit.type         = type_code
     unit.code         = code
     unit.name         = name
     unit.num_floors   = num_floors.to_i unless num_floors.nil?
@@ -184,6 +184,11 @@ class Unit
     area_code_detail = info[:category_codes][:custom_category_group].find { |item| item[:@name] == "Area" }
     return nil unless area_code_detail
     area_code_detail[:custom_category][:@code_detail]
+  end
+  def self.find_type(info)
+    type_code_detail = info[:category_codes][:custom_category_group].find { |item| item[:@name] == "Property Type" }
+    return nil unless type_code_detail
+    type_code_detail[:custom_category][:@code_detail]
   end
 
   def self.allows_pets?(info)
